@@ -34,7 +34,6 @@ bool KickMap::init()
 		Sprite * sp = Sprite::create();
 		sp->setPosition(Vec2(groundX, groundY));
 		sp->setAnchorPoint(Vec2::ZERO);
-		Size sss = sp->getContentSize();
 		sp->setContentSize(Size(groundW, groundH));
 		sp->setPhysicsBody(phy);
 		_tiledMap->addChild(sp); 

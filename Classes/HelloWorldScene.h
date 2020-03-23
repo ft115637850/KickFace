@@ -33,12 +33,12 @@ class HelloWorld : public cocos2d::Scene
 private:
 	std::unordered_map<int, cocos2d::Node*> _mouses;
 public:
+	bool onTouchHammerBegan(cocos2d::Touch* touch, cocos2d::Event* e);
+	void onTouchHammerMoved(cocos2d::Touch* touch, cocos2d::Event* e);
+	void onTouchHammerEnded(cocos2d::Touch* touch, cocos2d::Event* e);
     static cocos2d::Scene* createScene();
 
-    virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
+	bool init() override;
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);

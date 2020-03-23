@@ -37,6 +37,60 @@ USING_NS_CC;
 #define FACE_BIT_MASK	0b1000
 #define HAMMER_BIT_MASK	0b0100
 
+bool HelloWorld::onTouchHammerBegan(cocos2d::Touch * touch, cocos2d::Event * e)
+{
+	const auto location = touch->getLocation();
+	auto arr = getPhysicsWorld()->getShapes(location);
+
+	PhysicsBody* body = nullptr;
+	for (auto& obj : arr)
+	{
+		if ((obj->getBody()->getTag() & 0x80) != 0)
+		{
+			body = obj->getBody();
+			break;
+		}
+	}
+
+	if (body != nullptr)
+	{
+		Node* mouse = Node::create();
+		auto physicsBody = PhysicsBody::create(PHYSICS_INFINITY, PHYSICS_INFINITY);
+		physicsBody->setDynamic(false);
+		mouse->addComponent(physicsBody);
+		mouse->setPosition(location);
+		this->addChild(mouse);
+		PhysicsJointPin* joint = PhysicsJointPin::construct(physicsBody, body, location);
+		joint->setMaxForce(5000.0f * body->getMass());
+		getPhysicsWorld()->addJoint(joint);
+		_mouses.insert(std::make_pair(touch->getID(), mouse));
+
+		return true;
+	}
+	return false;
+}
+
+void HelloWorld::onTouchHammerMoved(cocos2d::Touch * touch, cocos2d::Event * e)
+{
+	auto it = _mouses.find(touch->getID());
+
+	if (it != _mouses.end())
+	{
+		it->second->setPosition(touch->getLocation());
+	}
+}
+
+void HelloWorld::onTouchHammerEnded(cocos2d::Touch * touch, cocos2d::Event * e)
+{
+	auto it = _mouses.find(touch->getID());
+
+	if (it != _mouses.end())
+	{
+		this->removeChild(it->second);
+		_mouses.erase(it);
+	}
+}
+
 Scene* HelloWorld::createScene()
 {
     return HelloWorld::create();
@@ -87,91 +141,30 @@ bool HelloWorld::init()
 	face->setPosition(startPos.x, visibleSize.height * 3 / 5 + 30);
 	face->getPhysicsBody()->setContactTestBitmask(FACE_BIT_MASK);
 	addChild(face);
-	/*auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = [this, visibleSize, face, bgSize, bgPosY](Touch* t, Event* e)
-	{
-		face->getPhysicsBody()->setVelocity(Vec2(1000, 1000));
-		this->runAction(Follow::create(face, Rect(0, bgPosY, bgSize.width, bgSize.height)));
-		return true;
-	};
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, face);*/
 
-	auto hammerPos = _tileMap->getWeaponPosition();
-	auto weaponFixPoint = Sprite::create();
+	auto hammerPos = _tileMap->getWeaponPosition();	
+	auto weaponFixPoint = Node::create();
+	auto sp1PhysicsBody = PhysicsBody::createBox(Size(10, 20));
+	weaponFixPoint->addComponent(sp1PhysicsBody);
 	weaponFixPoint->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5 + 100);
-	weaponFixPoint->addComponent(PhysicsBody::createBox(Size(10, 10), PhysicsMaterial(0.1f, 1.0f, 0.0f)));
-	auto sp1PhysicsBody = weaponFixPoint->getPhysicsBody();
-	//sp1PhysicsBody->setDynamic(false);
-	sp1PhysicsBody->setTag(0x80);
 	getPhysicsWorld()->addJoint(PhysicsJointPin::construct(sp1PhysicsBody, bounds->getPhysicsBody(), weaponFixPoint->getPosition()));
+	addChild(weaponFixPoint);
 	
 	auto hammer = HammerSprite::create();
-	hammer->setPosition(hammerPos.x, (hammerPos.y- startPos.y) + visibleSize.height * 3 / 5);
+	hammer->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5);
 	auto sp2PhysicsBody = hammer->getPhysicsBody();
-	//sp2PhysicsBody->setGravityEnable(false);
 	sp2PhysicsBody->setTag(0x80);
 	sp2PhysicsBody->setContactTestBitmask(HAMMER_BIT_MASK);
-
+	addChild(hammer);
 
 	PhysicsJointFixed* joint = PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, Vec2(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5 + 90));
 	getPhysicsWorld()->addJoint(joint);
-	addChild(weaponFixPoint);
-	addChild(hammer);
 
 	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = [this](Touch* touch, Event* e)
-	{
-		auto location = touch->getLocation();
-		auto arr = _physicsWorld->getShapes(location);
-
-		PhysicsBody* body = nullptr;
-		for (auto& obj : arr)
-		{
-			if ((obj->getBody()->getTag() & 0x80) != 0)
-			{
-				body = obj->getBody();
-				break;
-			}
-		}
-
-		if (body != nullptr)
-		{
-			Node* mouse = Node::create();
-			auto physicsBody = PhysicsBody::create(PHYSICS_INFINITY, PHYSICS_INFINITY);
-			physicsBody->setDynamic(false);
-			mouse->addComponent(physicsBody);
-			mouse->setPosition(location);
-			this->addChild(mouse);
-			PhysicsJointPin* joint = PhysicsJointPin::construct(physicsBody, body, location);
-			joint->setMaxForce(5000.0f * body->getMass());
-			_physicsWorld->addJoint(joint);
-			_mouses.insert(std::make_pair(touch->getID(), mouse));
-
-			return true;
-		}
-		return false;
-	};
-
-	listener->onTouchMoved = [this](Touch* touch, Event* /*event*/)
-	{
-		auto it = _mouses.find(touch->getID());
-
-		if (it != _mouses.end())
-		{
-			it->second->setPosition(touch->getLocation());
-		}
-	};
-
-	listener->onTouchEnded = [this](Touch* touch, Event* /*event*/)
-	{
-		auto it = _mouses.find(touch->getID());
-
-		if (it != _mouses.end())
-		{
-			this->removeChild(it->second);
-			_mouses.erase(it);
-		}
-	};
+	listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchHammerBegan, this);
+	listener->onTouchMoved = CC_CALLBACK_2(HelloWorld::onTouchHammerMoved, this);
+	listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchHammerEnded, this);
+	
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, hammer);
 
 	auto contactListener = EventListenerPhysicsContact::create();
@@ -182,6 +175,7 @@ bool HelloWorld::init()
 		case FACE_BIT_MASK | HAMMER_BIT_MASK:
 			this->runAction(Follow::create(face, Rect(0, bgPosY, bgSize.width, bgSize.height)));
 			break;
+		default: ;
 		}
 		return true;
 	};
@@ -190,16 +184,3 @@ bool HelloWorld::init()
     return true;
 }
 
-
-void HelloWorld::menuCloseCallback(Ref* pSender)
-{
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
-
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
-}
