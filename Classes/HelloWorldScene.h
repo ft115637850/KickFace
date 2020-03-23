@@ -26,13 +26,18 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "HammerSprite.h"
 
 
 class HelloWorld : public cocos2d::Scene
 {
 private:
 	std::unordered_map<int, cocos2d::Node*> _mouses;
+	bool _kickedOff;
+	HammerSprite* _hammer;
 public:
+	HelloWorld();
+
 	bool onTouchHammerBegan(cocos2d::Touch* touch, cocos2d::Event* e);
 	void onTouchHammerMoved(cocos2d::Touch* touch, cocos2d::Event* e);
 	void onTouchHammerEnded(cocos2d::Touch* touch, cocos2d::Event* e);

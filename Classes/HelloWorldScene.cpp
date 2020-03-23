@@ -29,7 +29,6 @@
 #include "Background.h"
 #include "FaceSprite.h"
 #include "KickMap.h"
-#include "HammerSprite.h"
 
 USING_NS_CC;
 
@@ -37,6 +36,10 @@ USING_NS_CC;
 #define FACE_BIT_MASK	0b1000
 #define HAMMER_BIT_MASK	0b0100
 #define HAMMER_BODY_TAG 0x80
+
+HelloWorld::HelloWorld() : _kickedOff(false)
+{
+}
 
 bool HelloWorld::onTouchHammerBegan(cocos2d::Touch * touch, cocos2d::Event * e)
 {
@@ -89,6 +92,12 @@ void HelloWorld::onTouchHammerEnded(cocos2d::Touch * touch, cocos2d::Event * e)
 	{
 		this->removeChild(it->second);
 		_mouses.erase(it);
+	}
+
+	if (_kickedOff)
+	{
+		auto veloc = _hammer->getPhysicsBody()->getVelocity();
+		_hammer->getPhysicsBody()->setVelocity(Vec2(veloc.x, 0));
 	}
 }
 
@@ -151,12 +160,12 @@ bool HelloWorld::init()
 	getPhysicsWorld()->addJoint(PhysicsJointPin::construct(sp1PhysicsBody, bounds->getPhysicsBody(), weaponFixPoint->getPosition()));
 	addChild(weaponFixPoint);
 	
-	auto hammer = HammerSprite::create();
-	hammer->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5);
-	auto sp2PhysicsBody = hammer->getPhysicsBody();
+	_hammer = HammerSprite::create();
+	_hammer->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5);
+	auto sp2PhysicsBody = _hammer->getPhysicsBody();
 	sp2PhysicsBody->setTag(HAMMER_BODY_TAG);
 	sp2PhysicsBody->setContactTestBitmask(HAMMER_BIT_MASK);
-	addChild(hammer);
+	addChild(_hammer);
 
 	PhysicsJointFixed* joint = PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, Vec2(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5 + 90));
 	getPhysicsWorld()->addJoint(joint);
@@ -166,7 +175,7 @@ bool HelloWorld::init()
 	listener->onTouchMoved = CC_CALLBACK_2(HelloWorld::onTouchHammerMoved, this);
 	listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchHammerEnded, this);
 	
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, hammer);
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, _hammer);
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = [this, face, bgPosY, bgSize](PhysicsContact& contact) {
@@ -174,6 +183,7 @@ bool HelloWorld::init()
 			contact.getShapeB()->getBody()->getContactTestBitmask())
 		{
 		case FACE_BIT_MASK | HAMMER_BIT_MASK:
+			_kickedOff = true;
 			this->runAction(Follow::create(face, Rect(0, bgPosY, bgSize.width, bgSize.height)));
 			break;
 		default: ;
