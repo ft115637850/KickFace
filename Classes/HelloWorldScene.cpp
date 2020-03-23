@@ -34,6 +34,9 @@
 USING_NS_CC;
 
 //#define EDGE_BIT_MASK	0b0001
+#define FACE_BIT_MASK	0b1000
+#define HAMMER_BIT_MASK	0b0100
+
 Scene* HelloWorld::createScene()
 {
     return HelloWorld::create();
@@ -56,7 +59,7 @@ bool HelloWorld::init()
         return false;
     }
 	
-	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -82,6 +85,7 @@ bool HelloWorld::init()
 	
 	auto face = FaceSprite::create();
 	face->setPosition(startPos.x, visibleSize.height * 3 / 5 + 30);
+	face->getPhysicsBody()->setContactTestBitmask(FACE_BIT_MASK);
 	addChild(face);
 	/*auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [this, visibleSize, face, bgSize, bgPosY](Touch* t, Event* e)
@@ -94,9 +98,7 @@ bool HelloWorld::init()
 
 	auto hammerPos = _tileMap->getWeaponPosition();
 	auto weaponFixPoint = Sprite::create();
-	//weaponFixPoint->setColor(Color3B(0, 0, 0));
-	//weaponFixPoint->setTextureRect(Rect(0, 0, 10, 10));
-	weaponFixPoint->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5 + 180);
+	weaponFixPoint->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5 + 100);
 	weaponFixPoint->addComponent(PhysicsBody::createBox(Size(10, 10), PhysicsMaterial(0.1f, 1.0f, 0.0f)));
 	auto sp1PhysicsBody = weaponFixPoint->getPhysicsBody();
 	//sp1PhysicsBody->setDynamic(false);
@@ -106,10 +108,12 @@ bool HelloWorld::init()
 	auto hammer = HammerSprite::create();
 	hammer->setPosition(hammerPos.x, (hammerPos.y- startPos.y) + visibleSize.height * 3 / 5);
 	auto sp2PhysicsBody = hammer->getPhysicsBody();
+	//sp2PhysicsBody->setGravityEnable(false);
 	sp2PhysicsBody->setTag(0x80);
+	sp2PhysicsBody->setContactTestBitmask(HAMMER_BIT_MASK);
 
 
-	PhysicsJointFixed* joint = PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, Vec2(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5 + 180));
+	PhysicsJointFixed* joint = PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, Vec2(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5 + 90));
 	getPhysicsWorld()->addJoint(joint);
 	addChild(weaponFixPoint);
 	addChild(hammer);
@@ -169,6 +173,19 @@ bool HelloWorld::init()
 		}
 	};
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, hammer);
+
+	auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = [this, face, bgPosY, bgSize](PhysicsContact& contact) {
+		switch (contact.getShapeA()->getBody()->getContactTestBitmask() |
+			contact.getShapeB()->getBody()->getContactTestBitmask())
+		{
+		case FACE_BIT_MASK | HAMMER_BIT_MASK:
+			this->runAction(Follow::create(face, Rect(0, bgPosY, bgSize.width, bgSize.height)));
+			break;
+		}
+		return true;
+	};
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
     return true;
 }
