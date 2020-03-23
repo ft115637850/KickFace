@@ -36,6 +36,7 @@ USING_NS_CC;
 //#define EDGE_BIT_MASK	0b0001
 #define FACE_BIT_MASK	0b1000
 #define HAMMER_BIT_MASK	0b0100
+#define HAMMER_BODY_TAG 0x80
 
 bool HelloWorld::onTouchHammerBegan(cocos2d::Touch * touch, cocos2d::Event * e)
 {
@@ -45,7 +46,7 @@ bool HelloWorld::onTouchHammerBegan(cocos2d::Touch * touch, cocos2d::Event * e)
 	PhysicsBody* body = nullptr;
 	for (auto& obj : arr)
 	{
-		if ((obj->getBody()->getTag() & 0x80) != 0)
+		if ((obj->getBody()->getTag() & HAMMER_BODY_TAG) != 0)
 		{
 			body = obj->getBody();
 			break;
@@ -153,7 +154,7 @@ bool HelloWorld::init()
 	auto hammer = HammerSprite::create();
 	hammer->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5);
 	auto sp2PhysicsBody = hammer->getPhysicsBody();
-	sp2PhysicsBody->setTag(0x80);
+	sp2PhysicsBody->setTag(HAMMER_BODY_TAG);
 	sp2PhysicsBody->setContactTestBitmask(HAMMER_BIT_MASK);
 	addChild(hammer);
 

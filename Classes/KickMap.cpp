@@ -29,7 +29,7 @@ bool KickMap::init()
 		auto groundY = ground["y"].asFloat();
 		auto groundW = ground["width"].asFloat();
 		auto groundH = ground["height"].asFloat();
-		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH));
+		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f));
 		phy->setDynamic(false);
 		Sprite * sp = Sprite::create();
 		sp->setPosition(Vec2(groundX, groundY));
