@@ -6,7 +6,7 @@ USING_NS_CC;
 class Background :public Node
 {
 public:
-	CREATE_FUNC(Background);
-	virtual bool init();
+	static Background* createBackground(int width, int height);
+	bool initBackground(int width, int height);
 };
 

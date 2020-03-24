@@ -32,9 +32,11 @@
 
 USING_NS_CC;
 
-//#define EDGE_BIT_MASK	0b0001
-#define FACE_BIT_MASK	0b1000
-#define HAMMER_BIT_MASK	0b0100
+#define EDGE_BIT_MASK	0b00010
+#define FACE_BIT_MASK	0b10000
+#define HAMMER_BIT_MASK	0b01000
+#define GROUND_BIT_MASK	0b00100
+#define PROPS_BIT_MASK	0b00001
 #define HAMMER_BODY_TAG 0x80
 
 HelloWorld::HelloWorld() : _kickedOff(false)
@@ -123,27 +125,28 @@ bool HelloWorld::init()
         return false;
     }
 	
-	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	auto world_size = Size(2048 * 2, 2048);
 
 	auto _tileMap = KickMap::create();
 	auto startPos = _tileMap->getFaceStartPosition();
 	float bgPosY = -1 * (startPos.y - visibleSize.height * 3 / 5);
 	_tileMap->setPosition(0, bgPosY);
 
-	auto bg = Background::create();
+	auto bg = Background::createBackground(world_size.width, world_size.height);
 	bg->setPosition(0, bgPosY);
 	addChild(bg);
 	addChild(_tileMap);
 
-	auto bgSize = bg->getContentSize();
+	//auto bgSize = bg->getContentSize();
 	auto bounds = Node::create();
-	bounds->setContentSize(bgSize);
-	bounds->setPhysicsBody(PhysicsBody::createEdgeBox(bgSize));
-	//bounds->getPhysicsBody()->setContactTestBitmask(EDGE_BIT_MASK);
+	bounds->setContentSize(world_size);
+	bounds->setPhysicsBody(PhysicsBody::createEdgeBox(world_size));
+	bounds->getPhysicsBody()->setContactTestBitmask(EDGE_BIT_MASK);
 	bounds->setPosition(bg->getPosition());
 	addChild(bounds);
 	
@@ -178,13 +181,20 @@ bool HelloWorld::init()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, _hammer);
 
 	auto contactListener = EventListenerPhysicsContact::create();
-	contactListener->onContactBegin = [this, face, bgPosY, bgSize](PhysicsContact& contact) {
+	contactListener->onContactBegin = [this, face, bgPosY, world_size](PhysicsContact& contact) {
+		const auto face_vel = face->getPhysicsBody()->getVelocity();
 		switch (contact.getShapeA()->getBody()->getContactTestBitmask() |
 			contact.getShapeB()->getBody()->getContactTestBitmask())
 		{
 		case FACE_BIT_MASK | HAMMER_BIT_MASK:
 			_kickedOff = true;
-			this->runAction(Follow::create(face, Rect(0, bgPosY, bgSize.width, bgSize.height)));
+			this->runAction(Follow::create(face, Rect(0, bgPosY, world_size.width, world_size.height)));
+			break;
+		case FACE_BIT_MASK | GROUND_BIT_MASK:
+			face->getPhysicsBody()->setVelocity(face_vel*0.2);
+			break;
+		case FACE_BIT_MASK | EDGE_BIT_MASK:
+			face->getPhysicsBody()->setVelocity(Vec2::ZERO);
 			break;
 		default: ;
 		}
