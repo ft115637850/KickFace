@@ -8,8 +8,11 @@ bool HammerSprite::init()
 		return false;
 	}
 
-	const auto physicsBody = PhysicsBody::createBox(Size(83.0f, 40.0f), PhysicsMaterial(0.1f, 1.0f, 0.0f));
-	physicsBody->setPositionOffset(Vec2(0, -50));
+	//After follow face action, the position of this body is wrong. why??
+	const auto physicsBody = PhysicsBody::createBox(Size(83.0f, 40.0f), PhysicsMaterial(0.1f, 1.0f, 0.0f), Vec2(0, -50));
+	//const auto physicsBody = PhysicsBody::createBox(Size(83.0f, 40.0f), PhysicsMaterial(0.1f, 1.0f, 0.0f));
+	//physicsBody->setPositionOffset(Vec2(0, -50));
+	
 	addComponent(physicsBody);
 
 	/*auto shapeCache = PhysicsShapeCache::getInstance();
