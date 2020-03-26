@@ -17,17 +17,8 @@ bool Background::initBackground(int width, int height)
 	if (Node::init() == false)
 		return false;
 
-	auto bg = Sprite::create("bg.png");
+	auto bg = Sprite::create("background.png", Rect(0, 0, width, height));
 	bg->setAnchorPoint(Vec2(0, 0));
-	Texture2D::TexParams tp = { GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT };
-	bg->getTexture()->setTexParameters(tp);
-	bg->setTextureRect(Rect(0, 0, width, height));
-	bg->setScale(2.0f);
-	addChild(bg);	
-
-	auto bg2 = Sprite::create("bg2.png");
-	bg2->setAnchorPoint(Vec2(0, 0));
-	addChild(bg2);
-	setAnchorPoint(Vec2(0, 0));
+	addChild(bg);
 	return true;
 }

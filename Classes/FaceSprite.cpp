@@ -9,7 +9,7 @@ bool FaceSprite::init()
 		return false;
 	}
 	
-	const auto physicsBody = PhysicsBody::createCircle(24.0f, PhysicsMaterial(0.1f, 1.0f, 0.0f));
+	const auto physicsBody = PhysicsBody::createCircle(60.0f, PhysicsMaterial(0.5f, 1.0f, 0.0f));
 	addComponent(physicsBody);
 
 	return true;

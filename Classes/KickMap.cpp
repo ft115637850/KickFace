@@ -23,7 +23,7 @@ bool KickMap::init()
 	if (Node::init() == false)
 		return false;
 
-	_tiledMap = experimental::TMXTiledMap::create("tiled/m2.tmx");
+	_tiledMap = experimental::TMXTiledMap::create("tiled/lm1.tmx");
 	ValueVector grounds = _tiledMap->getObjectGroup("grounds")->getObjects();
 	for (auto obj : grounds)
 	{

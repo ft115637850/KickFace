@@ -67,7 +67,7 @@ bool HelloWorld::onTouchHammerBegan(cocos2d::Touch * touch, cocos2d::Event * e)
 		mouse->setPosition(location);
 		this->addChild(mouse);
 		PhysicsJointPin* joint = PhysicsJointPin::construct(physicsBody, body, location);
-		joint->setMaxForce(5000.0f * body->getMass());
+		joint->setMaxForce(9000.0f * body->getMass());
 		getPhysicsWorld()->addJoint(joint);
 		_mouses.insert(std::make_pair(touch->getID(), mouse));
 
@@ -125,16 +125,16 @@ bool HelloWorld::init()
         return false;
     }
 	
-	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	auto world_size = Size(2048 * 2, 2048);
-
+	auto world_size = Size(4032, 2268);
+	// TO DO: Set Size according to picture
 	auto _tileMap = KickMap::create();
 	auto startPos = _tileMap->getFaceStartPosition();
-	float bgPosY = -1 * (startPos.y - visibleSize.height * 3 / 5);
+	float bgPosY = -1 * (startPos.y - visibleSize.height * 1 / 3);
 	_tileMap->setPosition(0, bgPosY);
 
 	auto bg = Background::createBackground(world_size.width, world_size.height);
@@ -151,26 +151,27 @@ bool HelloWorld::init()
 	addChild(bounds);
 	
 	auto face = FaceSprite::create();
-	face->setPosition(startPos.x, visibleSize.height * 3 / 5 + 30);
+	face->setPosition(startPos.x, visibleSize.height * 1 / 3 + 30);
 	face->getPhysicsBody()->setContactTestBitmask(FACE_BIT_MASK);
+	face->getPhysicsBody()->setGravityEnable(false);
 	addChild(face);
 
 	auto hammerPos = _tileMap->getWeaponPosition();	
 	auto weaponFixPoint = Node::create();
-	auto sp1PhysicsBody = PhysicsBody::createBox(Size(10, 20));
+	auto sp1PhysicsBody = PhysicsBody::createBox(Size(100, 100));
 	weaponFixPoint->addComponent(sp1PhysicsBody);
-	weaponFixPoint->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5 + 100);
+	weaponFixPoint->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 1 / 3 + 100);
 	getPhysicsWorld()->addJoint(PhysicsJointPin::construct(sp1PhysicsBody, bounds->getPhysicsBody(), weaponFixPoint->getPosition()));
 	addChild(weaponFixPoint);
 	
 	_hammer = HammerSprite::create();
-	_hammer->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5);
+	_hammer->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 1 / 3);
 	auto sp2PhysicsBody = _hammer->getPhysicsBody();
 	sp2PhysicsBody->setTag(HAMMER_BODY_TAG);
 	sp2PhysicsBody->setContactTestBitmask(HAMMER_BIT_MASK);
 	addChild(_hammer);
 
-	PhysicsJointFixed* joint = PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, Vec2(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 3 / 5 + 90));
+	PhysicsJointFixed* joint = PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, Vec2(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 1 / 3 + 20));
 	getPhysicsWorld()->addJoint(joint);
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -191,10 +192,10 @@ bool HelloWorld::init()
 			this->runAction(Follow::create(face, Rect(0, bgPosY, world_size.width, world_size.height)));
 			break;
 		case FACE_BIT_MASK | GROUND_BIT_MASK:
-			face->getPhysicsBody()->setVelocity(face_vel*0.2);
+			//face->getPhysicsBody()->setVelocity(face_vel*0.2);
 			break;
 		case FACE_BIT_MASK | EDGE_BIT_MASK:
-			face->getPhysicsBody()->setVelocity(Vec2::ZERO);
+			//face->getPhysicsBody()->setVelocity(Vec2::ZERO);
 			break;
 		default: ;
 		}
