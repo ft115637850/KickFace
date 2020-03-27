@@ -17,8 +17,9 @@ bool Background::initBackground(int width, int height)
 	if (Node::init() == false)
 		return false;
 
-	auto bg = Sprite::create("background.png", Rect(0, 0, width, height));
+	auto bg = Sprite::create("background.png");
 	bg->setAnchorPoint(Vec2(0, 0));
+	setContentSize(bg->getContentSize());
 	addChild(bg);
 	return true;
 }

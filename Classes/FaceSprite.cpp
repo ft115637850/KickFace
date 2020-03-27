@@ -8,8 +8,8 @@ bool FaceSprite::init()
 	{
 		return false;
 	}
-	
-	const auto physicsBody = PhysicsBody::createCircle(60.0f, PhysicsMaterial(0.5f, 1.0f, 0.0f));
+	auto size = getContentSize();
+	const auto physicsBody = PhysicsBody::createCircle(size.width / 2, PhysicsMaterial(0.5f, 1.0f, 0.0f));
 	addComponent(physicsBody);
 
 	return true;

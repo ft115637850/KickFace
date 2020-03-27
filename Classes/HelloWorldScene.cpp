@@ -125,21 +125,21 @@ bool HelloWorld::init()
         return false;
     }
 	
-	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	auto world_size = Size(4032, 2268);
-	// TO DO: Set Size according to picture
+
 	auto _tileMap = KickMap::create();
 	auto startPos = _tileMap->getFaceStartPosition();
 	float bgPosY = -1 * (startPos.y - visibleSize.height * 1 / 3);
 	_tileMap->setPosition(0, bgPosY);
 
-	auto bg = Background::createBackground(world_size.width, world_size.height);
+	auto bg = Background::createBackground(0, 0);
 	bg->setPosition(0, bgPosY);
 	addChild(bg);
+	auto world_size = bg->getContentSize();
 	addChild(_tileMap);
 
 	//auto bgSize = bg->getContentSize();
@@ -153,12 +153,12 @@ bool HelloWorld::init()
 	auto face = FaceSprite::create();
 	face->setPosition(startPos.x, visibleSize.height * 1 / 3 + 30);
 	face->getPhysicsBody()->setContactTestBitmask(FACE_BIT_MASK);
-	face->getPhysicsBody()->setGravityEnable(false);
+	//face->getPhysicsBody()->setGravityEnable(false);
 	addChild(face);
 
 	auto hammerPos = _tileMap->getWeaponPosition();	
 	auto weaponFixPoint = Node::create();
-	auto sp1PhysicsBody = PhysicsBody::createBox(Size(100, 100));
+	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 100));
 	weaponFixPoint->addComponent(sp1PhysicsBody);
 	weaponFixPoint->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 1 / 3 + 100);
 	getPhysicsWorld()->addJoint(PhysicsJointPin::construct(sp1PhysicsBody, bounds->getPhysicsBody(), weaponFixPoint->getPosition()));
