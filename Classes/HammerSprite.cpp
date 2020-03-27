@@ -8,16 +8,13 @@ bool HammerSprite::init()
 		return false;
 	}
 
+	auto size = getContentSize();
+	const float headerHeightFactor = 112.0f / 403.0f;
+	const float headerOffsetFactor = 145.5f / 403.0f;
 	//After follow face action, the position of this body is wrong. why??
-	const auto physicsBody = PhysicsBody::createBox(Size(83.0f, 40.0f), PhysicsMaterial(0.1f, 1.0f, 0.0f), Vec2(0, -50));
-	//const auto physicsBody = PhysicsBody::createBox(Size(83.0f, 40.0f), PhysicsMaterial(0.1f, 1.0f, 0.0f));
-	//physicsBody->setPositionOffset(Vec2(0, -50));
-	
+	const auto physicsBody = PhysicsBody::createBox(Size(size.width, size.height*headerHeightFactor),
+		PhysicsMaterial(1.0f, 1.0f, 1.0f), Vec2(0, -1 * headerOffsetFactor*size.height));
 	addComponent(physicsBody);
-
-	/*auto shapeCache = PhysicsShapeCache::getInstance();
-	shapeCache->addShapesWithFile("hammer.plist");
-	shapeCache->setBodyOnSprite("hammer.png", this);*/
 
 	return true;
 }
