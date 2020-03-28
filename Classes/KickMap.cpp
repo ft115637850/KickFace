@@ -32,7 +32,13 @@ bool KickMap::init()
 		auto groundY = ground["y"].asFloat();
 		auto groundW = ground["width"].asFloat();
 		auto groundH = ground["height"].asFloat();
+		
 		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f));
+		if (!ground["tag"].isNull())
+		{
+			phy->setTag(ground["tag"].asInt());
+		}
+
 		phy->setDynamic(false);
 		phy->setContactTestBitmask(GROUND_BIT_MASK);
 		Sprite * sp = Sprite::create();

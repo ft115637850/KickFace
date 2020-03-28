@@ -45,7 +45,7 @@ HelloWorld::HelloWorld() : _kickedOff(false)
 
 bool HelloWorld::onTouchHammerBegan(cocos2d::Touch * touch, cocos2d::Event * e)
 {
-	const auto location = touch->getLocation();
+	const auto location = this->convertToWorldSpace(touch->getLocation());
 	auto arr = getPhysicsWorld()->getShapes(location);
 
 	PhysicsBody* body = nullptr;
@@ -67,7 +67,7 @@ bool HelloWorld::onTouchHammerBegan(cocos2d::Touch * touch, cocos2d::Event * e)
 		mouse->setPosition(location);
 		this->addChild(mouse);
 		PhysicsJointPin* joint = PhysicsJointPin::construct(physicsBody, body, location);
-		joint->setMaxForce(9000.0f * body->getMass());
+		joint->setMaxForce(10000.0f * body->getMass());
 		getPhysicsWorld()->addJoint(joint);
 		_mouses.insert(std::make_pair(touch->getID(), mouse));
 
@@ -82,7 +82,7 @@ void HelloWorld::onTouchHammerMoved(cocos2d::Touch * touch, cocos2d::Event * e)
 
 	if (it != _mouses.end())
 	{
-		it->second->setPosition(touch->getLocation());
+		it->second->setPosition(this->convertToWorldSpace(touch->getLocation()));
 	}
 }
 
@@ -125,7 +125,7 @@ bool HelloWorld::init()
         return false;
     }
 	
-	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -158,7 +158,7 @@ bool HelloWorld::init()
 
 	auto hammerPos = _tileMap->getWeaponPosition();	
 	auto weaponFixPoint = Node::create();
-	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 100));
+	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 200));
 	weaponFixPoint->addComponent(sp1PhysicsBody);
 	weaponFixPoint->setPosition(hammerPos.x, (hammerPos.y - startPos.y) + visibleSize.height * 1 / 3 + 100);
 	getPhysicsWorld()->addJoint(PhysicsJointPin::construct(sp1PhysicsBody, bounds->getPhysicsBody(), weaponFixPoint->getPosition()));
@@ -182,7 +182,7 @@ bool HelloWorld::init()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, _hammer);
 
 	auto contactListener = EventListenerPhysicsContact::create();
-	contactListener->onContactBegin = [this, face, bgPosY, world_size](PhysicsContact& contact) {
+	contactListener->onContactBegin = [this, face, bgPosY, world_size, visibleSize](PhysicsContact& contact) {
 		const auto face_vel = face->getPhysicsBody()->getVelocity();
 		switch (contact.getShapeA()->getBody()->getContactTestBitmask() |
 			contact.getShapeB()->getBody()->getContactTestBitmask())
@@ -192,8 +192,23 @@ bool HelloWorld::init()
 			this->runAction(Follow::create(face, Rect(0, bgPosY, world_size.width, world_size.height)));
 			break;
 		case FACE_BIT_MASK | GROUND_BIT_MASK:
-			//face->getPhysicsBody()->setVelocity(face_vel*0.2);
+		{
+			face->getPhysicsBody()->setVelocity(Vec2::ZERO);
+			if (contact.getShapeB()->getBody()->getTag() == 1)
+			{
+				auto label = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 24);
+				auto item = MenuItemLabel::create(label, [](Object* obj)
+				{
+					log("menu item touched");
+				});
+
+				auto menu = Menu::create(item, NULL);
+				
+				menu->setPosition(this->convertToNodeSpace(Vec2(visibleSize.width / 2, visibleSize.height / 2 + 100)));
+				this->addChild(menu);
+			}
 			break;
+		}
 		case FACE_BIT_MASK | EDGE_BIT_MASK:
 			//face->getPhysicsBody()->setVelocity(Vec2::ZERO);
 			break;
