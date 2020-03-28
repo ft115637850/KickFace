@@ -11,6 +11,6 @@ public:
 	Vec2 getFaceStartPosition();
 	Vec2 getWeaponPosition();
 	CREATE_FUNC(KickMap);
-	virtual bool init();
+	bool init() override;
 };
 

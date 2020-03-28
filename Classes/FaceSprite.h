@@ -5,7 +5,7 @@
 class FaceSprite : public cocos2d::Sprite
 {
 public:
-	virtual bool init();
+	bool init() override;
 	CREATE_FUNC(FaceSprite);
 };
 

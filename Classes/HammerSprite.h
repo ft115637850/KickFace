@@ -5,7 +5,7 @@ USING_NS_CC;
 class HammerSprite : public cocos2d::Sprite
 {
 public:
-	virtual bool init();
+	bool init() override;
 	CREATE_FUNC(HammerSprite);
 };
 

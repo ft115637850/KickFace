@@ -192,6 +192,7 @@ bool KickFaceScene::init()
 
 void KickFaceScene::onEnterTransitionDidFinish()
 {
+	Scene::onEnterTransitionDidFinish();
 	_background->runAction(Follow::create(_face, Rect(0, 0, _worldSize.width, _worldSize.height)));
 }
 
