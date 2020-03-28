@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="63" tileheight="63" infinite="0" nextlayerid="6" nextobjectid="11">
+ <tileset firstgid="1" source="32x32.tsx"/>
+ <objectgroup id="2" name="props">
+  <object id="6" x="2721.44" y="1062.57" width="199.826" height="69.7804"/>
+  <object id="7" x="2527.95" y="1662.04" width="234.716" height="79.2959"/>
+  <object id="8" x="3136.95" y="1934.82" width="285.465" height="53.9212"/>
+ </objectgroup>
+ <objectgroup id="3" name="sprites">
+  <object id="9" name="face" x="717.663" y="774.849" width="37.4367" height="26.2649"/>
+  <object id="10" name="weapon" x="496.525" y="646.133" width="42.6086" height="23.2339"/>
+ </objectgroup>
+ <objectgroup id="4" name="grounds">
+  <object id="1" name="bottom" x="-9.51551" y="2194.91" width="4037.75" height="72.9522">
+   <properties>
+    <property name="tag" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="2" name="left" x="-3.17184" y="0" width="31.7184" height="2188.57"/>
+  <object id="3" name="right" x="3998.34" y="19.031" width="31.7184" height="2179.05"/>
+  <object id="4" name="top" x="34.8902" y="3.17184" width="3993.34" height="15.8592"/>
+  <object id="5" name="g1" x="662.463" y="900.802" width="86.091" height="60.2649"/>
+ </objectgroup>
+</map>
