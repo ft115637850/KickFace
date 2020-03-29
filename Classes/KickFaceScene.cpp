@@ -84,8 +84,12 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	{
 	case FACE_BIT_MASK | HAMMER_BIT_MASK:
 	{
-		auto s = contact.getShapeA()->getBody()->getVelocity();
-		//this->runAction(Follow::create(_face, Rect(0, 0, _worldSize.width, _worldSize.height)));
+		_face->showHitting();
+		this->runAction(Sequence::create(DelayTime::create(0.5f),
+			CallFunc::create([this]() {
+				_face->showScared();
+			}),
+			NULL));
 		break;
 	}
 	case FACE_BIT_MASK | GROUND_BIT_MASK:
@@ -94,6 +98,8 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		_face->getPhysicsBody()->setVelocity(face_vel*0.2);
 		if (contact.getShapeB()->getBody()->getTag() == 1)
 		{
+			this->stopAllActions();
+			_face->showHurt();
 			auto label1 = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 48);
 			auto item1 = MenuItemLabel::create(label1, [this](Object* obj)
 			{
@@ -114,9 +120,16 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		}
 		break;
 	}
-	case FACE_BIT_MASK | EDGE_BIT_MASK:
-		//face->getPhysicsBody()->setVelocity(Vec2::ZERO);
+	case FACE_BIT_MASK | PROPS_BIT_MASK:
+	{
+		_face->showHitting();
+		this->runAction(Sequence::create(DelayTime::create(0.5f),
+			CallFunc::create([this]() {
+				_face->showScared();
+			}),
+			NULL));
 		break;
+	}
 	default:;
 	}
 	return true;
