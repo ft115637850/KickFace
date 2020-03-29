@@ -61,9 +61,6 @@ bool KickMap::init()
 		phy->setDynamic(false);
 		phy->setContactTestBitmask(PROPS_BIT_MASK);
 		Sprite * sp = Sprite::create();
-		auto colorBg = LayerColor::create(Color4B(200, 190, 180, 255), groundW, groundH);
-		sp->setColor(Color3B(200, 190, 180));
-		sp->setTextureRect(Rect(0, 0, groundW, groundH));
 		sp->setPosition(Vec2(groundX, groundY));
 		sp->setAnchorPoint(Vec2::ZERO);
 		sp->setContentSize(Size(groundW, groundH));

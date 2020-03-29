@@ -94,29 +94,9 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	}
 	case FACE_BIT_MASK | GROUND_BIT_MASK:
 	{
-		const auto face_vel = _face->getPhysicsBody()->getVelocity();
-		_face->getPhysicsBody()->setVelocity(face_vel*0.2);
 		if (contact.getShapeB()->getBody()->getTag() == 1)
 		{
-			this->stopAllActions();
-			_face->showHurt();
-			auto label1 = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 48);
-			auto item1 = MenuItemLabel::create(label1, [this](Object* obj)
-			{
-				this->_background->stopAction(_followAct);
-				Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::create()));
-			});
-			item1->setPositionY(50);
-			auto label2 = Label::createWithTTF("Exit", "fonts/Marker Felt.ttf", 48);
-			auto item2 = MenuItemLabel::create(label2, [](Object* obj)
-			{
-				Director::getInstance()->end();
-			});
-			item2->setPositionY(-50);
-			auto menu = Menu::create(item1, item2, NULL);
-
-			menu->setPosition(this->convertToNodeSpace(Vec2(_visibleSize.width / 2, _visibleSize.height / 2 + 100)));
-			this->addChild(menu, 1);
+			kickComplete();
 		}
 		break;
 	}
@@ -130,9 +110,39 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 			NULL));
 		break;
 	}
+	case FACE_BIT_MASK| EDGE_BIT_MASK:
+	{
+		kickComplete();
+		break;
+	}
 	default:;
 	}
 	return true;
+}
+
+void KickFaceScene::kickComplete()
+{
+	const auto face_vel = _face->getPhysicsBody()->getVelocity();
+	_face->getPhysicsBody()->setVelocity(face_vel*0.2);
+	this->stopAllActions();
+	_face->showHurt();
+	auto label1 = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 48);
+	auto item1 = MenuItemLabel::create(label1, [this](Ref* obj)
+	{
+		this->_background->stopAction(_followAct);
+		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::create()));
+	});
+	item1->setPositionY(10);
+	auto label2 = Label::createWithTTF("Exit", "fonts/Marker Felt.ttf", 48);
+	auto item2 = MenuItemLabel::create(label2, [](Ref* obj)
+	{
+		Director::getInstance()->end();
+	});
+	item2->setPositionY(-70);
+	auto menu = Menu::create(item1, item2, NULL);
+
+	menu->setPosition(this->convertToNodeSpace(Vec2(_visibleSize.width / 2, _visibleSize.height / 2 + 100)));
+	this->addChild(menu, 1);
 }
 
 bool KickFaceScene::init()
@@ -148,18 +158,18 @@ bool KickFaceScene::init()
 	_visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	_background = Background::createBackground(0, 0);
+	_background = Background::createBackground(4032, 2268);
 	addChild(_background);
 	_worldSize = _background->getContentSize();
 
 	auto bounds = Node::create();
-	bounds->setContentSize(_worldSize);
-	bounds->setPhysicsBody(PhysicsBody::createEdgeBox(_worldSize));
+	bounds->setContentSize(Size(_worldSize.width, _worldSize.height+300));
+	bounds->setPhysicsBody(PhysicsBody::createEdgeBox(Size(_worldSize.width, _worldSize.height + 300)));
 	bounds->getPhysicsBody()->setContactTestBitmask(EDGE_BIT_MASK);
-	bounds->setPosition(_background->getPosition());
+	bounds->setPosition(0, -150);
 	_background->addChild(bounds);
 
-	auto _tileMap = KickMap::create();
+	_tileMap = KickMap::create();
 	const auto faceStartPosition = _tileMap->getFaceStartPosition();
 	_background->addChild(_tileMap);
 
@@ -172,7 +182,7 @@ bool KickFaceScene::init()
 
 	auto hammerPos = _tileMap->getWeaponPosition();
 	auto weaponFixPoint = Node::create();
-	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 300));
+	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 200));
 	weaponFixPoint->addComponent(sp1PhysicsBody);
 	weaponFixPoint->setPosition(hammerPos.x, hammerPos.y + 100);
 	sp1PhysicsBody->setVelocity(Vec2::ZERO);
@@ -206,6 +216,6 @@ bool KickFaceScene::init()
 void KickFaceScene::onEnterTransitionDidFinish()
 {
 	Scene::onEnterTransitionDidFinish();
-	_background->runAction(Follow::create(_face, Rect(0, 0, _worldSize.width, _worldSize.height)));
+  	_background->runAction(Follow::create(_face, Rect(0, 0, _worldSize.width, _worldSize.height)));
 }
 
