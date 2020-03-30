@@ -6,6 +6,7 @@ USING_NS_CC;
 class KickMap : public Node
 {
 private:
+	const float _factor = 1.96875f;
 	experimental::TMXTiledMap* _tiledMap;
 public:
 	Vec2 getFaceStartPosition();

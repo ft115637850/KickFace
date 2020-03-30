@@ -163,16 +163,15 @@ bool KickFaceScene::init()
 	_worldSize = _background->getContentSize();
 
 	auto bounds = Node::create();
-	bounds->setContentSize(Size(_worldSize.width, _worldSize.height+300));
+	bounds->setContentSize(Size(_worldSize.width, _worldSize.height+600));
 	bounds->setPhysicsBody(PhysicsBody::createEdgeBox(Size(_worldSize.width, _worldSize.height + 300)));
 	bounds->getPhysicsBody()->setContactTestBitmask(EDGE_BIT_MASK);
-	bounds->setPosition(0, -150);
+	bounds->setPosition(0, -400);
 	_background->addChild(bounds);
 
 	_tileMap = KickMap::create();
 	const auto faceStartPosition = _tileMap->getFaceStartPosition();
 	_background->addChild(_tileMap);
-
 
 	_face = FaceSprite::create();
 	_face->setPosition(faceStartPosition);
@@ -182,7 +181,7 @@ bool KickFaceScene::init()
 
 	auto hammerPos = _tileMap->getWeaponPosition();
 	auto weaponFixPoint = Node::create();
-	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 200));
+	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 300));
 	weaponFixPoint->addComponent(sp1PhysicsBody);
 	weaponFixPoint->setPosition(hammerPos.x, hammerPos.y + 100);
 	sp1PhysicsBody->setVelocity(Vec2::ZERO);

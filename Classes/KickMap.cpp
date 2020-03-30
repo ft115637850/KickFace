@@ -8,14 +8,14 @@ Vec2 KickMap::getFaceStartPosition()
 	auto objectGroup = _tiledMap->getObjectGroup("sprites");
 	auto face = objectGroup->getObject("face");
 	
-	return Vec2(face["x"].asFloat(), face["y"].asFloat());
+	return Vec2(face["x"].asFloat(), face["y"].asFloat())*_factor;
 }
 
 Vec2 KickMap::getWeaponPosition()
 {
 	auto objectGroup = _tiledMap->getObjectGroup("sprites");
 	auto weapon = objectGroup->getObject("weapon");
-	return Vec2(weapon["x"].asFloat(), weapon["y"].asFloat());
+	return Vec2(weapon["x"].asFloat(), weapon["y"].asFloat())*_factor;
 }
 
 bool KickMap::init()
@@ -23,7 +23,7 @@ bool KickMap::init()
 	if (Node::init() == false)
 		return false;
 
-	_tiledMap = experimental::TMXTiledMap::create("tiled/lm1.tmx");
+	_tiledMap = experimental::TMXTiledMap::create("tiled/m1.tmx");
 	ValueVector grounds = _tiledMap->getObjectGroup("grounds")->getObjects();
 	for (auto obj : grounds)
 	{
@@ -69,5 +69,6 @@ bool KickMap::init()
 	}
 	
 	addChild(_tiledMap);
+	setScale(_factor);
 	return true;
 }
