@@ -174,11 +174,6 @@ bool KickFaceScene::init()
 	//face->getPhysicsBody()->setGravityEnable(false);
 	_background->addChild(_face);
 
-	const auto beeStartPosition = _tileMap->getSpritesStartPosition("bee");
-	auto bee = BeeSprite::createBeeSprite(1);
-	bee->setPosition(beeStartPosition);
-	_background->addChild(bee);	
-
 	auto hammerPos = _tileMap->getSpritesStartPosition("weapon");
 	auto weaponFixPoint = Node::create();
 	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 300));

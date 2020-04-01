@@ -1,4 +1,6 @@
 #include "KickMap.h"
+
+#include "BeeSprite.h"
 #include "KFCommonDefinition.h"
 
 Vec2 KickMap::getSpritesStartPosition(std::string spriteName)
@@ -57,6 +59,24 @@ bool KickMap::init()
 		sp->setContentSize(Size(groundW, groundH));
 		sp->setPhysicsBody(phy);
 		_tiledMap->addChild(sp);
+	}
+
+	ValueVector sprites = _tiledMap->getObjectGroup("sprites")->getObjects();
+	for (auto obj : sprites)
+	{
+		ValueMap& prop = obj.asValueMap();
+		auto spName = prop["name"].asString();
+		auto groundX = prop["x"].asFloat();
+		auto groundY = prop["y"].asFloat();
+		auto groundW = prop["width"].asFloat();
+		auto groundH = prop["height"].asFloat();
+		if (spName == "bee")
+		{
+			auto beeColor = prop["color"].asInt();
+			auto sp = BeeSprite::createBeeSprite(beeColor);
+			sp->setPosition(Vec2(groundX, groundY));
+			_tiledMap->addChild(sp);
+		}
 	}
 	
 	addChild(_tiledMap);

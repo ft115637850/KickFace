@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="19">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="23">
  <tileset firstgid="1" source="32x32.tsx"/>
  <layer id="6" name="background" width="64" height="36">
   <data encoding="base64" compression="zlib">
@@ -21,7 +21,26 @@
    <ellipse/>
   </object>
   <object id="7" name="weapon" x="261.667" y="245" width="12" height="11.3333"/>
-  <object id="18" name="bee" x="373" y="258"/>
+  <object id="19" name="bee" x="702.811" y="298.219">
+   <properties>
+    <property name="color" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="20" name="bee" x="647" y="344.263">
+   <properties>
+    <property name="color" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="21" name="bee" x="701.92" y="345.362">
+   <properties>
+    <property name="color" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="18" name="bee" x="648.395" y="292.638">
+   <properties>
+    <property name="color" type="int" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="2" name="grounds">
   <object id="2" x="256.191" y="1104.42" width="1568.27" height="48.1978">
