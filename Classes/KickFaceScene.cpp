@@ -2,16 +2,11 @@
 #include "Background.h"
 #include "SimpleAudioEngine.h"
 #include "Background.h"
+#include "BeeSprite.h"
 #include "FaceSprite.h"
 #include "KickMap.h"
-#include "ui/UIButton.h"
+#include "KFCommonDefinition.h"
 
-#define EDGE_BIT_MASK	0b00010
-#define FACE_BIT_MASK	0b10000
-#define HAMMER_BIT_MASK	0b01000
-#define GROUND_BIT_MASK	0b00100
-#define PROPS_BIT_MASK	0b00001
-#define HAMMER_BODY_TAG 0x80
 
 KickFaceScene::KickFaceScene(): _hammer(nullptr), _face(nullptr), _followAct(nullptr), _background(nullptr)
 {
@@ -94,7 +89,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	}
 	case FACE_BIT_MASK | GROUND_BIT_MASK:
 	{
-		if (contact.getShapeB()->getBody()->getTag() == 1)
+		if (contact.getShapeB()->getBody()->getTag() == BOTTOM_GROUND_TAG)
 		{
 			kickComplete();
 		}
@@ -122,8 +117,8 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 
 void KickFaceScene::kickComplete()
 {
-	const auto face_vel = _face->getPhysicsBody()->getVelocity();
-	_face->getPhysicsBody()->setVelocity(face_vel*0.2);
+	//const auto face_vel = _face->getPhysicsBody()->getVelocity();
+	_face->getPhysicsBody()->setVelocity(Vec2::ZERO);
 	this->stopAllActions();
 	_face->showHurt();
 	auto label1 = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 48);
@@ -163,23 +158,28 @@ bool KickFaceScene::init()
 	_worldSize = _background->getContentSize();
 
 	auto bounds = Node::create();
-	bounds->setContentSize(Size(_worldSize.width, _worldSize.height+600));
+	bounds->setContentSize(Size(_worldSize.width, _worldSize.height+1000));
 	bounds->setPhysicsBody(PhysicsBody::createEdgeBox(Size(_worldSize.width, _worldSize.height + 300)));
 	bounds->getPhysicsBody()->setContactTestBitmask(EDGE_BIT_MASK);
-	bounds->setPosition(0, -400);
+	bounds->setPosition(0, -500);
 	_background->addChild(bounds);
 
 	_tileMap = KickMap::create();
-	const auto faceStartPosition = _tileMap->getFaceStartPosition();
 	_background->addChild(_tileMap);
 
+	const auto faceStartPosition = _tileMap->getSpritesStartPosition("face");
 	_face = FaceSprite::create();
 	_face->setPosition(faceStartPosition);
 	_face->getPhysicsBody()->setContactTestBitmask(FACE_BIT_MASK);
 	//face->getPhysicsBody()->setGravityEnable(false);
 	_background->addChild(_face);
 
-	auto hammerPos = _tileMap->getWeaponPosition();
+	const auto beeStartPosition = _tileMap->getSpritesStartPosition("bee");
+	auto bee = BeeSprite::createBeeSprite(1);
+	bee->setPosition(beeStartPosition);
+	_background->addChild(bee);	
+
+	auto hammerPos = _tileMap->getSpritesStartPosition("weapon");
 	auto weaponFixPoint = Node::create();
 	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 300));
 	weaponFixPoint->addComponent(sp1PhysicsBody);

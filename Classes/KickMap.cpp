@@ -1,21 +1,12 @@
 #include "KickMap.h"
+#include "KFCommonDefinition.h"
 
-#define GROUND_BIT_MASK	0b00100
-#define PROPS_BIT_MASK	0b00001
-
-Vec2 KickMap::getFaceStartPosition()
+Vec2 KickMap::getSpritesStartPosition(std::string spriteName)
 {
 	auto objectGroup = _tiledMap->getObjectGroup("sprites");
-	auto face = objectGroup->getObject("face");
-	
-	return Vec2(face["x"].asFloat(), face["y"].asFloat())*_factor;
-}
+	auto sp = objectGroup->getObject(spriteName);
 
-Vec2 KickMap::getWeaponPosition()
-{
-	auto objectGroup = _tiledMap->getObjectGroup("sprites");
-	auto weapon = objectGroup->getObject("weapon");
-	return Vec2(weapon["x"].asFloat(), weapon["y"].asFloat())*_factor;
+	return Vec2(sp["x"].asFloat(), sp["y"].asFloat())*_factor;
 }
 
 bool KickMap::init()
@@ -69,6 +60,6 @@ bool KickMap::init()
 	}
 	
 	addChild(_tiledMap);
-	setScale(_factor);
+	setScale(MAP_SCALE_FACTOR);
 	return true;
 }

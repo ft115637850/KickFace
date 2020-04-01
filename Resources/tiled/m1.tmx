@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="19">
+ <tileset firstgid="1" source="32x32.tsx"/>
+ <layer id="6" name="background" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt00lWwlAURdEf+kwBqYtApmQERUVhSoB1AfYtGAsESIBQzIEzAm3nexu789Y6jdt4vjHGFxERERERERGx2BQzBJhjgSVCRFhhjQ1ibLHDHgcL+oxjzAmyyCGPAooooYwKqqjBRR0NeE7y+1P4OEMTLZzjAm1c4grX6OAGt+iiZ0HfxwBD3OEeD3jEE57xgle84R0jjPFhQT/FDAHmWGCJEBFWWGODGFvssMfBgj6T4n+QRQ55FFBECWVUUEUNLupowEslvw8cERERERH5L6I//KSNmeATX/hOJ+/2274jG+00XQ==
+  </data>
+ </layer>
+ <layer id="7" name="scene1" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztl0tuwjAURU3cnxjQn9oyYzFITDsq0PVU6hA6KbCfzoPUioTuptciUiML7Nq1yXPsKx0JpGDnPD/s5LPDos0G7nnE/nnA/necsXvwAPrcboyQ/V1E9n+yrGOoSevfvP97xtgCLMEq8zA+enoBlmAl9TcF/yaT/O39VX0lx8VZ9ZeMLsyuT+tv5v/hYX9ylTOLvjL154SfD0ZH8B8azOH7XJNDzd9nNqhnAUqwrWrrwl+3p1Px35eQ11+8d4zBBEwt55D9Z+iLOcgV/z0q/i4S8vq7CBX/b1xTgJLvPpdHqhkVf58pqtpuq9rWE4O/Ksnf/DdN+Z+fuBmnnpD8Bz0349QTkr+PyP7iuedSc79t9l9nO1Sh7C/2CBlV2tb/c8z1CHrgDcw0c7fN3zSx+79G6D/GnjABU/Bs8UwRuv9/k/z1/p3T3/Pnhe8/lygj7l/n/8UPc9Vl7BrcgNtueN8Fh9yE+w8GfHt5
+  </data>
+ </layer>
+ <layer id="5" name="scene2" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt180NgkAQhuEJIUoZlKIXLMKLpVgKpdiEP9GLpThEDxtIlhB2ftb9nmTCASL7soREIgAAAACAvDx5Xt/jee7aa0V047nzPCrxpak5Wi/AGPrLtqa/a+idah1WsP/L7BtqJdZhxcv+H+rpaPDSLyn2XD31b5T2POSpvxPq5z2/hBOeK6E/Bv1+xPr5vT39jn3Ke+bSP9jWtEt9z5z6JaDfD/Sv/43hGzGe2PX/1r9U6f2eaPZb/NeYo9nv8V0rvT8nH2ZbHgA=
+  </data>
+ </layer>
+ <objectgroup id="4" name="sprites">
+  <object id="1" name="face" x="365.724" y="300.113" width="16.2288" height="18.833">
+   <ellipse/>
+  </object>
+  <object id="7" name="weapon" x="261.667" y="245" width="12" height="11.3333"/>
+  <object id="18" name="bee" x="373" y="258"/>
+ </objectgroup>
+ <objectgroup id="2" name="grounds">
+  <object id="2" x="256.191" y="1104.42" width="1568.27" height="48.1978">
+   <properties>
+    <property name="tag" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="3" x="352.136" y="366.352" width="32.2294" height="18.0133"/>
+  <object id="4" x="0.666667" y="-37.3333" width="30.6667" height="1188"/>
+  <object id="5" x="2016.67" y="-36.6667" width="31.3333" height="1188.67"/>
+  <object id="6" x="0.666667" y="-66" width="2048" height="28"/>
+ </objectgroup>
+ <objectgroup id="3" name="props">
+  <object id="8" x="928" y="768" width="31.3333" height="30.6667"/>
+  <object id="10" x="1569.33" y="321.333" width="96" height="30.6667"/>
+  <object id="11" x="1377.33" y="609.333" width="126.667" height="93.3333"/>
+  <object id="12" x="1502.67" y="993.333" width="130.667" height="30.6667"/>
+  <object id="13" x="1218.67" y="878.667" width="160" height="65.3333"/>
+  <object id="14" x="896" y="749.333" width="96" height="66.6667"/>
+  <object id="15" x="641.333" y="574.667" width="158.667" height="64"/>
+  <object id="16" x="1725.33" y="513.333" width="94.6667" height="32"/>
+  <object id="17" x="1729.33" y="802.667" width="60" height="57.3333"/>
+ </objectgroup>
+</map>

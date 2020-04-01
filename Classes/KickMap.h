@@ -9,8 +9,7 @@ private:
 	const float _factor = 1.96875f;
 	TMXTiledMap* _tiledMap;
 public:
-	Vec2 getFaceStartPosition();
-	Vec2 getWeaponPosition();
+	Vec2 getSpritesStartPosition(std::string spriteName);
 	CREATE_FUNC(KickMap);
 	bool init() override;
 };
