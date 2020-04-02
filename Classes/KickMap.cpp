@@ -4,6 +4,25 @@
 #include "FaceSprite.h"
 #include "KFCommonDefinition.h"
 
+void KickMap::addBees()
+{
+	ValueVector sprites = _tiledMap->getObjectGroup("sprites")->getObjects();
+	for (auto obj : sprites)
+	{
+		ValueMap& prop = obj.asValueMap();
+		auto spName = prop["name"].asString();
+		auto groundX = prop["x"].asFloat();
+		auto groundY = prop["y"].asFloat();
+		if (spName == "bee")
+		{
+			auto beeColor = prop["color"].asInt();
+			auto sp = BeeSprite::createBeeSprite(beeColor);
+			sp->setPosition(Vec2(groundX, groundY));
+			_tiledMap->addChild(sp);
+		}
+	}
+}
+
 Vec2 KickMap::getOuterSpritesStartPosition(const std::string& spriteName)
 {
 	auto objectGroup = _tiledMap->getObjectGroup("sprites");
@@ -34,6 +53,8 @@ bool KickMap::init()
 		}
 
 		phy->setDynamic(false);
+		/*phy->setCategoryBitmask(GROUND_CATEGORY_MASK);
+		phy->setCollisionBitmask(GROUND_COLLISION_MASK);*/
 		phy->setContactTestBitmask(GROUND_BIT_MASK);
 		Sprite * sp = Sprite::create();
 		sp->setPosition(Vec2(groundX, groundY));
@@ -53,6 +74,8 @@ bool KickMap::init()
 		auto groundH = prop["height"].asFloat();
 		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH), PhysicsMaterial(1.0f, 1.0f, 1.0f));
 		phy->setDynamic(false);
+		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);
+		phy->setCollisionBitmask(PROPS_COLLISION_MASK);*/
 		phy->setContactTestBitmask(PROPS_BIT_MASK);
 		Sprite * sp = Sprite::create();
 		sp->setPosition(Vec2(groundX, groundY));
@@ -62,22 +85,7 @@ bool KickMap::init()
 		_tiledMap->addChild(sp);
 	}
 
-	ValueVector sprites = _tiledMap->getObjectGroup("sprites")->getObjects();
-	for (auto obj : sprites)
-	{
-		ValueMap& prop = obj.asValueMap();
-		auto spName = prop["name"].asString();
-		auto groundX = prop["x"].asFloat();
-		auto groundY = prop["y"].asFloat();
-		if (spName == "bee")
-		{
-			auto beeColor = prop["color"].asInt();
-			auto sp = BeeSprite::createBeeSprite(beeColor);
-			sp->setPosition(Vec2(groundX, groundY));
-			_tiledMap->addChild(sp);
-		}
-	}
-	
+	addBees();
 	addChild(_tiledMap);
 	setScale(MAP_SCALE_FACTOR);
 	return true;

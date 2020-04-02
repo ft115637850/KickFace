@@ -94,7 +94,8 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	}
 	case FACE_BIT_MASK | GROUND_BIT_MASK:
 	{
-		if (contact.getShapeB()->getBody()->getTag() == BOTTOM_GROUND_TAG)
+		if (contact.getShapeB()->getBody()->getTag() == BOTTOM_GROUND_TAG||
+			contact.getShapeA()->getBody()->getTag() == BOTTOM_GROUND_TAG)
 		{
 			kickComplete();
 		}
@@ -114,6 +115,13 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	{
 		kickComplete();
 		break;
+	}
+	case BEE_BIT_MASK| HAMMER_BIT_MASK:
+	case BEE_BIT_MASK | GROUND_BIT_MASK:
+	case BEE_BIT_MASK | PROPS_BIT_MASK:
+	case BEE_BIT_MASK | EDGE_BIT_MASK:
+	{
+		return false;
 	}
 	default:;
 	}
@@ -157,6 +165,8 @@ void KickFaceScene::createWorldAndMap()
 	_boundary->setContentSize(Size(_worldSize.width, _worldSize.height + 1000));
 	_boundary->setPhysicsBody(PhysicsBody::createEdgeBox(Size(_worldSize.width, _worldSize.height + 300)));
 	_boundary->getPhysicsBody()->setTag(EDGE_BODY_TAG);
+	/*_boundary->getPhysicsBody()->setCategoryBitmask(EDGE_CATEGORY_MASK);
+	_boundary->getPhysicsBody()->setCollisionBitmask(EDGE_COLLISION_MASK);*/
 	_boundary->getPhysicsBody()->setContactTestBitmask(EDGE_BIT_MASK);
 	_boundary->setPosition(0, -500);
 	_background->addChild(_boundary);
@@ -189,6 +199,8 @@ void KickFaceScene::addKickWeapon()
 	_hammer->setPosition(hammerPos);
 	auto sp2PhysicsBody = _hammer->getPhysicsBody();
 	sp2PhysicsBody->setTag(HAMMER_BODY_TAG);
+	/*sp2PhysicsBody->setCategoryBitmask(HAMMER_CATEGORY_MASK);
+	sp2PhysicsBody->setCollisionBitmask(HAMMER_COLLISION_MASK);*/
 	sp2PhysicsBody->setContactTestBitmask(HAMMER_BIT_MASK);
 	sp1PhysicsBody->setVelocity(Vec2::ZERO);
 	_background->addChild(_hammer);

@@ -8,6 +8,7 @@ class KickMap : public Node
 {
 private:
 	TMXTiledMap* _tiledMap;
+	void addBees();
 public:
 	Vec2 getOuterSpritesStartPosition(const std::string& spriteName);
 	CREATE_FUNC(KickMap);
