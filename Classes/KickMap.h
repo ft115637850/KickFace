@@ -1,15 +1,15 @@
 #pragma once
 
 #include "cocos2d.h"
+#include "FaceSprite.h"
 USING_NS_CC;
 
 class KickMap : public Node
 {
 private:
-	const float _factor = 1.96875f;
 	TMXTiledMap* _tiledMap;
 public:
-	Vec2 getSpritesStartPosition(std::string spriteName);
+	Vec2 getOuterSpritesStartPosition(const std::string& spriteName);
 	CREATE_FUNC(KickMap);
 	bool init() override;
 };

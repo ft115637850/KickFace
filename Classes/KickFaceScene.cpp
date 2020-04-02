@@ -8,7 +8,12 @@
 #include "KFCommonDefinition.h"
 
 
-KickFaceScene::KickFaceScene(): _hammer(nullptr), _face(nullptr), _followAct(nullptr), _background(nullptr)
+KickFaceScene::KickFaceScene():
+_hammer(nullptr),
+_face(nullptr),
+_tileMap(nullptr),
+_background(nullptr),
+_boundary(nullptr)
 {
 }
 
@@ -98,7 +103,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	case FACE_BIT_MASK | PROPS_BIT_MASK:
 	{
 		_face->showHitting();
-		this->runAction(Sequence::create(DelayTime::create(0.5f),
+		_background->runAction(Sequence::create(DelayTime::create(0.5f),
 			CallFunc::create([this]() {
 				_face->showScared();
 			}),
@@ -119,12 +124,11 @@ void KickFaceScene::kickComplete()
 {
 	//const auto face_vel = _face->getPhysicsBody()->getVelocity();
 	_face->getPhysicsBody()->setVelocity(Vec2::ZERO);
-	this->stopAllActions();
+	_background->stopAllActions();
 	_face->showHurt();
 	auto label1 = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 48);
-	auto item1 = MenuItemLabel::create(label1, [this](Ref* obj)
+	auto item1 = MenuItemLabel::create(label1, [](Ref* obj)
 	{
-		this->_background->stopAction(_followAct);
 		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::create()));
 	});
 	item1->setPositionY(10);
@@ -140,49 +144,47 @@ void KickFaceScene::kickComplete()
 	this->addChild(menu, 1);
 }
 
-bool KickFaceScene::init()
+void KickFaceScene::createWorldAndMap()
 {
-	if (!Scene::initWithPhysics())
-	{
-		return false;
-	}
-
 	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
-
-	_visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	_background = Background::createBackground(4032, 2268);
+	
+	_background = Background::createBackground(WORLD_WIDTH, WORLD_HEIGHT);
 	addChild(_background);
 	_worldSize = _background->getContentSize();
 
-	auto bounds = Node::create();
-	bounds->setContentSize(Size(_worldSize.width, _worldSize.height+1000));
-	bounds->setPhysicsBody(PhysicsBody::createEdgeBox(Size(_worldSize.width, _worldSize.height + 300)));
-	bounds->getPhysicsBody()->setContactTestBitmask(EDGE_BIT_MASK);
-	bounds->setPosition(0, -500);
-	_background->addChild(bounds);
+	_boundary = Node::create();
+	_boundary->setContentSize(Size(_worldSize.width, _worldSize.height + 1000));
+	_boundary->setPhysicsBody(PhysicsBody::createEdgeBox(Size(_worldSize.width, _worldSize.height + 300)));
+	_boundary->getPhysicsBody()->setTag(EDGE_BODY_TAG);
+	_boundary->getPhysicsBody()->setContactTestBitmask(EDGE_BIT_MASK);
+	_boundary->setPosition(0, -500);
+	_background->addChild(_boundary);
 
 	_tileMap = KickMap::create();
 	_background->addChild(_tileMap);
+}
 
-	const auto faceStartPosition = _tileMap->getSpritesStartPosition("face");
+void KickFaceScene::addFace()
+{
+	const auto faceStartPosition = _tileMap->getOuterSpritesStartPosition("face");
 	_face = FaceSprite::create();
 	_face->setPosition(faceStartPosition);
-	_face->getPhysicsBody()->setContactTestBitmask(FACE_BIT_MASK);
-	//face->getPhysicsBody()->setGravityEnable(false);
+	////face->getPhysicsBody()->setGravityEnable(false);
 	_background->addChild(_face);
+}
 
-	auto hammerPos = _tileMap->getSpritesStartPosition("weapon");
+void KickFaceScene::addKickWeapon()
+{
+	auto hammerPos = _tileMap->getOuterSpritesStartPosition("weapon");
 	auto weaponFixPoint = Node::create();
 	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 300));
 	weaponFixPoint->addComponent(sp1PhysicsBody);
 	weaponFixPoint->setPosition(hammerPos.x, hammerPos.y + 100);
 	sp1PhysicsBody->setVelocity(Vec2::ZERO);
-	getPhysicsWorld()->addJoint(PhysicsJointPin::construct(sp1PhysicsBody, bounds->getPhysicsBody(), weaponFixPoint->getPosition()));
+	getPhysicsWorld()->addJoint(PhysicsJointPin::construct(sp1PhysicsBody, _boundary->getPhysicsBody(), weaponFixPoint->getPosition()));
 	_background->addChild(weaponFixPoint);
-
+	
 	_hammer = HammerSprite::create();
 	_hammer->setPosition(hammerPos);
 	auto sp2PhysicsBody = _hammer->getPhysicsBody();
@@ -193,7 +195,10 @@ bool KickFaceScene::init()
 
 	PhysicsJointFixed* joint = PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, hammerPos);
 	getPhysicsWorld()->addJoint(joint);
+}
 
+void KickFaceScene::addEventHandlers()
+{
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(KickFaceScene::onTouchHammerBegan, this);
 	listener->onTouchMoved = CC_CALLBACK_2(KickFaceScene::onTouchHammerMoved, this);
@@ -204,6 +209,22 @@ bool KickFaceScene::init()
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(KickFaceScene::onBodyContact, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
+}
+
+bool KickFaceScene::init()
+{
+	if (!Scene::initWithPhysics())
+	{
+		return false;
+	}
+
+	_visibleSize = Director::getInstance()->getVisibleSize();
+	//Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	createWorldAndMap();
+	addFace();
+	addKickWeapon();
+	addEventHandlers();
 	return true;
 }
 

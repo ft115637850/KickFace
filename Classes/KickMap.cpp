@@ -1,14 +1,15 @@
 #include "KickMap.h"
 
 #include "BeeSprite.h"
+#include "FaceSprite.h"
 #include "KFCommonDefinition.h"
 
-Vec2 KickMap::getSpritesStartPosition(std::string spriteName)
+Vec2 KickMap::getOuterSpritesStartPosition(const std::string& spriteName)
 {
 	auto objectGroup = _tiledMap->getObjectGroup("sprites");
 	auto sp = objectGroup->getObject(spriteName);
 
-	return Vec2(sp["x"].asFloat(), sp["y"].asFloat())*_factor;
+	return Vec2(sp["x"].asFloat(), sp["y"].asFloat())*MAP_SCALE_FACTOR;
 }
 
 bool KickMap::init()
@@ -68,8 +69,6 @@ bool KickMap::init()
 		auto spName = prop["name"].asString();
 		auto groundX = prop["x"].asFloat();
 		auto groundY = prop["y"].asFloat();
-		auto groundW = prop["width"].asFloat();
-		auto groundH = prop["height"].asFloat();
 		if (spName == "bee")
 		{
 			auto beeColor = prop["color"].asInt();
