@@ -28,7 +28,7 @@ private:
 	void addKickWeapon();
 	void addEventHandlers();
 	KickFaceScene();
-	~KickFaceScene();
+	virtual ~KickFaceScene();
 public:
 	bool init() override;
 	void onEnterTransitionDidFinish() override;

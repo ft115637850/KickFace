@@ -3,6 +3,7 @@
 #include "SimpleAudioEngine.h"
 #include "Background.h"
 #include "BeeSprite.h"
+#include "BodyContactHelper.h"
 #include "FaceSprite.h"
 #include "KickMap.h"
 #include "KFCommonDefinition.h"
@@ -20,7 +21,9 @@ _boundary(nullptr)
 
 KickFaceScene::~KickFaceScene()
 {
-
+	_tileMap->removeAllChildren();
+	_background->removeAllChildren();
+	this->Scene::removeAllChildren();
 }
 
 bool KickFaceScene::onTouchHammerBegan(cocos2d::Touch * touch, cocos2d::Event * e)
@@ -116,10 +119,15 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		kickComplete();
 		break;
 	}
-	case BEE_BIT_MASK| HAMMER_BIT_MASK:
-	case BEE_BIT_MASK | GROUND_BIT_MASK:
+	case BEE_BIT_MASK | FACE_BIT_MASK:
+	{
+		BeeSprite* beeSp = BodyContactHelper::getInstance()->getBeeBetweenShapes(contact.getShapeA(), contact.getShapeB());
+		beeSp->collidedWithFace(_face);
+		break;
+	}
+	case BEE_BIT_MASK | BEE_BIT_MASK:
+	case BEE_BIT_MASK | HAMMER_BIT_MASK:
 	case BEE_BIT_MASK | PROPS_BIT_MASK:
-	case BEE_BIT_MASK | EDGE_BIT_MASK:
 	{
 		return false;
 	}
@@ -180,7 +188,7 @@ void KickFaceScene::addFace()
 	const auto faceStartPosition = _tileMap->getOuterSpritesStartPosition("face");
 	_face = FaceSprite::create();
 	_face->setPosition(faceStartPosition);
-	////face->getPhysicsBody()->setGravityEnable(false);
+	//_face->getPhysicsBody()->setGravityEnable(false);
 	_background->addChild(_face);
 }
 

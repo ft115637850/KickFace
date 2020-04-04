@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="59">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="62">
  <tileset firstgid="1" source="32x32.tsx"/>
  <layer id="6" name="background" width="64" height="36">
   <data encoding="base64" compression="zlib">
@@ -43,204 +43,24 @@
    <ellipse/>
   </object>
   <object id="7" name="weapon" x="261.667" y="245" width="12" height="11.3333"/>
-  <object id="19" name="bee" x="702.811" y="298.219">
-   <properties>
-    <property name="color" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="20" name="bee" x="647" y="344.263">
-   <properties>
-    <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="21" name="bee" x="701.92" y="345.362">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="18" name="bee" x="648.395" y="292.638">
+  <object id="58" name="bee" x="597" y="321">
    <properties>
     <property name="color" type="int" value="1"/>
    </properties>
   </object>
-  <object id="23" name="bee" x="831.416" y="306.581">
-   <properties>
-    <property name="color" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="24" name="bee" x="775.605" y="352.625">
-   <properties>
-    <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="25" name="bee" x="830.525" y="353.724">
+  <object id="59" name="bee" x="599" y="287">
    <properties>
     <property name="color" type="int" value="2"/>
    </properties>
   </object>
-  <object id="26" name="bee" x="777" y="301">
-   <properties>
-    <property name="color" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="27" name="bee" x="752.416" y="202.581">
+  <object id="60" name="bee" x="633.882" y="321">
    <properties>
     <property name="color" type="int" value="4"/>
    </properties>
   </object>
-  <object id="28" name="bee" x="696.605" y="248.625">
+  <object id="61" name="bee" x="636.118" y="283">
    <properties>
     <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="29" name="bee" x="751.525" y="249.724">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="30" name="bee" x="698" y="197">
-   <properties>
-    <property name="color" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="31" name="bee" x="951.416" y="223.581">
-   <properties>
-    <property name="color" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="32" name="bee" x="895.605" y="269.625">
-   <properties>
-    <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="33" name="bee" x="950.525" y="270.724">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="34" name="bee" x="897" y="218">
-   <properties>
-    <property name="color" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="35" name="bee" x="743.416" y="437.581">
-   <properties>
-    <property name="color" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="36" name="bee" x="687.605" y="483.625">
-   <properties>
-    <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="37" name="bee" x="742.525" y="484.724">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="38" name="bee" x="689" y="432">
-   <properties>
-    <property name="color" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="39" name="bee" x="876.416" y="444.581">
-   <properties>
-    <property name="color" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="40" name="bee" x="820.605" y="490.625">
-   <properties>
-    <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="41" name="bee" x="875.525" y="491.724">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="42" name="bee" x="822" y="439">
-   <properties>
-    <property name="color" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="43" name="bee" x="1062.42" y="410.581">
-   <properties>
-    <property name="color" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="44" name="bee" x="1006.61" y="456.625">
-   <properties>
-    <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="45" name="bee" x="1061.53" y="457.724">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="46" name="bee" x="1008" y="405">
-   <properties>
-    <property name="color" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="47" name="bee" x="969.416" y="348.581">
-   <properties>
-    <property name="color" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="48" name="bee" x="913.605" y="394.625">
-   <properties>
-    <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="49" name="bee" x="968.525" y="395.724">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="50" name="bee" x="915" y="343">
-   <properties>
-    <property name="color" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="51" name="bee" x="647.416" y="427.581">
-   <properties>
-    <property name="color" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="52" name="bee" x="591.605" y="473.625">
-   <properties>
-    <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="53" name="bee" x="646.525" y="474.724">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="54" name="bee" x="593" y="422">
-   <properties>
-    <property name="color" type="int" value="1"/>
-   </properties>
-  </object>
-  <object id="55" name="bee" x="611.416" y="251.581">
-   <properties>
-    <property name="color" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="56" name="bee" x="555.605" y="297.625">
-   <properties>
-    <property name="color" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="57" name="bee" x="610.525" y="298.724">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="58" name="bee" x="557" y="246">
-   <properties>
-    <property name="color" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>

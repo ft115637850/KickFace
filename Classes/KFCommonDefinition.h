@@ -1,4 +1,5 @@
 ﻿#pragma once
+#define PI 3.14159265
 
 #define WORLD_WIDTH			4032
 #define WORLD_HEIGHT		2268
