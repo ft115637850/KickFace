@@ -6,7 +6,7 @@ void BeeSprite::hurt()
 {
 	this->stopAction(_flyAct);
 	auto texture = Director::getInstance()->getTextureCache()->getTextureForKey("tiled/32x32.png");
-	this->setSpriteFrame(SpriteFrame::createWithTexture(texture, Rect(32 * (_textureXIdx + 2), 32 * _textureYIdx, 32, 32)));
+	this->setSpriteFrame(SpriteFrame::createWithTexture(texture, Rect(_textureSize * (_textureXIdx + 2), _textureSize * _textureYIdx, _textureSize, _textureSize)));
 }
 
 void BeeSprite::startChasingFace()
@@ -137,8 +137,10 @@ bool BeeSprite::initBeeSprite(unsigned beeType)
 	}
 	}
 
-	auto frame0 = SpriteFrame::createWithTexture(texture, Rect(32 * _textureXIdx, 32 * _textureYIdx, 32, 32));
-	auto frame1 = SpriteFrame::createWithTexture(texture, Rect(32 * (_textureXIdx +1), 32 * _textureYIdx, 32, 32));
+	auto f = Director::getInstance()->getContentScaleFactor();
+	_textureSize = 32 / f;
+	auto frame0 = SpriteFrame::createWithTexture(texture, Rect(_textureSize * _textureXIdx, _textureSize * _textureYIdx, _textureSize, _textureSize));
+	auto frame1 = SpriteFrame::createWithTexture(texture, Rect(_textureSize * (_textureXIdx +1), _textureSize * _textureYIdx, _textureSize, _textureSize));
 	//_hurtBee = SpriteFrame::createWithTexture(texture, Rect(32 * (_textureXIdx + 2), 32 * _textureYIdx, 32, 32))->getTexture();
 
 	if (Sprite::initWithSpriteFrame(frame0) == false)

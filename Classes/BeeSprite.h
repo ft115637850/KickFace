@@ -8,6 +8,7 @@ class BeeSprite : public cocos2d::Sprite
 private:
 	unsigned _textureXIdx = 0;
 	unsigned _textureYIdx = 0;
+	float _textureSize = 0;
 	unsigned _beeType = 0;
 	bool isTowardLeft = true;
 	FaceSprite * _chasingFace = nullptr;
