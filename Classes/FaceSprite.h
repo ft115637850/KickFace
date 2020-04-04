@@ -4,8 +4,15 @@
 
 class FaceSprite : public cocos2d::Sprite
 {
+private:
+	cocos2d::Texture2D* _scaredFace = nullptr;
+	cocos2d::Texture2D* _hittingFace = nullptr;
+	cocos2d::Texture2D* _hurtFace = nullptr;
 public:
-	virtual bool init();
+	void showScared();
+	void showHitting();
+	void showHurt();
+	bool init() override;
 	CREATE_FUNC(FaceSprite);
 };
 
