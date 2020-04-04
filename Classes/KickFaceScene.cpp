@@ -145,6 +145,7 @@ void KickFaceScene::kickComplete()
 	auto label1 = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 48);
 	auto item1 = MenuItemLabel::create(label1, [](Ref* obj)
 	{
+		BeeSprite::clearBeesGroup();
 		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::create()));
 	});
 	item1->setPositionY(10);

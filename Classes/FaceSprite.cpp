@@ -39,3 +39,7 @@ bool FaceSprite::init()
 
 	return true;
 }
+
+FaceSprite::~FaceSprite()
+{
+}

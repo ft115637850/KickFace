@@ -14,5 +14,6 @@ public:
 	void showHurt();
 	bool init() override;
 	CREATE_FUNC(FaceSprite);
+	~FaceSprite();
 };
 

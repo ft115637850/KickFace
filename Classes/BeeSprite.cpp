@@ -2,6 +2,8 @@
 #include "KFCommonDefinition.h"
 USING_NS_CC;
 
+Vector<BeeSprite*> BeeSprite::beesGroup_;
+
 void BeeSprite::hurt()
 {
 	this->stopAction(_flyAct);
@@ -9,8 +11,11 @@ void BeeSprite::hurt()
 	this->setSpriteFrame(SpriteFrame::createWithTexture(texture, Rect(_textureSize * (_textureXIdx + 2), _textureSize * _textureYIdx, _textureSize, _textureSize)));
 }
 
-void BeeSprite::startChasingFace()
+void BeeSprite::startChasingFace(FaceSprite* face)
 {
+	if (_chasingFace == nullptr)
+		_chasingFace = face;
+
 	this->schedule(schedule_selector(BeeSprite::updateChase), 0.5f);
 }
 
@@ -47,8 +52,9 @@ void BeeSprite::collidedWithFace(FaceSprite * face)
 	float lossConscious = 1.0f;
 	if (_chasingFace == nullptr)
 	{
-		hurt();
 		_chasingFace = face;
+		hurt();
+		BeeSprite::notifyGroupChasing(face);
 	}
 	else
 	{
@@ -59,7 +65,7 @@ void BeeSprite::collidedWithFace(FaceSprite * face)
 
 	_chaseAct = this->runAction(Sequence::create(DelayTime::create(lossConscious),
 		CallFunc::create(CC_CALLBACK_0(BeeSprite::recoverFromCollision, this)),
-		CallFunc::create(CC_CALLBACK_0(BeeSprite::startChasingFace, this)),
+		CallFunc::create(CC_CALLBACK_0(BeeSprite::startChasingFace, this, face)),
 		NULL));
 }
 
@@ -99,6 +105,22 @@ BeeSprite * BeeSprite::createBeeSprite(unsigned beeColor)
 	}
 	CC_SAFE_DELETE(p);
 	return nullptr;
+}
+
+void BeeSprite::clearBeesGroup()
+{
+	beesGroup_.clear();
+}
+
+void BeeSprite::notifyGroupChasing(FaceSprite* face)
+{
+	for (auto bee: beesGroup_)
+	{
+		if (bee->_chasingFace == nullptr)
+		{
+			bee->startChasingFace(face);
+		}
+	}
 }
 
 bool BeeSprite::initBeeSprite(unsigned beeType)
@@ -163,7 +185,7 @@ bool BeeSprite::initBeeSprite(unsigned beeType)
 	physicsBody->setRotationEnable(false);
 	addComponent(physicsBody);
 	
-	//this->setFlippedX(true);
+	beesGroup_.pushBack(this);
 	return true;
 }
 
