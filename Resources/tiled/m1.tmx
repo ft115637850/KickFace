@@ -43,7 +43,7 @@
    <ellipse/>
   </object>
   <object id="7" name="weapon" x="261.667" y="245" width="12" height="11.3333"/>
-  <object id="58" name="bee" x="597" y="321">
+  <object id="58" name="bee" x="595" y="322">
    <properties>
     <property name="color" type="int" value="1"/>
    </properties>

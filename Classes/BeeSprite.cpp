@@ -36,7 +36,7 @@ void BeeSprite::applyChasingForce(const cocos2d::Vec2 & distance)
 	if ((abs(distance.x) < abs(distance.y) && abs(distance.y) < 400) ||
 		(abs(distance.x) > abs(distance.y) && abs(distance.x) < 400))
 	{
-		factor = 400;
+		factor = 500;
 	}
 	else if ((abs(distance.x) < abs(distance.y) && abs(distance.y) > 1000) ||
 		(abs(distance.x) > abs(distance.y) && abs(distance.x) > 1000))
@@ -49,6 +49,13 @@ void BeeSprite::applyChasingForce(const cocos2d::Vec2 & distance)
 
 void BeeSprite::collidedWithFace(FaceSprite * face)
 {
+	if (isRecovered == false)
+	{
+		return;
+	}
+
+	isRecovered = false;
+	
 	float lossConscious = 1.0f;
 	if (_chasingFace == nullptr)
 	{
@@ -60,10 +67,9 @@ void BeeSprite::collidedWithFace(FaceSprite * face)
 	{
 		lossConscious = 0.8f;
 		this->unschedule(schedule_selector(BeeSprite::updateChase));
-		this->stopAction(_chaseAct);
 	}
 
-	_chaseAct = this->runAction(Sequence::create(DelayTime::create(lossConscious),
+	this->runAction(Sequence::create(DelayTime::create(lossConscious),
 		CallFunc::create(CC_CALLBACK_0(BeeSprite::recoverFromCollision, this)),
 		CallFunc::create(CC_CALLBACK_0(BeeSprite::startChasingFace, this, face)),
 		NULL));
@@ -74,7 +80,7 @@ void BeeSprite::recoverFromCollision()
 	this->stopAction(_flyAct);
 	auto animation = Animation::createWithSpriteFrames(_frames, 0.1f);
 	_flyAct = this->runAction(RepeatForever::create(Animate::create(animation)));
-	
+	 
 	auto velocity = this->getPhysicsBody()->getVelocity();
 	this->getPhysicsBody()->applyImpulse(-1 * this->getPhysicsBody()->getMass() * velocity / 2);
 
@@ -82,6 +88,7 @@ void BeeSprite::recoverFromCollision()
 
 void BeeSprite::updateChase(float t)
 {
+	isRecovered = true;
 	if (_chasingFace == nullptr)
 		return;
 

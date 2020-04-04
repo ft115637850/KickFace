@@ -11,8 +11,8 @@ private:
 	float _textureSize = 0;
 	unsigned _beeType = 0;
 	bool isTowardLeft = true;
+	bool isRecovered = true;
 	FaceSprite * _chasingFace = nullptr;
-	cocos2d::Action* _chaseAct = nullptr;
 	cocos2d::Action* _flyAct = nullptr;
 	cocos2d::Vector<cocos2d::SpriteFrame *> _frames;
 	static cocos2d::Vector<BeeSprite*> beesGroup_;
