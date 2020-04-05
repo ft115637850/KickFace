@@ -21,16 +21,7 @@ void BeeSprite::startChasingFace(FaceSprite* face)
 
 void BeeSprite::applyChasingForce(const cocos2d::Vec2 & distance)
 {
-	if (distance.x < 0 && isTowardLeft == false)
-	{
-		this->setFlippedX(false);
-		isTowardLeft = true;
-	}
-	else if (distance.x > 0 && isTowardLeft == true)
-	{
-		this->setFlippedX(true);
-		isTowardLeft = false;
-	}
+	adjustDirection(distance);
 
 	float factor = 200;
 	if ((abs(distance.x) < abs(distance.y) && abs(distance.y) < 400) ||
@@ -45,6 +36,69 @@ void BeeSprite::applyChasingForce(const cocos2d::Vec2 & distance)
 	}
 
 	this->getPhysicsBody()->applyForce(this->getPhysicsBody()->getMass() * distance * factor);
+}
+
+void BeeSprite::adjustDirection(const cocos2d::Vec2 & distance)
+{
+	if (distance.x < 0)
+	{
+		if (isTowardLeft == false)
+		{
+			this->setFlippedX(false);
+			isTowardLeft = true;
+		}
+
+		if (!_chasingParticleLeft->isActive())
+		{
+			_chasingParticleLeft->start();
+		}
+
+		if (_chasingParticleRight->isActive())
+		{
+			_chasingParticleRight->stop();
+		}
+	}
+	else if (distance.x > 0)
+	{
+		if (isTowardLeft == true)
+		{
+			this->setFlippedX(true);
+			isTowardLeft = false;
+		}
+
+		if (!_chasingParticleRight->isActive())
+		{
+			_chasingParticleRight->start();
+		}
+
+		if (_chasingParticleLeft->isActive())
+		{
+			_chasingParticleLeft->stop();
+		}
+	}
+}
+
+void BeeSprite::addParticle()
+{
+	auto pFileLeft = FileUtils::getInstance()->getValueMapFromFile("particle_bee_l.plist");
+	_chasingParticleLeft = ParticleSystemQuad::create(pFileLeft);
+	//_chasingParticleLeft->setAutoRemoveOnFinish(true);
+	_chasingParticleLeft->setStartColor(Color4F::WHITE);
+	_chasingParticleLeft->setEndColor(Color4F::WHITE);
+	_chasingParticleLeft->setPosition(0, 0);
+	_chasingParticleLeft->setPositionType(ParticleSystem::PositionType::RELATIVE);
+	_chasingParticleLeft->stop();
+	addChild(_chasingParticleLeft);
+
+	auto pFileRight = FileUtils::getInstance()->getValueMapFromFile("particle_bee_r.plist");
+	_chasingParticleRight = ParticleSystemQuad::create(pFileRight);
+	//_chasingParticleRight->setAutoRemoveOnFinish(true);
+	_chasingParticleRight->setStartColor(Color4F::WHITE);
+	_chasingParticleRight->setEndColor(Color4F::WHITE);
+	_chasingParticleRight->setPosition(getContentSize().width, 0);
+	_chasingParticleRight->setPositionType(ParticleSystem::PositionType::RELATIVE);
+	_chasingParticleRight->stop();
+	addChild(_chasingParticleRight);
 }
 
 void BeeSprite::collidedWithFace(FaceSprite * face)
@@ -65,6 +119,17 @@ void BeeSprite::collidedWithFace(FaceSprite * face)
 	}
 	else
 	{
+		if (_chasingParticleLeft->isActive())
+		{
+			_chasingParticleLeft->stop();
+		}
+
+		if (_chasingParticleRight->isActive())
+		{
+			_chasingParticleRight->stop();
+		}
+
+		
 		lossConscious = 0.8f;
 		this->unschedule(schedule_selector(BeeSprite::updateChase));
 	}
@@ -83,7 +148,6 @@ void BeeSprite::recoverFromCollision()
 	 
 	auto velocity = this->getPhysicsBody()->getVelocity();
 	this->getPhysicsBody()->applyImpulse(-1 * this->getPhysicsBody()->getMass() * velocity / 2);
-
 }
 
 void BeeSprite::updateChase(float t)
@@ -132,11 +196,6 @@ void BeeSprite::notifyGroupChasing(FaceSprite* face)
 
 bool BeeSprite::initBeeSprite(unsigned beeType)
 {
-	/*auto texture = Director::getInstance()->getTextureCache()->addImage("bee.png");
-	auto frame0 = SpriteFrame::createWithTexture(texture, Rect(32 * 0, 32 * beeType, 32, 32));
-	auto frame1 = SpriteFrame::createWithTexture(texture, Rect(32 * 1, 32 * beeType, 32, 32));
-	auto frame2 = SpriteFrame::createWithTexture(texture, Rect(32 * 2, 32 * beeType, 32, 32));*/
-	_beeType = beeType;
 	auto texture = Director::getInstance()->getTextureCache()->getTextureForKey("tiled/32x32.png");
 	switch (beeType)
 	{
@@ -191,13 +250,19 @@ bool BeeSprite::initBeeSprite(unsigned beeType)
 	physicsBody->setGravityEnable(false);
 	physicsBody->setRotationEnable(false);
 	addComponent(physicsBody);
-	
+
+	addParticle();
+
 	beesGroup_.pushBack(this);
 	return true;
 }
 
 BeeSprite::~BeeSprite()
 {
+	_chasingParticleLeft->stopSystem();
+	_chasingParticleLeft->setAutoRemoveOnFinish(true);
+	_chasingParticleRight->stopSystem();
+	_chasingParticleRight->setAutoRemoveOnFinish(true);
 	this->unschedule(schedule_selector(BeeSprite::updateChase));
 	this->stopAllActions();
 }

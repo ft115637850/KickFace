@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="62">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="69">
  <tileset firstgid="1" source="32x32.tsx"/>
  <layer id="6" name="background" width="64" height="36">
   <data encoding="base64" compression="zlib">
@@ -43,24 +43,44 @@
    <ellipse/>
   </object>
   <object id="7" name="weapon" x="261.667" y="245" width="12" height="11.3333"/>
-  <object id="58" name="bee" x="595" y="322">
+  <object id="58" name="bee" x="586" y="353">
    <properties>
     <property name="color" type="int" value="1"/>
    </properties>
   </object>
-  <object id="59" name="bee" x="599" y="287">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="60" name="bee" x="633.882" y="321">
+  <object id="62" name="bee" x="729" y="312">
    <properties>
     <property name="color" type="int" value="4"/>
    </properties>
   </object>
-  <object id="61" name="bee" x="636.118" y="283">
+  <object id="63" name="bee" x="654" y="378">
+   <properties>
+    <property name="color" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="64" name="bee" x="687" y="274">
    <properties>
     <property name="color" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="65" name="bee" x="611" y="294">
+   <properties>
+    <property name="color" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="66" name="bee" x="620" y="443">
+   <properties>
+    <property name="color" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="67" name="bee" x="693" y="465">
+   <properties>
+    <property name="color" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="68" name="bee" x="757" y="380">
+   <properties>
+    <property name="color" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>
