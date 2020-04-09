@@ -259,10 +259,11 @@ bool BeeSprite::initBeeSprite(unsigned beeType)
 
 BeeSprite::~BeeSprite()
 {
-	_chasingParticleLeft->stopSystem();
 	_chasingParticleLeft->setAutoRemoveOnFinish(true);
-	_chasingParticleRight->stopSystem();
+	_chasingParticleLeft->stopSystem();
 	_chasingParticleRight->setAutoRemoveOnFinish(true);
+	_chasingParticleRight->stopSystem();
+
 	this->unschedule(schedule_selector(BeeSprite::updateChase));
 	this->stopAllActions();
 }

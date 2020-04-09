@@ -21,7 +21,6 @@ _boundary(nullptr)
 
 KickFaceScene::~KickFaceScene()
 {
-	_tileMap->removeAllChildren();
 	_background->removeAllChildren();
 	this->Scene::removeAllChildren();
 }
@@ -241,7 +240,6 @@ bool KickFaceScene::init()
 	{
 		return false;
 	}
-
 	_visibleSize = Director::getInstance()->getVisibleSize();
 	//Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
