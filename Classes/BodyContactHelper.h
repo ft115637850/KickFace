@@ -5,12 +5,8 @@
 USING_NS_CC;
 class BodyContactHelper
 {
-private:
-	static BodyContactHelper* _instance;
-
 public:
-	static BodyContactHelper* getInstance();
-	BeeSprite* getBeeBetweenShapes(PhysicsShape* shapeA, PhysicsShape* shapeB);
-	FaceSprite* getFaceBetweenShapes(PhysicsShape* shapeA, PhysicsShape* shapeB);
+	static BeeSprite* getBeeBetweenShapes(PhysicsShape* shapeA, PhysicsShape* shapeB);
+	static FaceSprite* getFaceBetweenShapes(PhysicsShape* shapeA, PhysicsShape* shapeB);
 };
 

@@ -120,7 +120,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	}
 	case BEE_BIT_MASK | FACE_BIT_MASK:
 	{
-		BeeSprite* beeSp = BodyContactHelper::getInstance()->getBeeBetweenShapes(contact.getShapeA(), contact.getShapeB());
+		BeeSprite* beeSp = BodyContactHelper::getBeeBetweenShapes(contact.getShapeA(), contact.getShapeB());
 		beeSp->collidedWithFace(_face);
 		break;
 	}
