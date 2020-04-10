@@ -27,23 +27,32 @@ void FaceSprite::catchFire()
 	isOnFire = true;
 	auto size = getContentSize();
 	auto pFileLeft = FileUtils::getInstance()->getValueMapFromFile("fire_background.plist");
-	auto emitter = ParticleSystemQuad::create(pFileLeft);
-	emitter->setPosVar(Vec2(30, 2));
-	emitter->setStartSize(35);
-	emitter->setPositionType(ParticleSystem::PositionType::FREE);
-	emitter->setBlendFunc(BlendFunc::ALPHA_PREMULTIPLIED);
-	emitter->setAutoRemoveOnFinish(true);
-	emitter->setPosition(size.width / 2, size.height);
-	addChild(emitter);
+	_smokeEmitter = ParticleSystemQuad::create(pFileLeft);
+	_smokeEmitter->setPosVar(Vec2(30, 2));
+	_smokeEmitter->setStartSize(35);
+	_smokeEmitter->setPositionType(ParticleSystem::PositionType::FREE);
+	_smokeEmitter->setBlendFunc(BlendFunc::ALPHA_PREMULTIPLIED);
+	_smokeEmitter->setAutoRemoveOnFinish(true);
+	_smokeEmitter->setPosition(size.width / 2, size.height);
+	addChild(_smokeEmitter);
 
 	auto pFileLeft2 = FileUtils::getInstance()->getValueMapFromFile("fire_foreground.plist");
-	auto emitter2 = ParticleSystemQuad::create(pFileLeft2);
-	emitter2->setPosVar(Vec2(26, 1));
-	emitter2->setStartSize(30);
-	emitter2->setPositionType(ParticleSystem::PositionType::FREE);
-	emitter2->setAutoRemoveOnFinish(true);
-	emitter2->setPosition(size.width / 2, size.height);
-	addChild(emitter2);
+	_fireEmitter = ParticleSystemQuad::create(pFileLeft2);
+	_fireEmitter->setPosVar(Vec2(26, 1));
+	_fireEmitter->setStartSize(30);
+	_fireEmitter->setPositionType(ParticleSystem::PositionType::FREE);
+	_fireEmitter->setAutoRemoveOnFinish(true);
+	_fireEmitter->setPosition(size.width / 2, size.height);
+	addChild(_fireEmitter);
+}
+
+void FaceSprite::fallInWater()
+{
+	if (isOnFire)
+	{
+		_smokeEmitter->stop();
+		_fireEmitter->stop();
+	}
 }
 
 bool FaceSprite::init()
@@ -69,4 +78,12 @@ bool FaceSprite::init()
 
 FaceSprite::~FaceSprite()
 {
+	if (_smokeEmitter !=nullptr)
+	{
+		_smokeEmitter->stopSystem();
+	}
+	if (_fireEmitter !=nullptr)
+	{
+		_fireEmitter->stopSystem();
+	}
 }

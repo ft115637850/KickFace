@@ -118,6 +118,14 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		enterFireTime = std::chrono::steady_clock::now();
 		return false;
 	}
+	case FACE_BIT_MASK| WATER_BIT_MASK:
+	{
+		auto p = _face->getPosition();
+		auto s = _face->getContentSize();
+		addSpray(Vec2(p.x, p.y - s.height / 2));
+		_face->fallInWater();
+		return false;
+	}
 	case FACE_BIT_MASK| EDGE_BIT_MASK:
 	{
 		kickComplete();
@@ -217,6 +225,17 @@ void KickFaceScene::addFace()
 	_face->setPosition(faceStartPosition);
 	//_face->getPhysicsBody()->setGravityEnable(false);
 	_background->addChild(_face);
+}
+
+void KickFaceScene::addSpray(const Vec2& position)
+{
+	auto pFileLeft = FileUtils::getInstance()->getValueMapFromFile("spray.plist");
+	auto emitter = ParticleSystemQuad::create(pFileLeft);
+	emitter->setPositionType(ParticleSystem::PositionType::RELATIVE);
+	//emitter->setBlendFunc(BlendFunc::ALPHA_PREMULTIPLIED);
+	emitter->setAutoRemoveOnFinish(true);
+	emitter->setPosition(position);
+	_background->addChild(emitter, 2);
 }
 
 void KickFaceScene::addKickWeapon()

@@ -93,6 +93,30 @@ void KickMap::addFireRange(TMXObjectGroup * group)
 	}
 }
 
+void KickMap::addWater(TMXObjectGroup * group)
+{
+	ValueVector waterGroup = group->getObjects();
+	for (auto obj : waterGroup)
+	{
+		ValueMap& water = obj.asValueMap();
+		auto waterX = water["x"].asFloat();
+		auto waterY = water["y"].asFloat();
+		auto waterW = water["width"].asFloat();
+		auto waterH = water["height"].asFloat();
+		PhysicsBody * phy = PhysicsBody::createBox(Size(waterW, waterH), PhysicsMaterial(1.0f, 1.0f, 1.0f));
+		phy->setDynamic(false);
+		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);
+		phy->setCollisionBitmask(PROPS_COLLISION_MASK);*/
+		phy->setContactTestBitmask(WATER_BIT_MASK);
+		Sprite * sp = Sprite::create();
+		sp->setPosition(Vec2(waterX, waterY));
+		sp->setAnchorPoint(Vec2::ZERO);
+		sp->setContentSize(Size(waterW, waterH));
+		sp->setPhysicsBody(phy);
+		_tiledMap->addChild(sp);
+	}
+}
+
 void KickMap::addGrounds(TMXObjectGroup * group)
 {
 	ValueVector grounds = group->getObjects();
@@ -195,6 +219,10 @@ bool KickMap::initKickMap(Background * bg)
 		else if (objectGroup && objectGroup->getGroupName() == "fireRange")
 		{
 			addFireRange(objectGroup);
+		}
+		else if (objectGroup && objectGroup->getGroupName() == "water")
+		{
+			addWater(objectGroup);
 		}
 	}
 

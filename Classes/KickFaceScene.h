@@ -30,6 +30,7 @@ private:
 	void addFace();
 	void addKickWeapon();
 	void addEventHandlers();
+	void addSpray(const Vec2& position);
 	KickFaceScene();
 	virtual ~KickFaceScene();
 public:

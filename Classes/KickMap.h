@@ -14,6 +14,7 @@ private:
 	void addProps(TMXObjectGroup* group);
 	void addFire(TMXObjectGroup* group, Background* bg);
 	void addFireRange(TMXObjectGroup* group);
+	void addWater(TMXObjectGroup* group);
 public:
 	Vec2 getOuterSpritesStartPosition(const std::string& spriteName) const;
 	~KickMap();
