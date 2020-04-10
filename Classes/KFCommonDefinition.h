@@ -6,12 +6,13 @@ static const int WORLD_HEIGHT = 2268;
 static const float MAP_SCALE_FACTOR = 1.96875f;
 
 // Physical body
-static const int FACE_BIT_MASK = 0b100000;
-static const int HAMMER_BIT_MASK = 0b010000;
-static const int GROUND_BIT_MASK = 0b001000;
-static const int EDGE_BIT_MASK = 0b000100;
-static const int PROPS_BIT_MASK = 0b000010;
-static const int  BEE_BIT_MASK = 0b000001;
+static const int FACE_BIT_MASK = 0b1000000;
+static const int HAMMER_BIT_MASK = 0b0100000;
+static const int GROUND_BIT_MASK = 0b0010000;
+static const int EDGE_BIT_MASK = 0b0001000;
+static const int PROPS_BIT_MASK = 0b0000100;
+static const int  BEE_BIT_MASK = 0b0000010;
+static const int  FIRE_BIT_MASK = 0b0000001;
 static const int  EDGE_BODY_TAG = 1;
 static const int  HAMMER_BODY_TAG = 2;
 static const int  BOTTOM_GROUND_TAG = 3;

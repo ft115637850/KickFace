@@ -113,6 +113,11 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 			NULL));
 		break;
 	}
+	case FACE_BIT_MASK | FIRE_BIT_MASK:
+	{
+			//TO DO:
+		return false;
+	}
 	case FACE_BIT_MASK| EDGE_BIT_MASK:
 	{
 		kickComplete();
@@ -125,6 +130,8 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		break;
 	}
 	//case BEE_BIT_MASK | GROUND_BIT_MASK:
+	case HAMMER_BIT_MASK | FIRE_BIT_MASK:
+	case BEE_BIT_MASK | FIRE_BIT_MASK:
 	case BEE_BIT_MASK | BEE_BIT_MASK:
 	case BEE_BIT_MASK | HAMMER_BIT_MASK:
 	case BEE_BIT_MASK | PROPS_BIT_MASK:
@@ -163,7 +170,7 @@ void KickFaceScene::kickComplete()
 
 void KickFaceScene::createWorldAndMap()
 {
-	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
 	
 	_background = Background::createBackground(WORLD_WIDTH, WORLD_HEIGHT);
@@ -201,7 +208,7 @@ void KickFaceScene::addKickWeapon()
 	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 300));
 	weaponFixPoint->addComponent(sp1PhysicsBody);
 	weaponFixPoint->setPosition(hammerPos.x, hammerPos.y + 100);
-	sp1PhysicsBody->setVelocity(Vec2::ZERO);
+	sp1PhysicsBody->setGravityEnable(false);
 	sp1PhysicsBody->setContactTestBitmask(PROPS_BIT_MASK);
 	getPhysicsWorld()->addJoint(PhysicsJointPin::construct(sp1PhysicsBody, _boundary->getPhysicsBody(), weaponFixPoint->getPosition()));
 	_background->addChild(weaponFixPoint);
@@ -210,15 +217,9 @@ void KickFaceScene::addKickWeapon()
 	_hammer->setPosition(hammerPos);
 	auto sp2PhysicsBody = _hammer->getPhysicsBody();
 	sp2PhysicsBody->setTag(HAMMER_BODY_TAG);
-	/*sp2PhysicsBody->setCategoryBitmask(HAMMER_CATEGORY_MASK);
-	sp2PhysicsBody->setCollisionBitmask(HAMMER_COLLISION_MASK);*/
 	sp2PhysicsBody->setContactTestBitmask(HAMMER_BIT_MASK);
-	sp1PhysicsBody->setVelocity(Vec2::ZERO);
-	sp1PhysicsBody->setContactTestBitmask(PROPS_BIT_MASK);
 	_background->addChild(_hammer);
-
-	PhysicsJointFixed* joint = PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, hammerPos);
-	getPhysicsWorld()->addJoint(joint);
+	getPhysicsWorld()->addJoint(PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, hammerPos));
 }
 
 void KickFaceScene::addEventHandlers()

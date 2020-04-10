@@ -9,11 +9,14 @@ class KickMap : public Node
 {
 private:
 	TMXTiledMap* _tiledMap;
-	void addBees();
+	void addBees(TMXObjectGroup* group);
+	void addGrounds(TMXObjectGroup* group);
+	void addProps(TMXObjectGroup* group);
+	void addFire(TMXObjectGroup* group, Background* bg);
+	void addFireRange(TMXObjectGroup* group);
 public:
-	Vec2 getOuterSpritesStartPosition(const std::string& spriteName);
+	Vec2 getOuterSpritesStartPosition(const std::string& spriteName) const;
 	~KickMap();
-	void addFire(Background* bg);
 	static KickMap* createKickMap(Background* bg);
 	bool initKickMap(Background* bg);
 };
