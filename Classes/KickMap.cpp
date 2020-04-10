@@ -4,9 +4,9 @@
 #include "FaceSprite.h"
 #include "KFCommonDefinition.h"
 
-void KickMap::addBees()
+void KickMap::addBees(TMXObjectGroup * group)
 {
-	ValueVector sprites = _tiledMap->getObjectGroup("sprites")->getObjects();
+	ValueVector sprites = group->getObjects();
 	for (auto obj : sprites)
 	{
 		ValueMap& prop = obj.asValueMap();
@@ -23,21 +23,79 @@ void KickMap::addBees()
 	}
 }
 
-Vec2 KickMap::getOuterSpritesStartPosition(const std::string& spriteName)
+void KickMap::addFire(TMXObjectGroup * group, Background * bg)
 {
-	auto objectGroup = _tiledMap->getObjectGroup("sprites");
-	auto sp = objectGroup->getObject(spriteName);
+	auto f = Director::getInstance()->getContentScaleFactor();
+	ValueVector sprites = group->getObjects();
+	for (auto obj : sprites)
+	{
+		ValueMap& prop = obj.asValueMap();
+		auto groundX = prop["x"].asFloat();
+		auto groundY = prop["y"].asFloat();
+		bool isInner = prop["isInner"].asBool();
 
-	return Vec2(sp["x"].asFloat(), sp["y"].asFloat())*MAP_SCALE_FACTOR;
+		auto pFileLeft = FileUtils::getInstance()->getValueMapFromFile("fire_background.plist");
+		auto emitter = ParticleSystemQuad::create(pFileLeft);
+		emitter->setPositionType(ParticleSystem::PositionType::RELATIVE);
+		emitter->setBlendFunc(BlendFunc::ALPHA_PREMULTIPLIED);
+		emitter->setAutoRemoveOnFinish(true);
+		if (isInner)
+		{
+			emitter->setPosition(Vec2(groundX, groundY));
+			_tiledMap->addChild(emitter, 2);
+		}
+		else
+		{
+			emitter->setPosition(Vec2(groundX, groundY)*MAP_SCALE_FACTOR);
+			emitter->setScale(MAP_SCALE_FACTOR);
+			bg->addChild(emitter, 2);
+		}
+
+		auto pFileLeft2 = FileUtils::getInstance()->getValueMapFromFile("fire_foreground.plist");
+		auto emitter2 = ParticleSystemQuad::create(pFileLeft2);
+		emitter2->setPositionType(ParticleSystem::PositionType::RELATIVE);
+		emitter2->setAutoRemoveOnFinish(true);
+		if (isInner)
+		{
+			emitter2->setPosition(Vec2(groundX, groundY));
+			_tiledMap->addChild(emitter2, 2);
+		}
+		else
+		{
+			emitter2->setPosition(Vec2(groundX, groundY)*MAP_SCALE_FACTOR);
+			emitter2->setScale(MAP_SCALE_FACTOR);
+			bg->addChild(emitter2, 2);
+		}
+	}
 }
 
-bool KickMap::init()
+void KickMap::addFireRange(TMXObjectGroup * group)
 {
-	if (Node::init() == false)
-		return false;
+	ValueVector fireRanges = group->getObjects();
+	for (auto obj : fireRanges)
+	{
+		ValueMap& fireRange = obj.asValueMap();
+		auto fireRangeX = fireRange["x"].asFloat();
+		auto fireRangeY = fireRange["y"].asFloat();
+		auto fireRangeW = fireRange["width"].asFloat();
+		auto fireRangeH = fireRange["height"].asFloat();
+		PhysicsBody * phy = PhysicsBody::createBox(Size(fireRangeW, fireRangeH), PhysicsMaterial(1.0f, 1.0f, 1.0f));
+		phy->setDynamic(false);
+		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);
+		phy->setCollisionBitmask(PROPS_COLLISION_MASK);*/
+		phy->setContactTestBitmask(FIRE_BIT_MASK);
+		Sprite * sp = Sprite::create();
+		sp->setPosition(Vec2(fireRangeX, fireRangeY));
+		sp->setAnchorPoint(Vec2::ZERO);
+		sp->setContentSize(Size(fireRangeW, fireRangeH));
+		sp->setPhysicsBody(phy);
+		_tiledMap->addChild(sp);
+	}
+}
 
-	_tiledMap = TMXTiledMap::create("tiled/m1.tmx");
-	ValueVector grounds = _tiledMap->getObjectGroup("grounds")->getObjects();
+void KickMap::addGrounds(TMXObjectGroup * group)
+{
+	ValueVector grounds = group->getObjects();
 	for (auto obj : grounds)
 	{
 		ValueMap& ground = obj.asValueMap();
@@ -45,7 +103,7 @@ bool KickMap::init()
 		auto groundY = ground["y"].asFloat();
 		auto groundW = ground["width"].asFloat();
 		auto groundH = ground["height"].asFloat();
-		
+
 		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f));
 		if (!ground["tag"].isNull())
 		{
@@ -61,10 +119,13 @@ bool KickMap::init()
 		sp->setAnchorPoint(Vec2::ZERO);
 		sp->setContentSize(Size(groundW, groundH));
 		sp->setPhysicsBody(phy);
-		_tiledMap->addChild(sp); 
+		_tiledMap->addChild(sp);
 	}
-	
-	ValueVector props = _tiledMap->getObjectGroup("props")->getObjects();
+}
+
+void KickMap::addProps(TMXObjectGroup * group)
+{
+	ValueVector props = group->getObjects();
 	for (auto obj : props)
 	{
 		ValueMap& prop = obj.asValueMap();
@@ -84,9 +145,66 @@ bool KickMap::init()
 		sp->setPhysicsBody(phy);
 		_tiledMap->addChild(sp);
 	}
+}
 
-	addBees();
+Vec2 KickMap::getOuterSpritesStartPosition(const std::string& spriteName) const
+{
+	auto objectGroup = _tiledMap->getObjectGroup("sprites");
+	auto sp = objectGroup->getObject(spriteName);
+
+	return Vec2(sp["x"].asFloat(), sp["y"].asFloat())*MAP_SCALE_FACTOR;
+}
+
+KickMap * KickMap::createKickMap(Background * bg)
+{
+	KickMap* p = new KickMap();
+	if (p && p->initKickMap(bg))
+	{
+		p->autorelease();
+		return p;
+	}
+	CC_SAFE_DELETE(p);
+	return nullptr;
+}
+
+bool KickMap::initKickMap(Background * bg)
+{
+	if (Node::init() == false)
+		return false;
+
+	_tiledMap = TMXTiledMap::create("tiled/m1.tmx");
+	auto groups = _tiledMap->getObjectGroups();
+	for (const auto objectGroup : groups)
+	{
+		if (objectGroup && objectGroup->getGroupName() == "grounds")
+		{
+			addGrounds(objectGroup);
+		}
+		else if (objectGroup && objectGroup->getGroupName() == "props")
+		{
+			addProps(objectGroup);
+		}
+		else if (objectGroup && objectGroup->getGroupName() == "sprites")
+		{
+			addBees(objectGroup);
+		}
+		else if (objectGroup && objectGroup->getGroupName() == "fire")
+		{
+			addFire(objectGroup, bg);
+		}
+		else if (objectGroup && objectGroup->getGroupName() == "fireRange")
+		{
+			addFireRange(objectGroup);
+		}
+	}
+
 	addChild(_tiledMap);
 	setScale(MAP_SCALE_FACTOR);
 	return true;
+}
+
+KickMap::~KickMap()
+{
+	_tiledMap->removeAllChildren();
+	removeAllChildren();
 }

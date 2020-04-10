@@ -2,18 +2,6 @@
 
 #include "KFCommonDefinition.h"
 
-BodyContactHelper* BodyContactHelper::_instance = nullptr;
-
-BodyContactHelper * BodyContactHelper::getInstance()
-{
-	if (_instance == nullptr)
-	{
-		_instance = new BodyContactHelper();
-	}
-
-	return _instance;
-}
-
 BeeSprite * BodyContactHelper::getBeeBetweenShapes(PhysicsShape * shapeA, PhysicsShape * shapeB)
 {
 	BeeSprite* beeSp = nullptr;
