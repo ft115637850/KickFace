@@ -12,9 +12,9 @@ private:
 	void addBees();
 public:
 	Vec2 getOuterSpritesStartPosition(const std::string& spriteName);
-	CREATE_FUNC(KickMap);
 	~KickMap();
-	bool init() override;
 	void addFire(Background* bg);
+	static KickMap* createKickMap(Background* bg);
+	bool initKickMap(Background* bg);
 };
 

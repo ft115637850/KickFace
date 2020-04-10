@@ -180,9 +180,9 @@ void KickFaceScene::createWorldAndMap()
 	_boundary->setPosition(0, -500);
 	_background->addChild(_boundary);
 
-	_tileMap = KickMap::create();
+	_tileMap = KickMap::createKickMap(_background);
 	_background->addChild(_tileMap);
-	_tileMap->addFire(_background);
+	//_tileMap->addFire(_background);
 }
 
 void KickFaceScene::addFace()

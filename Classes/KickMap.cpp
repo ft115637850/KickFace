@@ -58,26 +58,30 @@ void KickMap::addFire(Background * bg)
 		if (isInner)
 		{
 			emitter2->setPosition(Vec2(groundX, groundY));
-			_tiledMap->addChild(emitter2, 5);
+			_tiledMap->addChild(emitter2, 2);
 		}
 		else
 		{
 			emitter2->setPosition(Vec2(groundX, groundY)*MAP_SCALE_FACTOR);
 			emitter2->setScale(MAP_SCALE_FACTOR);
-			bg->addChild(emitter2, 5);
+			bg->addChild(emitter2, 2);
 		}
 	}
 }
 
-Vec2 KickMap::getOuterSpritesStartPosition(const std::string& spriteName)
+KickMap * KickMap::createKickMap(Background * bg)
 {
-	auto objectGroup = _tiledMap->getObjectGroup("sprites");
-	auto sp = objectGroup->getObject(spriteName);
-
-	return Vec2(sp["x"].asFloat(), sp["y"].asFloat())*MAP_SCALE_FACTOR;
+	KickMap* p = new KickMap();
+	if (p && p->initKickMap(bg))
+	{
+		p->autorelease();
+		return p;
+	}
+	CC_SAFE_DELETE(p);
+	return nullptr;
 }
 
-bool KickMap::init()
+bool KickMap::initKickMap(Background * bg)
 {
 	if (Node::init() == false)
 		return false;
@@ -91,7 +95,7 @@ bool KickMap::init()
 		auto groundY = ground["y"].asFloat();
 		auto groundW = ground["width"].asFloat();
 		auto groundH = ground["height"].asFloat();
-		
+
 		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f));
 		if (!ground["tag"].isNull())
 		{
@@ -107,9 +111,9 @@ bool KickMap::init()
 		sp->setAnchorPoint(Vec2::ZERO);
 		sp->setContentSize(Size(groundW, groundH));
 		sp->setPhysicsBody(phy);
-		_tiledMap->addChild(sp); 
+		_tiledMap->addChild(sp);
 	}
-	
+
 	ValueVector props = _tiledMap->getObjectGroup("props")->getObjects();
 	for (auto obj : props)
 	{
@@ -133,8 +137,17 @@ bool KickMap::init()
 
 	addBees();
 	addChild(_tiledMap);
+	addFire(bg);
 	setScale(MAP_SCALE_FACTOR);
 	return true;
+}
+
+Vec2 KickMap::getOuterSpritesStartPosition(const std::string& spriteName)
+{
+	auto objectGroup = _tiledMap->getObjectGroup("sprites");
+	auto sp = objectGroup->getObject(spriteName);
+
+	return Vec2(sp["x"].asFloat(), sp["y"].asFloat())*MAP_SCALE_FACTOR;
 }
 
 KickMap::~KickMap()
