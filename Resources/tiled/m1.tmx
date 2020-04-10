@@ -17,10 +17,26 @@
   </data>
  </layer>
  <objectgroup id="8" name="fire">
-  <object id="70" name="f4" x="594" y="342"/>
-  <object id="79" name="f3" x="560" y="342"/>
-  <object id="80" name="f2" x="756" y="343"/>
-  <object id="81" name="f1" x="722" y="343"/>
+  <object id="70" name="f4" x="594" y="342">
+   <properties>
+    <property name="isInner" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="79" name="f3" x="560" y="342">
+   <properties>
+    <property name="isInner" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="80" name="f2" x="756" y="343">
+   <properties>
+    <property name="isInner" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="81" name="f1" x="722" y="343">
+   <properties>
+    <property name="isInner" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="2" name="grounds">
   <object id="2" x="256.191" y="1104.42" width="1568.27" height="48.1978">

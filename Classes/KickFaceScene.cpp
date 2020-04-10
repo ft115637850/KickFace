@@ -182,6 +182,7 @@ void KickFaceScene::createWorldAndMap()
 
 	_tileMap = KickMap::create();
 	_background->addChild(_tileMap);
+	_tileMap->addFire(_background);
 }
 
 void KickFaceScene::addFace()
