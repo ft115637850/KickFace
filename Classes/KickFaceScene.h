@@ -18,10 +18,13 @@ private:
 	Size _visibleSize;
 	Background* _background;
 	Node* _boundary;
+	std::chrono::time_point<std::chrono::steady_clock> enterFireTime;
+	std::chrono::time_point<std::chrono::steady_clock> exitFireTime;
 	bool onTouchHammerBegan(cocos2d::Touch* touch, cocos2d::Event* e);
 	void onTouchHammerMoved(cocos2d::Touch* touch, cocos2d::Event* e);
 	void onTouchHammerEnded(cocos2d::Touch* touch, cocos2d::Event* e);
 	bool onBodyContact(cocos2d::PhysicsContact& contact);
+	void onBodySeparate(cocos2d::PhysicsContact& contact);
 	void kickComplete();
 	void createWorldAndMap();
 	void addFace();

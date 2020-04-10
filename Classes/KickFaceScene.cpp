@@ -115,7 +115,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	}
 	case FACE_BIT_MASK | FIRE_BIT_MASK:
 	{
-			//TO DO:
+		enterFireTime = std::chrono::steady_clock::now();
 		return false;
 	}
 	case FACE_BIT_MASK| EDGE_BIT_MASK:
@@ -141,6 +141,25 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	default:;
 	}
 	return true;
+}
+
+void KickFaceScene::onBodySeparate(cocos2d::PhysicsContact & contact)
+{
+	switch (contact.getShapeA()->getBody()->getContactTestBitmask() |
+		contact.getShapeB()->getBody()->getContactTestBitmask())
+	{
+	case FACE_BIT_MASK | FIRE_BIT_MASK:
+	{
+		exitFireTime = std::chrono::steady_clock::now();
+		std::chrono::duration<double> elapsed_seconds = exitFireTime - enterFireTime;
+		if (elapsed_seconds.count() > 0.1)
+		{
+			_face->catchFire();
+		}
+		log("leaves in %lf", elapsed_seconds.count());
+		break;
+	}
+	}
 }
 
 void KickFaceScene::kickComplete()
@@ -170,7 +189,7 @@ void KickFaceScene::kickComplete()
 
 void KickFaceScene::createWorldAndMap()
 {
-	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
 	
 	_background = Background::createBackground(WORLD_WIDTH, WORLD_HEIGHT);
@@ -189,7 +208,6 @@ void KickFaceScene::createWorldAndMap()
 
 	_tileMap = KickMap::createKickMap(_background);
 	_background->addChild(_tileMap);
-	//_tileMap->addFire(_background);
 }
 
 void KickFaceScene::addFace()
@@ -233,6 +251,7 @@ void KickFaceScene::addEventHandlers()
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(KickFaceScene::onBodyContact, this);
+	contactListener->onContactSeparate = CC_CALLBACK_1(KickFaceScene::onBodySeparate, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 }
 

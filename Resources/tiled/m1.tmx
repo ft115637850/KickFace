@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="86">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="92">
  <tileset firstgid="1" source="32x32.tsx"/>
  <layer id="6" name="background" width="64" height="36">
   <data encoding="base64" compression="zlib">
@@ -16,6 +16,10 @@
    eJztl0sOgkAMQBsCyMbPETyKbnDlZ+/Go3gBPkfwKF7Az8ZPdONRLNEFjGQIMgyF6Usa0qGh8+iEBACGYRiGYf4hcABCJ7sWYR47+fVd44CeR8H1hPnZEP++CzBws2tDzEdufn3XmKPnQnBdYr7S5P/AeH6u26LaiwVwxbhh3C01/QP0DAXXCPNY4/zX+lqRhP3Npoq/78FL1T6agudfjqkH4zr20RRU5j+zf0MHVPzrRPZeKfm7mmaehpK/X5M/znyfjvQ9E/xlsD8dZP54bjff605lz7b4J/RsmKju2Sb/OmB/OrB/9Wck3wgxZPVd8y+L6f6U0OnfxL9GETr9KZ410/3bxBvQfieS
   </data>
  </layer>
+ <objectgroup id="9" name="fireRange">
+  <object id="90" x="544" y="237.667" width="63.6667" height="117.333"/>
+  <object id="91" x="704.667" y="239.333" width="63.6667" height="117.333"/>
+ </objectgroup>
  <objectgroup id="8" name="fire">
   <object id="70" name="f4" x="594" y="342">
    <properties>
