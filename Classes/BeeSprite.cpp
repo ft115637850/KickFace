@@ -161,9 +161,6 @@ void BeeSprite::updateChase(float t)
 	Vec2 distance = (targetPosition - beePosition);
 
 	applyChasingForce(distance);
-
-	/*float r = atan2(distance.y, distance.x) * 180 / PI + 180;
-	this->setRotation(r);*/
 }
 
 BeeSprite * BeeSprite::createBeeSprite(unsigned beeColor)

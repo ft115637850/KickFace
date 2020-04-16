@@ -71,6 +71,7 @@ bool FaceSprite::init()
 	/*physicsBody->setCategoryBitmask(FACE_CATEGORY_MASK);
 	physicsBody->setCollisionBitmask(FACE_COLLISION_MASK);*/
 	physicsBody->setContactTestBitmask(FACE_BIT_MASK);
+	physicsBody->setVelocityLimit(2560.0f);
 	addComponent(physicsBody);
 
 	return true;

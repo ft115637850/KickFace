@@ -1,8 +1,7 @@
 ﻿#pragma once
 
-static const float PI = 3.14159265f;
-static const int WORLD_WIDTH = 4032;
-static const int WORLD_HEIGHT = 2268;
+static const unsigned int WORLD_WIDTH = 4032;
+static const unsigned int WORLD_HEIGHT = 2268;
 static const float MAP_SCALE_FACTOR = 1.96875f;
 
 // Physical body
@@ -14,15 +13,15 @@ static const int PROPS_BIT_MASK = 0b00001000;
 static const int  BEE_BIT_MASK = 0b00000100;
 static const int  FIRE_BIT_MASK = 0b00000010;
 static const int  WATER_BIT_MASK = 0b00000001;
-static const int  EDGE_BODY_TAG = 1;
-static const int  HAMMER_BODY_TAG = 2;
-static const int  BOTTOM_GROUND_TAG = 3;
+static const unsigned int  EDGE_BODY_TAG = 1;
+static const unsigned int  HAMMER_BODY_TAG = 2;
+static const unsigned int  BOTTOM_GROUND_TAG = 3;
 
 // Map tags & types
-static const int  BLACK_BEE = 1;
-static const int  YELLOW_BEE = 2;
-static const int  BLUE_BEE = 3;
-static const int  RED_BEE = 4;
+static const unsigned int  BLACK_BEE = 1;
+static const unsigned int  YELLOW_BEE = 2;
+static const unsigned int  BLUE_BEE = 3;
+static const unsigned int  RED_BEE = 4;
 
 
 

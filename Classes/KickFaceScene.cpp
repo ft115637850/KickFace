@@ -120,6 +120,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	}
 	case FACE_BIT_MASK| WATER_BIT_MASK:
 	{
+		_face->getPhysicsBody()->setVelocity(Vec2::ZERO);
 		auto p = _face->getPosition();
 		auto s = _face->getContentSize();
 		addSpray(Vec2(p.x, p.y - s.height / 2));
@@ -164,7 +165,6 @@ void KickFaceScene::onBodySeparate(cocos2d::PhysicsContact & contact)
 		{
 			_face->catchFire();
 		}
-		log("leaves in %lf", elapsed_seconds.count());
 		break;
 	}
 	}
@@ -198,7 +198,8 @@ void KickFaceScene::kickComplete()
 void KickFaceScene::createWorldAndMap()
 {
 	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
+	this->getPhysicsWorld()->setGravity(Vec2(0, -2000));
+	this->getPhysicsWorld()->setSpeed(0.9);
 	
 	_background = Background::createBackground(WORLD_WIDTH, WORLD_HEIGHT);
 	addChild(_background);
