@@ -23,6 +23,12 @@ static const unsigned int  YELLOW_BEE = 2;
 static const unsigned int  BLUE_BEE = 3;
 static const unsigned int  RED_BEE = 4;
 
+static const unsigned int  YELLOW_FLAG = 1;
+static const unsigned int  GREEN_FLAG = 2;
+static const unsigned int  RED_FLAG = 3;
+static const unsigned int  BLUE_FLAG = 4;
+
+
 
 
 //#define FACE_CATEGORY_MASK		0b100000

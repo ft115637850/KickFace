@@ -1,10 +1,10 @@
 #include "KickMap.h"
 
 #include "BeeSprite.h"
-#include "FaceSprite.h"
+#include "FlagSprite.h"
 #include "KFCommonDefinition.h"
 
-void KickMap::addBees(TMXObjectGroup * group)
+void KickMap::addSprites(TMXObjectGroup * group)
 {
 	ValueVector sprites = group->getObjects();
 	for (auto obj : sprites)
@@ -19,6 +19,13 @@ void KickMap::addBees(TMXObjectGroup * group)
 			auto sp = BeeSprite::createBeeSprite(beeColor);
 			sp->setPosition(Vec2(groundX, groundY));
 			_tiledMap->addChild(sp);
+		}
+		else if (spName == "flag")
+		{
+			auto flagColor = prop["color"].asInt();
+			auto sp = FlagSprite::createFlagSprite(flagColor);
+			sp->setPosition(Vec2(groundX + 10, groundY));
+			_tiledMap->addChild(sp,2);
 		}
 	}
 }
@@ -157,7 +164,7 @@ void KickMap::addProps(TMXObjectGroup * group)
 		auto groundY = prop["y"].asFloat();
 		auto groundW = prop["width"].asFloat();
 		auto groundH = prop["height"].asFloat();
-		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH), PhysicsMaterial(1.0f, 1.0f, 1.0f));
+		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f));
 		phy->setDynamic(false);
 		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);
 		phy->setCollisionBitmask(PROPS_COLLISION_MASK);*/
@@ -210,7 +217,7 @@ bool KickMap::initKickMap(Background * bg)
 		}
 		else if (objectGroup && objectGroup->getGroupName() == "sprites")
 		{
-			addBees(objectGroup);
+			addSprites(objectGroup);
 		}
 		else if (objectGroup && objectGroup->getGroupName() == "fire")
 		{

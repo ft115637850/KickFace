@@ -154,6 +154,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\BeeSprite.cpp" />
     <ClCompile Include="..\Classes\BodyContactHelper.cpp" />
     <ClCompile Include="..\Classes\FaceSprite.cpp" />
+    <ClCompile Include="..\Classes\FlagSprite.cpp" />
     <ClCompile Include="..\Classes\HammerSprite.cpp" />
     <ClCompile Include="..\Classes\KickFaceScene.cpp" />
     <ClCompile Include="..\Classes\KickMap.cpp" />
@@ -165,6 +166,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Background.h" />
     <ClInclude Include="..\Classes\BeeSprite.h" />
     <ClInclude Include="..\Classes\BodyContactHelper.h" />
+    <ClInclude Include="..\Classes\FlagSprite.h" />
     <ClInclude Include="..\Classes\KFCommonDefinition.h" />
     <ClInclude Include="..\Classes\FaceSprite.h" />
     <ClInclude Include="..\Classes\HammerSprite.h" />

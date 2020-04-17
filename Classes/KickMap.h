@@ -9,7 +9,7 @@ class KickMap : public Node
 {
 private:
 	TMXTiledMap* _tiledMap;
-	void addBees(TMXObjectGroup* group);
+	void addSprites(TMXObjectGroup* group);
 	void addGrounds(TMXObjectGroup* group);
 	void addProps(TMXObjectGroup* group);
 	void addFire(TMXObjectGroup* group, Background* bg);

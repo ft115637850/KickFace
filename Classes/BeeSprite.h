@@ -26,11 +26,10 @@ private:
 public:
 	void collidedWithFace(FaceSprite* face);
 	void updateChase(float t);
-	static BeeSprite* createBeeSprite(unsigned beeType);
+	static BeeSprite* createBeeSprite(unsigned beeColor);
 	static void clearBeesGroup();
 	static void notifyGroupChasing(FaceSprite* face);
 	bool initBeeSprite(unsigned beeColor);
-	CREATE_FUNC(BeeSprite);
 	~BeeSprite();
 };
 
