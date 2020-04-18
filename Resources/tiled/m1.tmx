@@ -17,7 +17,7 @@
   </data>
  </layer>
  <objectgroup id="10" name="water">
-  <object id="93" x="32.3333" y="1127.5" width="1664.17" height="24.3333"/>
+  <object id="93" x="32.3333" y="1127.5" width="1633.17" height="24.3333"/>
  </objectgroup>
  <objectgroup id="9" name="fireRange">
   <object id="90" x="562" y="617.667" width="63.6667" height="117.333"/>

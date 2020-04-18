@@ -149,8 +149,9 @@ void KickMap::addGrounds(TMXObjectGroup * group)
 				auto y = -dicp.at("y").asFloat();//yÈ¡¸ºÖµ
 				points[i] = Vec2(x, y);
 				i++;
-				phy->addShape(PhysicsShapePolygon::create(points, size));
 			}
+			phy->addShape(PhysicsShapePolygon::create(points, size));
+			delete[] points;
 		}
 		else
 		{
