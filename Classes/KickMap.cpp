@@ -24,8 +24,8 @@ void KickMap::addSprites(TMXObjectGroup * group)
 		{
 			auto flagColor = prop["color"].asInt();
 			auto sp = FlagSprite::createFlagSprite(flagColor);
-			sp->setPosition(Vec2(groundX + 10, groundY));
-			_tiledMap->addChild(sp,2);
+			sp->setPosition(Vec2(groundX, groundY));
+			_tiledMap->addChild(sp);
 		}
 	}
 }

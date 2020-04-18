@@ -111,7 +111,7 @@
     <property name="color" type="int" value="4"/>
    </properties>
   </object>
-  <object id="111" name="flag" x="1880" y="1015">
+  <object id="111" name="flag" x="1893" y="1015">
    <properties>
     <property name="color" type="int" value="3"/>
    </properties>
