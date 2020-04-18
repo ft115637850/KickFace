@@ -55,7 +55,7 @@ void KickMap::addFire(TMXObjectGroup * group, Background * bg)
 		{
 			emitter->setPosition(Vec2(groundX, groundY)*MAP_SCALE_FACTOR);
 			emitter->setScale(MAP_SCALE_FACTOR);
-			bg->addChild(emitter, 2);
+			bg->addChild(emitter, 3);
 		}
 
 		auto pFileLeft2 = FileUtils::getInstance()->getValueMapFromFile("fire_foreground.plist");
@@ -71,7 +71,7 @@ void KickMap::addFire(TMXObjectGroup * group, Background * bg)
 		{
 			emitter2->setPosition(Vec2(groundX, groundY)*MAP_SCALE_FACTOR);
 			emitter2->setScale(MAP_SCALE_FACTOR);
-			bg->addChild(emitter2, 2);
+			bg->addChild(emitter2, 3);
 		}
 	}
 }
