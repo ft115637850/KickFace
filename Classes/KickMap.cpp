@@ -124,6 +124,43 @@ void KickMap::addWater(TMXObjectGroup * group)
 	}
 }
 
+void KickMap::addCactus(TMXObjectGroup * group)
+{
+	ValueVector waterGroup = group->getObjects();
+	for (auto obj : waterGroup)
+	{
+		ValueMap& cactus = obj.asValueMap();
+		auto waterX = cactus["x"].asFloat();
+		auto waterY = cactus["y"].asFloat();
+		auto waterW = cactus["width"].asFloat();
+		auto waterH = cactus["height"].asFloat();
+		PhysicsBody * phy = PhysicsBody::create();
+		auto polygon = cactus["points"].asValueVector();
+		auto size = polygon.size();
+		Vec2* points = new Vec2[size];
+		int i = 0;
+		for (auto pointValue : polygon)
+		{
+			auto dicp = pointValue.asValueMap();
+			auto x = dicp.at("x").asFloat();
+			auto y = -dicp.at("y").asFloat();//yÈ¡¸ºÖµ
+			points[i] = Vec2(x, y);
+			i++;
+		}
+		phy->addShape(PhysicsShapePolygon::create(points, size));
+		delete [] points;
+
+		phy->setDynamic(false);
+		phy->setContactTestBitmask(CACTUS_BIT_MASK);
+		Sprite * sp = Sprite::create();
+		sp->setPosition(Vec2(waterX, waterY));
+		sp->setAnchorPoint(Vec2::ZERO);
+		sp->setContentSize(Size(waterW, waterH));
+		sp->setPhysicsBody(phy);
+		_tiledMap->addChild(sp);
+	}
+}
+
 void KickMap::addGrounds(TMXObjectGroup * group)
 {
 	ValueVector grounds = group->getObjects();
@@ -252,6 +289,10 @@ bool KickMap::initKickMap(Background * bg)
 		else if (objectGroup && objectGroup->getGroupName() == "water")
 		{
 			addWater(objectGroup);
+		}
+		else if (objectGroup && objectGroup->getGroupName() == "cactus")
+		{
+			addCactus(objectGroup);
 		}
 	}
 

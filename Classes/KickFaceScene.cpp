@@ -89,14 +89,14 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		_face->showHitting();
 		this->runAction(Sequence::create(DelayTime::create(0.5f),
 			CallFunc::create([this]() {
-				_face->showScared();
-			}),
+			_face->showScared();
+		}),
 			NULL));
 		break;
 	}
 	case FACE_BIT_MASK | GROUND_BIT_MASK:
 	{
-		if (contact.getShapeB()->getBody()->getTag() == BOTTOM_GROUND_TAG||
+		if (contact.getShapeB()->getBody()->getTag() == BOTTOM_GROUND_TAG ||
 			contact.getShapeA()->getBody()->getTag() == BOTTOM_GROUND_TAG)
 		{
 			kickComplete();
@@ -108,8 +108,8 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		_face->showHitting();
 		_background->runAction(Sequence::create(DelayTime::create(0.5f),
 			CallFunc::create([this]() {
-				_face->showScared();
-			}),
+			_face->showScared();
+		}),
 			NULL));
 		break;
 	}
@@ -118,7 +118,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		enterFireTime = std::chrono::steady_clock::now();
 		return false;
 	}
-	case FACE_BIT_MASK| WATER_BIT_MASK:
+	case FACE_BIT_MASK | WATER_BIT_MASK:
 	{
 		_face->getPhysicsBody()->setVelocity(Vec2::ZERO);
 		auto p = _face->getPosition();
@@ -127,8 +127,14 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		_face->fallInWater();
 		return false;
 	}
-	case FACE_BIT_MASK| EDGE_BIT_MASK:
+	case FACE_BIT_MASK | EDGE_BIT_MASK:
 	{
+		kickComplete();
+		break;
+	}
+	case FACE_BIT_MASK | CACTUS_BIT_MASK:
+	{
+		_face->hitCactus();
 		kickComplete();
 		break;
 	}
@@ -138,7 +144,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		beeSp->collidedWithFace(_face);
 		break;
 	}
-	//case BEE_BIT_MASK | GROUND_BIT_MASK:
+	case BEE_BIT_MASK | CACTUS_BIT_MASK:
 	case HAMMER_BIT_MASK | FIRE_BIT_MASK:
 	case BEE_BIT_MASK | FIRE_BIT_MASK:
 	case BEE_BIT_MASK | BEE_BIT_MASK:

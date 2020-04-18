@@ -4,6 +4,12 @@
 
 USING_NS_CC;
 
+void FaceSprite::hitCactus()
+{
+	getPhysicsBody()->setVelocity(Vec2::ZERO);
+	isOnCactus = true;
+}
+
 void FaceSprite::showScared()
 {
 	setTexture(_scaredFace);
@@ -52,6 +58,15 @@ void FaceSprite::fallInWater()
 	{
 		_smokeEmitter->stop();
 		_fireEmitter->stop();
+	}
+}
+
+void FaceSprite::update(float dt)
+{
+	Sprite::update(dt);
+	if (isOnCactus)
+	{
+		getPhysicsBody()->setDynamic(false);
 	}
 }
 

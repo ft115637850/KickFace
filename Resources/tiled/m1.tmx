@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="115">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="127">
  <tileset firstgid="1" source="32x32.tsx"/>
  <layer id="6" name="background" width="64" height="36">
   <data encoding="base64" compression="zlib">
@@ -8,7 +8,7 @@
  </layer>
  <layer id="7" name="scene1" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztl00OgjAQhSdUWBo3KvchunPpzwU8imsJicB9XLh1489xnIYFRoUAwZJp35e8tJmS0tc06SsRAPKYKqIZa84K1dCrsYM19hEY5uQRpayMlXt/mJ/PdMrKWLnB8x37RZv45v4JzNHmXOGuco84KNokGHYdANjGjXPCnfVgPXvMDENlBdfR744Na8vaYd+BBSD/A2AX55qscRkRHd+yvs7/uvaZ/3VNKqrmbl7+8NW0JoUI/iuB/+41KcB/9Rj8d69JQbJ/v4d3tWT/C8f9Hxzxvx+X/VVY9ifh97eaq2quqGZM++pa61NteQGQEU7I
+   eJztl80KgkAUhQcnXUabSupxpHYt+3mBHqV1IqS+T4u2bfqhXqY7KBiVooMpdzwfHGa4I3rPMDBHIQDgx1AKMSKNSa5suxszWGIfQcMcLCFCUkSKrT+8n850SIpIcYPn27eTMbCb+yZojirnCndV9/CdZAycdvsAwDQulBOupBvpXmNmaCsrdB3137EirUkb7DswAOR/AMziWJA1Tj0h9m9ZX+V/VfvM/6rGFVlwN89/+Cpb44IH/7nAv36NC/Cfvwb/+jUucPZv1/Bfzdn/LO39QeNTcy84+9+lvU/o+1PNHjj43/az+cLN5gP3+1nFWZaXV7CmfOnW6lRVXlbpUMA=
   </data>
  </layer>
  <layer id="5" name="scene2" width="64" height="36">
@@ -115,6 +115,17 @@
    <properties>
     <property name="color" type="int" value="3"/>
    </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="11" name="cactus">
+  <object id="119" x="1949.27" y="1024.73">
+   <polygon points="0,0 5.45455,-0.181818 14.1818,8.18182 14.5455,62.5455 -9.45455,62.3636 -9.81818,7.63636"/>
+  </object>
+  <object id="123" x="1929.61" y="1048.18">
+   <polygon points="0,0 -6.15115,5.09091 -5.98028,27.4545 -1.87952,30.1818 8.03067,30.9091 8.03067,4"/>
+  </object>
+  <object id="126" x="1973.65" y="1031.64">
+   <polygon points="0,0 3.17467,0.181818 6.34934,5.27273 6.04699,26.7273 2.72114,32 -7.10521,32.1818 -7.10521,8.90909"/>
   </object>
  </objectgroup>
 </map>
