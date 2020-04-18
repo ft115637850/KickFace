@@ -134,8 +134,29 @@ void KickMap::addGrounds(TMXObjectGroup * group)
 		auto groundY = ground["y"].asFloat();
 		auto groundW = ground["width"].asFloat();
 		auto groundH = ground["height"].asFloat();
-
-		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f));
+		auto isPolygon = ground["isPolygon"].asBool();
+		PhysicsBody * phy = PhysicsBody::create();
+		if (isPolygon)
+		{
+			auto polygon = ground["points"].asValueVector();
+			auto size = polygon.size();
+			Vec2* points = new Vec2[size];
+			int i = 0;
+			for (auto pointValue : polygon)
+			{
+				auto dicp = pointValue.asValueMap();
+				auto x = dicp.at("x").asFloat();
+				auto y = -dicp.at("y").asFloat();//yÈ¡¸ºÖµ
+				points[i] = Vec2(x, y);
+				i++;
+				phy->addShape(PhysicsShapePolygon::create(points, size));
+			}
+		}
+		else
+		{
+			phy->addShape(PhysicsShapeBox::create(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f)));
+		}
+		
 		if (!ground["tag"].isNull())
 		{
 			phy->setTag(ground["tag"].asInt());
