@@ -27,8 +27,10 @@ package org.cocos2dx.cpp;
 import android.os.Bundle;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import android.os.Build;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.widget.Toast;
 
 public class AppActivity extends Cocos2dxActivity {
 
@@ -53,6 +55,24 @@ public class AppActivity extends Cocos2dxActivity {
         }
         // DO OTHER INITIALIZATION BELOW
         
+    }
+
+    //
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+            if(System.currentTimeMillis() - exitTime > 2000){
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            }else{
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }
