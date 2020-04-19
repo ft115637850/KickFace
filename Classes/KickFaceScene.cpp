@@ -180,6 +180,7 @@ void KickFaceScene::kickComplete()
 {
 	//const auto face_vel = _face->getPhysicsBody()->getVelocity();
 	_face->getPhysicsBody()->setVelocity(Vec2::ZERO);
+	_face->getPhysicsBody()->setAngularVelocity(0);
 	_background->stopAllActions();
 	_face->showHurt();
 	auto label1 = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 48);
