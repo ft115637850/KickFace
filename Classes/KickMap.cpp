@@ -223,7 +223,29 @@ void KickMap::addProps(TMXObjectGroup * group)
 		auto groundY = prop["y"].asFloat();
 		auto groundW = prop["width"].asFloat();
 		auto groundH = prop["height"].asFloat();
-		PhysicsBody * phy = PhysicsBody::createBox(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f));
+		auto isPolygon = prop["isPolygon"].asBool();
+		PhysicsBody * phy = PhysicsBody::create();
+		if (isPolygon)
+		{
+			auto polygon = prop["points"].asValueVector();
+			auto size = polygon.size();
+			Vec2* points = new Vec2[size];
+			int i = 0;
+			for (auto pointValue : polygon)
+			{
+				auto dicp = pointValue.asValueMap();
+				auto x = dicp.at("x").asFloat();
+				auto y = -dicp.at("y").asFloat();//yÈ¡¸ºÖµ
+				points[i] = Vec2(x, y);
+				i++;
+			}
+			phy->addShape(PhysicsShapePolygon::create(points, size));
+			delete[] points;
+		}
+		else
+		{
+			phy->addShape(PhysicsShapeBox::create(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f)));
+		}
 		phy->setDynamic(false);
 		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);
 		phy->setCollisionBitmask(PROPS_COLLISION_MASK);*/
@@ -262,7 +284,7 @@ bool KickMap::initKickMap(Background * bg)
 	if (Node::init() == false)
 		return false;
 
-	_tiledMap = TMXTiledMap::create("tiled/m1.tmx");
+	_tiledMap = TMXTiledMap::create("tiled/m2.tmx");
 	auto groups = _tiledMap->getObjectGroups();
 	for (const auto objectGroup : groups)
 	{
