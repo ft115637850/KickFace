@@ -16,10 +16,11 @@ private:
 	void addFireRange(TMXObjectGroup* group);
 	void addWater(TMXObjectGroup* group);
 	void addCactus(TMXObjectGroup* group);
+	void addPass(TMXObjectGroup* group);
 public:
 	Vec2 getOuterSpritesStartPosition(const std::string& spriteName) const;
 	~KickMap();
-	static KickMap* createKickMap(Background* bg);
-	bool initKickMap(Background* bg);
+	static KickMap* createKickMap(Background* bg, unsigned levelNumber);
+	bool initKickMap(Background* bg, unsigned levelNumber);
 };
 

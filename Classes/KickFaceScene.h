@@ -10,6 +10,7 @@ USING_NS_CC;
 class KickFaceScene: public Scene
 {
 private:
+	unsigned levelNumber = 0;
 	std::unordered_map<int, cocos2d::Node*> _mouses;
 	HammerSprite* _hammer;
 	FaceSprite* _face;
@@ -34,8 +35,8 @@ private:
 	KickFaceScene();
 	virtual ~KickFaceScene();
 public:
-	bool init() override;
 	void onEnterTransitionDidFinish() override;
-	CREATE_FUNC(KickFaceScene);
+	static KickFaceScene* createKickFaceScene(unsigned levelNumber);
+	bool initKickFaceScene(unsigned levelNumber);
 };
 

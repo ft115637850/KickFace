@@ -144,6 +144,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		beeSp->collidedWithFace(_face);
 		break;
 	}
+	case FACE_BIT_MASK | PASS_BIT_MASK:
 	case BEE_BIT_MASK | CACTUS_BIT_MASK:
 	case HAMMER_BIT_MASK | FIRE_BIT_MASK:
 	case BEE_BIT_MASK | FIRE_BIT_MASK:
@@ -173,6 +174,11 @@ void KickFaceScene::onBodySeparate(cocos2d::PhysicsContact & contact)
 		}
 		break;
 	}
+	case FACE_BIT_MASK | PASS_BIT_MASK:
+	{
+		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::createKickFaceScene(levelNumber + 1)));
+		break;
+	}
 	}
 }
 
@@ -184,10 +190,10 @@ void KickFaceScene::kickComplete()
 	_background->stopAllActions();
 	_face->showHurt();
 	auto label1 = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 48);
-	auto item1 = MenuItemLabel::create(label1, [](Ref* obj)
+	auto item1 = MenuItemLabel::create(label1, [this](Ref* obj)
 	{
 		BeeSprite::clearBeesGroup();
-		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::create()));
+		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::createKickFaceScene(levelNumber)));
 	});
 	item1->setPositionY(10);
 	auto label2 = Label::createWithTTF("Exit", "fonts/Marker Felt.ttf", 48);
@@ -222,7 +228,7 @@ void KickFaceScene::createWorldAndMap()
 	_boundary->setPosition(0, -500);
 	_background->addChild(_boundary);
 
-	_tileMap = KickMap::createKickMap(_background);
+	_tileMap = KickMap::createKickMap(_background, this->levelNumber);
 	_background->addChild(_tileMap);
 }
 
@@ -282,12 +288,13 @@ void KickFaceScene::addEventHandlers()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 }
 
-bool KickFaceScene::init()
+bool KickFaceScene::initKickFaceScene(unsigned levelNumber)
 {
 	if (!Scene::initWithPhysics())
 	{
 		return false;
 	}
+	this->levelNumber = levelNumber;
 	_visibleSize = Director::getInstance()->getVisibleSize();
 	//Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -302,5 +309,17 @@ void KickFaceScene::onEnterTransitionDidFinish()
 {
 	Scene::onEnterTransitionDidFinish();
   	_background->runAction(Follow::create(_face, Rect(0, 0, _worldSize.width, _worldSize.height)));
+}
+
+KickFaceScene * KickFaceScene::createKickFaceScene(unsigned levelNumber)
+{
+	KickFaceScene* p = new KickFaceScene();
+	if (p && p->initKickFaceScene(levelNumber))
+	{
+		p->autorelease();
+		return p;
+	}
+	CC_SAFE_DELETE(p);
+	return nullptr;
 }
 

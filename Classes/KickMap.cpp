@@ -161,6 +161,24 @@ void KickMap::addCactus(TMXObjectGroup * group)
 	}
 }
 
+void KickMap::addPass(TMXObjectGroup * group)
+{
+	ValueVector waterGroup = group->getObjects();
+	for (auto obj : waterGroup)
+	{
+		ValueMap& pass = obj.asValueMap();
+		PhysicsBody * phy = PhysicsBody::createBox(Size(pass["width"].asFloat(), pass["height"].asFloat()), PhysicsMaterial(1.0f, 1.0f, 1.0f));
+		phy->setDynamic(false);
+		phy->setContactTestBitmask(PASS_BIT_MASK);
+		Sprite * sp = Sprite::create();
+		sp->setPosition(Vec2(pass["x"].asFloat(), pass["y"].asFloat()));
+		sp->setAnchorPoint(Vec2::ZERO);
+		sp->setContentSize(Size(pass["width"].asFloat(), pass["height"].asFloat()));
+		sp->setPhysicsBody(phy);
+		_tiledMap->addChild(sp);
+	}
+}
+
 void KickMap::addGrounds(TMXObjectGroup * group)
 {
 	ValueVector grounds = group->getObjects();
@@ -267,10 +285,10 @@ Vec2 KickMap::getOuterSpritesStartPosition(const std::string& spriteName) const
 	return Vec2(sp["x"].asFloat(), sp["y"].asFloat())*MAP_SCALE_FACTOR;
 }
 
-KickMap * KickMap::createKickMap(Background * bg)
+KickMap * KickMap::createKickMap(Background * bg, unsigned levelNumber)
 {
 	KickMap* p = new KickMap();
-	if (p && p->initKickMap(bg))
+	if (p && p->initKickMap(bg, levelNumber))
 	{
 		p->autorelease();
 		return p;
@@ -279,12 +297,12 @@ KickMap * KickMap::createKickMap(Background * bg)
 	return nullptr;
 }
 
-bool KickMap::initKickMap(Background * bg)
+bool KickMap::initKickMap(Background * bg, unsigned levelNumber)
 {
 	if (Node::init() == false)
 		return false;
 
-	_tiledMap = TMXTiledMap::create("tiled/m2.tmx");
+	_tiledMap = TMXTiledMap::create(StringUtils::format("tiled/m%d.tmx", levelNumber));
 	auto groups = _tiledMap->getObjectGroups();
 	for (const auto objectGroup : groups)
 	{
@@ -315,6 +333,10 @@ bool KickMap::initKickMap(Background * bg)
 		else if (objectGroup && objectGroup->getGroupName() == "cactus")
 		{
 			addCactus(objectGroup);
+		}
+		else if (objectGroup && objectGroup->getGroupName() == "pass")
+		{
+			addPass(objectGroup);
 		}
 	}
 
