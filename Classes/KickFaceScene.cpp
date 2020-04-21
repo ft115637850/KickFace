@@ -125,6 +125,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		auto s = _face->getContentSize();
 		addSpray(Vec2(p.x, p.y - s.height / 2));
 		_face->fallInWater();
+		BeeSprite::stopGroupChasing();
 		return false;
 	}
 	case FACE_BIT_MASK | EDGE_BIT_MASK:
@@ -142,6 +143,18 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	{
 		BeeSprite* beeSp = BodyContactHelper::getBeeBetweenShapes(contact.getShapeA(), contact.getShapeB());
 		beeSp->collidedWithFace(_face);
+		break;
+	}
+	case SNAIL_BIT_MASK | FACE_BIT_MASK:
+	{
+		SnailSprite* snail = BodyContactHelper::getSnailBetweenShapes(contact.getShapeA(), contact.getShapeB());
+		snail->hurt();
+		break;
+	}
+	case SNAIL_BIT_MASK| WATER_BIT_MASK:
+	{
+		SnailSprite* snail = BodyContactHelper::getSnailBetweenShapes(contact.getShapeA(), contact.getShapeB());
+		snail->removeFromParent();
 		break;
 	}
 	case FACE_BIT_MASK | PASS_BIT_MASK:

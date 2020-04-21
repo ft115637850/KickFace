@@ -159,6 +159,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\KickFaceScene.cpp" />
     <ClCompile Include="..\Classes\KickMap.cpp" />
     <ClCompile Include="..\Classes\PhysicsShapeCache.cpp" />
+    <ClCompile Include="..\Classes\SnailSprite.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +174,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\KickFaceScene.h" />
     <ClInclude Include="..\Classes\KickMap.h" />
     <ClInclude Include="..\Classes\PhysicsShapeCache.h" />
+    <ClInclude Include="..\Classes\SnailSprite.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

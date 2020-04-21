@@ -11,6 +11,7 @@ private:
 	float _textureSize = 0;
 	bool isTowardLeft = true;
 	bool isRecovered = true;
+	bool _hasStopped = false;
 	FaceSprite * _chasingFace = nullptr;
 	cocos2d::Action* _flyAct = nullptr;
 	cocos2d::ParticleSystemQuad* _chasingParticleLeft = nullptr;
@@ -20,6 +21,7 @@ private:
 	void hurt();
 	void recoverFromCollision();
 	void startChasingFace(FaceSprite* face);
+	void stopChasingFace();
 	void applyChasingForce(const cocos2d::Vec2& distance);
 	void adjustDirection(const cocos2d::Vec2& distance);
 	void addParticle();
@@ -29,6 +31,7 @@ public:
 	static BeeSprite* createBeeSprite(unsigned beeColor);
 	static void clearBeesGroup();
 	static void notifyGroupChasing(FaceSprite* face);
+	static void stopGroupChasing();
 	bool initBeeSprite(unsigned beeColor);
 	~BeeSprite();
 };

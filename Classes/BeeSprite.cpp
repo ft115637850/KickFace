@@ -19,6 +19,15 @@ void BeeSprite::startChasingFace(FaceSprite* face)
 	this->schedule(schedule_selector(BeeSprite::updateChase), 0.5f);
 }
 
+void BeeSprite::stopChasingFace()
+{
+	_hasStopped = true;
+	this->_chasingFace = nullptr;
+	this->unschedule(schedule_selector(BeeSprite::updateChase));
+	this->_chasingParticleRight->stop();
+	this->_chasingParticleLeft->stop();
+}
+
 void BeeSprite::applyChasingForce(const cocos2d::Vec2 & distance)
 {
 	adjustDirection(distance);
@@ -153,7 +162,7 @@ void BeeSprite::recoverFromCollision()
 void BeeSprite::updateChase(float t)
 {
 	isRecovered = true;
-	if (_chasingFace == nullptr)
+	if (_chasingFace == nullptr || _hasStopped)
 		return;
 
 	auto targetPosition = _chasingFace->getPosition() / MAP_SCALE_FACTOR;
@@ -187,6 +196,17 @@ void BeeSprite::notifyGroupChasing(FaceSprite* face)
 		if (bee->_chasingFace == nullptr)
 		{
 			bee->startChasingFace(face);
+		}
+	}
+}
+
+void BeeSprite::stopGroupChasing()
+{
+	for (auto bee : beesGroup_)
+	{
+		if (bee->_chasingFace != nullptr)
+		{
+			bee->stopChasingFace();
 		}
 	}
 }

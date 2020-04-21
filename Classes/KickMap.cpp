@@ -3,28 +3,34 @@
 #include "BeeSprite.h"
 #include "FlagSprite.h"
 #include "KFCommonDefinition.h"
+#include "SnailSprite.h"
 
 void KickMap::addSprites(TMXObjectGroup * group)
 {
 	ValueVector sprites = group->getObjects();
 	for (auto obj : sprites)
 	{
-		ValueMap& prop = obj.asValueMap();
-		auto spName = prop["name"].asString();
-		auto groundX = prop["x"].asFloat();
-		auto groundY = prop["y"].asFloat();
+		ValueMap& spProps = obj.asValueMap();
+		auto spName = spProps["name"].asString();
 		if (spName == "bee")
 		{
-			auto beeColor = prop["color"].asInt();
+			auto beeColor = spProps["color"].asInt();
 			auto sp = BeeSprite::createBeeSprite(beeColor);
-			sp->setPosition(Vec2(groundX, groundY));
+			sp->setPosition(Vec2(spProps["x"].asFloat(), spProps["y"].asFloat()));
 			_tiledMap->addChild(sp);
 		}
 		else if (spName == "flag")
 		{
-			auto flagColor = prop["color"].asInt();
+			auto flagColor = spProps["color"].asInt();
 			auto sp = FlagSprite::createFlagSprite(flagColor);
-			sp->setPosition(Vec2(groundX, groundY));
+			sp->setPosition(Vec2(spProps["x"].asFloat(), spProps["y"].asFloat()));
+			_tiledMap->addChild(sp);
+		}
+		else if (spName == "snail")
+		{
+			auto flagColor = spProps["color"].asInt();
+			auto sp = SnailSprite::createSnail(flagColor);
+			sp->setPosition(Vec2(spProps["x"].asFloat(), spProps["y"].asFloat()));
 			_tiledMap->addChild(sp);
 		}
 	}
@@ -330,7 +336,7 @@ bool KickMap::initKickMap(Background * bg, unsigned levelNumber)
 		{
 			addWater(objectGroup);
 		}
-		else if (objectGroup && objectGroup->getGroupName() == "cactus")
+		else if (objectGroup && objectGroup->getGroupName() == "cactus") 
 		{
 			addCactus(objectGroup);
 		}
