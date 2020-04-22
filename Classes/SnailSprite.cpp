@@ -60,6 +60,7 @@ void SnailSprite::hurt()
 
 void SnailSprite::update(float delta)
 {
+	Sprite::update(delta);
 	if (_isFalling && !this->getPhysicsBody()->isGravityEnabled())
 	{
 		this->getPhysicsBody()->setGravityEnable(true);
