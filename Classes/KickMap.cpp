@@ -31,7 +31,7 @@ void KickMap::addSprites(TMXObjectGroup * group)
 			auto flagColor = spProps["color"].asInt();
 			auto sp = SnailSprite::createSnail(flagColor);
 			sp->setPosition(Vec2(spProps["x"].asFloat(), spProps["y"].asFloat()));
-			_tiledMap->addChild(sp);
+			_tiledMap->addChild(sp, 2);
 		}
 	}
 }

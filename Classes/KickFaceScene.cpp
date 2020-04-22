@@ -149,14 +149,16 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	{
 		SnailSprite* snail = BodyContactHelper::getSnailBetweenShapes(contact.getShapeA(), contact.getShapeB());
 		snail->hurt();
-		break;
+		return false;
 	}
-	case SNAIL_BIT_MASK| WATER_BIT_MASK:
+	case SNAIL_BIT_MASK | PASS_BIT_MASK:
+	case SNAIL_BIT_MASK | WATER_BIT_MASK:
 	{
 		SnailSprite* snail = BodyContactHelper::getSnailBetweenShapes(contact.getShapeA(), contact.getShapeB());
 		snail->removeFromParent();
 		break;
 	}
+	case SNAIL_BIT_MASK | PROPS_BIT_MASK:
 	case FACE_BIT_MASK | PASS_BIT_MASK:
 	case BEE_BIT_MASK | CACTUS_BIT_MASK:
 	case HAMMER_BIT_MASK | FIRE_BIT_MASK:
