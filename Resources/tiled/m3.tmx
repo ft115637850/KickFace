@@ -86,7 +86,7 @@
     <property name="color" type="int" value="3"/>
    </properties>
   </object>
-  <object id="134" name="snail" x="1549" y="792">
+  <object id="134" name="snail" x="1549" y="790">
    <properties>
     <property name="color" type="int" value="2"/>
    </properties>
