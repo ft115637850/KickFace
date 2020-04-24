@@ -115,8 +115,9 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	}
 	case FACE_BIT_MASK | FIRE_BIT_MASK:
 	{
-		enterFireTime = std::chrono::steady_clock::now();
-		return false;
+		//enterFireTime = std::chrono::steady_clock::now();
+		_face->catchFire();
+		break;
 	}
 	case FACE_BIT_MASK | WATER_BIT_MASK:
 	{
@@ -179,7 +180,7 @@ void KickFaceScene::onBodySeparate(cocos2d::PhysicsContact & contact)
 	switch (contact.getShapeA()->getBody()->getContactTestBitmask() |
 		contact.getShapeB()->getBody()->getContactTestBitmask())
 	{
-	case FACE_BIT_MASK | FIRE_BIT_MASK:
+	/*case FACE_BIT_MASK | FIRE_BIT_MASK:
 	{
 		exitFireTime = std::chrono::steady_clock::now();
 		std::chrono::duration<double> elapsed_seconds = exitFireTime - enterFireTime;
@@ -188,7 +189,7 @@ void KickFaceScene::onBodySeparate(cocos2d::PhysicsContact & contact)
 			_face->catchFire();
 		}
 		break;
-	}
+	}*/
 	case FACE_BIT_MASK | PASS_BIT_MASK:
 	{
 		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::createKickFaceScene(levelNumber + 1)));

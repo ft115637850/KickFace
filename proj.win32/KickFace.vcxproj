@@ -192,6 +192,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   <ItemGroup>
     <None Include="..\Resources\tiled\32x32.tsx" />
     <None Include="..\Resources\tiled\m1.tmx" />
+    <None Include="..\Resources\tiled\m2.tmx" />
+    <None Include="..\Resources\tiled\m3.tmx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Resources\bluebee.png" />

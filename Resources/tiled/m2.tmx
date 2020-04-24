@@ -20,9 +20,12 @@
   <object id="93" x="32.3333" y="1127.5" width="1633.17" height="24.3333"/>
  </objectgroup>
  <objectgroup id="9" name="fireRange">
-  <object id="90" x="562" y="617.667" width="63.6667" height="117.333"/>
-  <object id="91" x="721.667" y="618.333" width="63.6667" height="117.333"/>
-  <object id="97" name="r3" x="881.167" y="617.757" width="63.6667" height="117.333"/>
+  <object id="82" x="588.818" y="618.455" width="6.90909" height="5.45455"/>
+  <object id="83" x="586.545" y="745.545" width="9.31818" height="5.72727"/>
+  <object id="84" x="748" y="618.364" width="7.63636" height="4.36364"/>
+  <object id="85" x="748.455" y="746.364" width="7.09091" height="5.45455"/>
+  <object id="100" x="907.5" y="617.788" width="7.63636" height="4.36364"/>
+  <object id="101" x="907.955" y="745.788" width="7.09091" height="5.45455"/>
  </objectgroup>
  <objectgroup id="8" name="fire">
   <object id="98" name="f6" x="931.5" y="723.424">
@@ -81,14 +84,7 @@
  <objectgroup id="12" name="pass">
   <object id="127" x="1792.33" y="1119" width="63.6667" height="27.3333"/>
  </objectgroup>
- <objectgroup id="3" name="props">
-  <object id="82" x="588.818" y="618.455" width="6.90909" height="5.45455"/>
-  <object id="83" x="586.545" y="745.545" width="9.31818" height="5.72727"/>
-  <object id="84" x="748" y="618.364" width="7.63636" height="4.36364"/>
-  <object id="85" x="748.455" y="746.364" width="7.09091" height="5.45455"/>
-  <object id="100" x="907.5" y="617.788" width="7.63636" height="4.36364"/>
-  <object id="101" x="907.955" y="745.788" width="7.09091" height="5.45455"/>
- </objectgroup>
+ <objectgroup id="3" name="props"/>
  <objectgroup id="4" name="sprites">
   <object id="1" name="face" x="365.724" y="697.113" width="16.2288" height="18.833">
    <ellipse/>
