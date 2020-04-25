@@ -32,7 +32,7 @@ bool SnailSprite::initSnail(unsigned snailColor)
 		return false;
 	}
 
-	const auto physicsBody = PhysicsBody::createCircle(getContentSize().width / 2, PhysicsMaterial(1.0f, 0.0f, 1.0f));
+	const auto physicsBody = PhysicsBody::createCircle(getContentSize().width / 2, COIN_MATERIAL);
 	physicsBody->setContactTestBitmask(SNAIL_BIT_MASK);
 	physicsBody->setGravityEnable(false);
 	physicsBody->setRotationEnable(false);

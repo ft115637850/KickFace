@@ -140,6 +140,12 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		kickComplete();
 		break;
 	}
+	case FACE_BIT_MASK | COIN_BIT_MASK:
+	{
+		CoinSprite* coin = BodyContactHelper::getCoinBetweenShapes(contact.getShapeA(), contact.getShapeB());
+		coin->getCoin();
+		return false;
+	}
 	case BEE_BIT_MASK | FACE_BIT_MASK:
 	{
 		BeeSprite* beeSp = BodyContactHelper::getBeeBetweenShapes(contact.getShapeA(), contact.getShapeB());
@@ -162,7 +168,7 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	case SNAIL_BIT_MASK | PROPS_BIT_MASK:
 	case FACE_BIT_MASK | PASS_BIT_MASK:
 	case BEE_BIT_MASK | CACTUS_BIT_MASK:
-	case HAMMER_BIT_MASK | FIRE_BIT_MASK:
+	case BEE_BIT_MASK | COIN_BIT_MASK:
 	case BEE_BIT_MASK | FIRE_BIT_MASK:
 	case BEE_BIT_MASK | BEE_BIT_MASK:
 	case BEE_BIT_MASK | HAMMER_BIT_MASK:

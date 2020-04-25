@@ -82,7 +82,7 @@ bool FaceSprite::init()
 	_hurtFace = Director::getInstance()->getTextureCache()->addImage("face3.png");
 
 	auto size = getContentSize();
-	const auto physicsBody = PhysicsBody::createCircle(size.width / 2, PhysicsMaterial(0.5f, 1.0f, 0.0f));
+	const auto physicsBody = PhysicsBody::createCircle(size.width / 2, FACE_MATERIAL);
 	/*physicsBody->setCategoryBitmask(FACE_CATEGORY_MASK);
 	physicsBody->setCollisionBitmask(FACE_COLLISION_MASK);*/
 	physicsBody->setContactTestBitmask(FACE_BIT_MASK);

@@ -1,6 +1,7 @@
 #include "KickMap.h"
 
 #include "BeeSprite.h"
+#include "CoinSprite.h"
 #include "FlagSprite.h"
 #include "KFCommonDefinition.h"
 #include "SnailSprite.h"
@@ -12,27 +13,34 @@ void KickMap::addSprites(TMXObjectGroup * group)
 	{
 		ValueMap& spProps = obj.asValueMap();
 		auto spName = spProps["name"].asString();
+		Sprite* sp = nullptr;
 		if (spName == "bee")
 		{
 			auto beeColor = spProps["color"].asInt();
-			auto sp = BeeSprite::createBeeSprite(beeColor);
-			sp->setPosition(Vec2(spProps["x"].asFloat(), spProps["y"].asFloat()));
-			_tiledMap->addChild(sp);
+			sp = BeeSprite::createBeeSprite(beeColor);
+			
 		}
 		else if (spName == "flag")
 		{
 			auto flagColor = spProps["color"].asInt();
-			auto sp = FlagSprite::createFlagSprite(flagColor);
-			sp->setPosition(Vec2(spProps["x"].asFloat(), spProps["y"].asFloat()));
-			_tiledMap->addChild(sp);
+			sp = FlagSprite::createFlagSprite(flagColor);
 		}
 		else if (spName == "snail")
 		{
 			auto flagColor = spProps["color"].asInt();
-			auto sp = SnailSprite::createSnail(flagColor);
-			sp->setPosition(Vec2(spProps["x"].asFloat(), spProps["y"].asFloat()));
-			_tiledMap->addChild(sp, 2);
+			sp = SnailSprite::createSnail(flagColor);
 		}
+		else if (spName == "coin")
+		{
+			sp = CoinSprite::create();
+		}
+		else
+		{
+			continue;
+		}
+
+		sp->setPosition(Vec2(spProps["x"].asFloat(), spProps["y"].asFloat()));
+		_tiledMap->addChild(sp);
 	}
 }
 
@@ -92,7 +100,7 @@ void KickMap::addFireRange(TMXObjectGroup * group)
 		auto fireRangeY = fireRange["y"].asFloat();
 		auto fireRangeW = fireRange["width"].asFloat();
 		auto fireRangeH = fireRange["height"].asFloat();
-		PhysicsBody * phy = PhysicsBody::createBox(Size(fireRangeW, fireRangeH), PhysicsMaterial(1.0f, 1.0f, 1.0f));
+		PhysicsBody * phy = PhysicsBody::createBox(Size(fireRangeW, fireRangeH), RING_MATERIAL);
 		phy->setDynamic(false);
 		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);
 		phy->setCollisionBitmask(PROPS_COLLISION_MASK);*/
@@ -116,7 +124,7 @@ void KickMap::addWater(TMXObjectGroup * group)
 		auto waterY = water["y"].asFloat();
 		auto waterW = water["width"].asFloat();
 		auto waterH = water["height"].asFloat();
-		PhysicsBody * phy = PhysicsBody::createBox(Size(waterW, waterH), PhysicsMaterial(1.0f, 1.0f, 1.0f));
+		PhysicsBody * phy = PhysicsBody::createBox(Size(waterW, waterH), WATER_MATERIAL);
 		phy->setDynamic(false);
 		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);
 		phy->setCollisionBitmask(PROPS_COLLISION_MASK);*/
@@ -173,7 +181,7 @@ void KickMap::addPass(TMXObjectGroup * group)
 	for (auto obj : waterGroup)
 	{
 		ValueMap& pass = obj.asValueMap();
-		PhysicsBody * phy = PhysicsBody::createBox(Size(pass["width"].asFloat(), pass["height"].asFloat()), PhysicsMaterial(1.0f, 1.0f, 1.0f));
+		PhysicsBody * phy = PhysicsBody::createBox(Size(pass["width"].asFloat(), pass["height"].asFloat()), WATER_MATERIAL);
 		phy->setDynamic(false);
 		phy->setContactTestBitmask(PASS_BIT_MASK);
 		Sprite * sp = Sprite::create();
@@ -211,12 +219,12 @@ void KickMap::addGrounds(TMXObjectGroup * group)
 				points[i] = Vec2(x, y);
 				i++;
 			}
-			phy->addShape(PhysicsShapePolygon::create(points, size));
+			phy->addShape(PhysicsShapePolygon::create(points, size, GROUND_MATERIAL));
 			delete[] points;
 		}
 		else
 		{
-			phy->addShape(PhysicsShapeBox::create(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f)));
+			phy->addShape(PhysicsShapeBox::create(Size(groundW, groundH), GROUND_MATERIAL));
 		}
 		
 		if (!ground["tag"].isNull())
@@ -268,7 +276,7 @@ void KickMap::addProps(TMXObjectGroup * group)
 		}
 		else
 		{
-			phy->addShape(PhysicsShapeBox::create(Size(groundW, groundH), PhysicsMaterial(1.0f, 0.1f, 1.0f)));
+			phy->addShape(PhysicsShapeBox::create(Size(groundW, groundH), PROP_MATERIAL));
 		}
 		phy->setDynamic(false);
 		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);

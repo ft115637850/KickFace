@@ -260,7 +260,7 @@ bool BeeSprite::initBeeSprite(unsigned beeType)
 	_flyAct = this->runAction(RepeatForever::create(Animate::create(animation)));
 
 	auto size = getContentSize();
-	const auto physicsBody = PhysicsBody::createCircle(size.width / 2, PhysicsMaterial(0.1f, 0.0f, 1.0f));
+	const auto physicsBody = PhysicsBody::createCircle(size.width / 2, BEE_MATERIAL);
 	/*physicsBody->setCategoryBitmask(BEE_CATEGORY_MASK);
 	physicsBody->setCollisionBitmask(BEE_COLLISION_MASK);*/
 	physicsBody->setContactTestBitmask(BEE_BIT_MASK);

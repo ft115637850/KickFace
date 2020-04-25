@@ -1,5 +1,7 @@
 #include "BodyContactHelper.h"
 
+
+#include "CoinSprite.h"
 #include "KFCommonDefinition.h"
 #include "SnailSprite.h"
 
@@ -41,6 +43,20 @@ SnailSprite * BodyContactHelper::getSnailBetweenShapes(PhysicsShape * shapeA, Ph
 	else
 	{
 		sp = static_cast<SnailSprite*>(shapeB->getBody()->getNode());
+	}
+	return sp;
+}
+
+CoinSprite * BodyContactHelper::getCoinBetweenShapes(PhysicsShape * shapeA, PhysicsShape * shapeB)
+{
+	CoinSprite* sp = nullptr;
+	if (shapeA->getContactTestBitmask() == COIN_BIT_MASK)
+	{
+		sp = static_cast<CoinSprite*>(shapeA->getBody()->getNode());
+	}
+	else
+	{
+		sp = static_cast<CoinSprite*>(shapeB->getBody()->getNode());
 	}
 	return sp;
 }
