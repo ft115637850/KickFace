@@ -89,14 +89,14 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		_face->showHitting();
 		this->runAction(Sequence::create(DelayTime::create(0.5f),
 			CallFunc::create([this]() {
-				_face->showScared();
-			}),
+			_face->showScared();
+		}),
 			NULL));
 		break;
 	}
 	case FACE_BIT_MASK | GROUND_BIT_MASK:
 	{
-		if (contact.getShapeB()->getBody()->getTag() == BOTTOM_GROUND_TAG||
+		if (contact.getShapeB()->getBody()->getTag() == BOTTOM_GROUND_TAG ||
 			contact.getShapeA()->getBody()->getTag() == BOTTOM_GROUND_TAG)
 		{
 			kickComplete();
@@ -108,20 +108,43 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		_face->showHitting();
 		_background->runAction(Sequence::create(DelayTime::create(0.5f),
 			CallFunc::create([this]() {
-				_face->showScared();
-			}),
+			_face->showScared();
+		}),
 			NULL));
 		break;
 	}
 	case FACE_BIT_MASK | FIRE_BIT_MASK:
 	{
-		enterFireTime = std::chrono::steady_clock::now();
+		//enterFireTime = std::chrono::steady_clock::now();
+		_face->catchFire();
+		break;
+	}
+	case FACE_BIT_MASK | WATER_BIT_MASK:
+	{
+		_face->getPhysicsBody()->setVelocity(Vec2::ZERO);
+		auto p = _face->getPosition();
+		auto s = _face->getContentSize();
+		addSpray(Vec2(p.x, p.y - s.height / 2));
+		_face->fallInWater();
+		BeeSprite::stopGroupChasing();
 		return false;
 	}
-	case FACE_BIT_MASK| EDGE_BIT_MASK:
+	case FACE_BIT_MASK | EDGE_BIT_MASK:
 	{
 		kickComplete();
 		break;
+	}
+	case FACE_BIT_MASK | CACTUS_BIT_MASK:
+	{
+		_face->hitCactus();
+		kickComplete();
+		break;
+	}
+	case FACE_BIT_MASK | COIN_BIT_MASK:
+	{
+		CoinSprite* coin = BodyContactHelper::getCoinBetweenShapes(contact.getShapeA(), contact.getShapeB());
+		coin->getCoin();
+		return false;
 	}
 	case BEE_BIT_MASK | FACE_BIT_MASK:
 	{
@@ -129,8 +152,23 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		beeSp->collidedWithFace(_face);
 		break;
 	}
-	//case BEE_BIT_MASK | GROUND_BIT_MASK:
-	case HAMMER_BIT_MASK | FIRE_BIT_MASK:
+	case SNAIL_BIT_MASK | FACE_BIT_MASK:
+	{
+		SnailSprite* snail = BodyContactHelper::getSnailBetweenShapes(contact.getShapeA(), contact.getShapeB());
+		snail->hurt();
+		return false;
+	}
+	case SNAIL_BIT_MASK | PASS_BIT_MASK:
+	case SNAIL_BIT_MASK | WATER_BIT_MASK:
+	{
+		SnailSprite* snail = BodyContactHelper::getSnailBetweenShapes(contact.getShapeA(), contact.getShapeB());
+		snail->removeFromParent();
+		break;
+	}
+	case SNAIL_BIT_MASK | PROPS_BIT_MASK:
+	case FACE_BIT_MASK | PASS_BIT_MASK:
+	case BEE_BIT_MASK | CACTUS_BIT_MASK:
+	case BEE_BIT_MASK | COIN_BIT_MASK:
 	case BEE_BIT_MASK | FIRE_BIT_MASK:
 	case BEE_BIT_MASK | BEE_BIT_MASK:
 	case BEE_BIT_MASK | HAMMER_BIT_MASK:
@@ -148,7 +186,7 @@ void KickFaceScene::onBodySeparate(cocos2d::PhysicsContact & contact)
 	switch (contact.getShapeA()->getBody()->getContactTestBitmask() |
 		contact.getShapeB()->getBody()->getContactTestBitmask())
 	{
-	case FACE_BIT_MASK | FIRE_BIT_MASK:
+	/*case FACE_BIT_MASK | FIRE_BIT_MASK:
 	{
 		exitFireTime = std::chrono::steady_clock::now();
 		std::chrono::duration<double> elapsed_seconds = exitFireTime - enterFireTime;
@@ -156,7 +194,11 @@ void KickFaceScene::onBodySeparate(cocos2d::PhysicsContact & contact)
 		{
 			_face->catchFire();
 		}
-		log("leaves in %lf", elapsed_seconds.count());
+		break;
+	}*/
+	case FACE_BIT_MASK | PASS_BIT_MASK:
+	{
+		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::createKickFaceScene(levelNumber + 1)));
 		break;
 	}
 	}
@@ -166,13 +208,14 @@ void KickFaceScene::kickComplete()
 {
 	//const auto face_vel = _face->getPhysicsBody()->getVelocity();
 	_face->getPhysicsBody()->setVelocity(Vec2::ZERO);
+	_face->getPhysicsBody()->setAngularVelocity(0);
 	_background->stopAllActions();
 	_face->showHurt();
 	auto label1 = Label::createWithTTF("Kick Again", "fonts/Marker Felt.ttf", 48);
-	auto item1 = MenuItemLabel::create(label1, [](Ref* obj)
+	auto item1 = MenuItemLabel::create(label1, [this](Ref* obj)
 	{
 		BeeSprite::clearBeesGroup();
-		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::create()));
+		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::createKickFaceScene(levelNumber)));
 	});
 	item1->setPositionY(10);
 	auto label2 = Label::createWithTTF("Exit", "fonts/Marker Felt.ttf", 48);
@@ -190,7 +233,8 @@ void KickFaceScene::kickComplete()
 void KickFaceScene::createWorldAndMap()
 {
 	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-	this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
+	this->getPhysicsWorld()->setGravity(Vec2(0, -2000));
+	this->getPhysicsWorld()->setSpeed(0.9);
 	
 	_background = Background::createBackground(WORLD_WIDTH, WORLD_HEIGHT);
 	addChild(_background);
@@ -206,7 +250,7 @@ void KickFaceScene::createWorldAndMap()
 	_boundary->setPosition(0, -500);
 	_background->addChild(_boundary);
 
-	_tileMap = KickMap::createKickMap(_background);
+	_tileMap = KickMap::createKickMap(_background, this->levelNumber);
 	_background->addChild(_tileMap);
 }
 
@@ -217,6 +261,17 @@ void KickFaceScene::addFace()
 	_face->setPosition(faceStartPosition);
 	//_face->getPhysicsBody()->setGravityEnable(false);
 	_background->addChild(_face);
+}
+
+void KickFaceScene::addSpray(const Vec2& position)
+{
+	auto pFileLeft = FileUtils::getInstance()->getValueMapFromFile("spray.plist");
+	auto emitter = ParticleSystemQuad::create(pFileLeft);
+	emitter->setPositionType(ParticleSystem::PositionType::RELATIVE);
+	//emitter->setBlendFunc(BlendFunc::ALPHA_PREMULTIPLIED);
+	emitter->setAutoRemoveOnFinish(true);
+	emitter->setPosition(position);
+	_background->addChild(emitter, 2);
 }
 
 void KickFaceScene::addKickWeapon()
@@ -255,12 +310,13 @@ void KickFaceScene::addEventHandlers()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 }
 
-bool KickFaceScene::init()
+bool KickFaceScene::initKickFaceScene(unsigned levelNumber)
 {
 	if (!Scene::initWithPhysics())
 	{
 		return false;
 	}
+	this->levelNumber = levelNumber;
 	_visibleSize = Director::getInstance()->getVisibleSize();
 	//Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -275,5 +331,17 @@ void KickFaceScene::onEnterTransitionDidFinish()
 {
 	Scene::onEnterTransitionDidFinish();
   	_background->runAction(Follow::create(_face, Rect(0, 0, _worldSize.width, _worldSize.height)));
+}
+
+KickFaceScene * KickFaceScene::createKickFaceScene(unsigned levelNumber)
+{
+	KickFaceScene* p = new KickFaceScene();
+	if (p && p->initKickFaceScene(levelNumber))
+	{
+		p->autorelease();
+		return p;
+	}
+	CC_SAFE_DELETE(p);
+	return nullptr;
 }
 

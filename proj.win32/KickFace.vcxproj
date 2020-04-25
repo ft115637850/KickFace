@@ -153,11 +153,14 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Background.cpp" />
     <ClCompile Include="..\Classes\BeeSprite.cpp" />
     <ClCompile Include="..\Classes\BodyContactHelper.cpp" />
+    <ClCompile Include="..\Classes\CoinSprite.cpp" />
     <ClCompile Include="..\Classes\FaceSprite.cpp" />
+    <ClCompile Include="..\Classes\FlagSprite.cpp" />
     <ClCompile Include="..\Classes\HammerSprite.cpp" />
     <ClCompile Include="..\Classes\KickFaceScene.cpp" />
     <ClCompile Include="..\Classes\KickMap.cpp" />
     <ClCompile Include="..\Classes\PhysicsShapeCache.cpp" />
+    <ClCompile Include="..\Classes\SnailSprite.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,12 +168,15 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Background.h" />
     <ClInclude Include="..\Classes\BeeSprite.h" />
     <ClInclude Include="..\Classes\BodyContactHelper.h" />
+    <ClInclude Include="..\Classes\CoinSprite.h" />
+    <ClInclude Include="..\Classes\FlagSprite.h" />
     <ClInclude Include="..\Classes\KFCommonDefinition.h" />
     <ClInclude Include="..\Classes\FaceSprite.h" />
     <ClInclude Include="..\Classes\HammerSprite.h" />
     <ClInclude Include="..\Classes\KickFaceScene.h" />
     <ClInclude Include="..\Classes\KickMap.h" />
     <ClInclude Include="..\Classes\PhysicsShapeCache.h" />
+    <ClInclude Include="..\Classes\SnailSprite.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +194,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   <ItemGroup>
     <None Include="..\Resources\tiled\32x32.tsx" />
     <None Include="..\Resources\tiled\m1.tmx" />
+    <None Include="..\Resources\tiled\m2.tmx" />
+    <None Include="..\Resources\tiled\m3.tmx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Resources\bluebee.png" />

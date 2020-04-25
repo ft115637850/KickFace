@@ -19,6 +19,15 @@ void BeeSprite::startChasingFace(FaceSprite* face)
 	this->schedule(schedule_selector(BeeSprite::updateChase), 0.5f);
 }
 
+void BeeSprite::stopChasingFace()
+{
+	_hasStopped = true;
+	this->_chasingFace = nullptr;
+	this->unschedule(schedule_selector(BeeSprite::updateChase));
+	this->_chasingParticleRight->stop();
+	this->_chasingParticleLeft->stop();
+}
+
 void BeeSprite::applyChasingForce(const cocos2d::Vec2 & distance)
 {
 	adjustDirection(distance);
@@ -153,7 +162,7 @@ void BeeSprite::recoverFromCollision()
 void BeeSprite::updateChase(float t)
 {
 	isRecovered = true;
-	if (_chasingFace == nullptr)
+	if (_chasingFace == nullptr || _hasStopped)
 		return;
 
 	auto targetPosition = _chasingFace->getPosition() / MAP_SCALE_FACTOR;
@@ -161,9 +170,6 @@ void BeeSprite::updateChase(float t)
 	Vec2 distance = (targetPosition - beePosition);
 
 	applyChasingForce(distance);
-
-	/*float r = atan2(distance.y, distance.x) * 180 / PI + 180;
-	this->setRotation(r);*/
 }
 
 BeeSprite * BeeSprite::createBeeSprite(unsigned beeColor)
@@ -190,6 +196,17 @@ void BeeSprite::notifyGroupChasing(FaceSprite* face)
 		if (bee->_chasingFace == nullptr)
 		{
 			bee->startChasingFace(face);
+		}
+	}
+}
+
+void BeeSprite::stopGroupChasing()
+{
+	for (auto bee : beesGroup_)
+	{
+		if (bee->_chasingFace != nullptr)
+		{
+			bee->stopChasingFace();
 		}
 	}
 }
@@ -243,7 +260,7 @@ bool BeeSprite::initBeeSprite(unsigned beeType)
 	_flyAct = this->runAction(RepeatForever::create(Animate::create(animation)));
 
 	auto size = getContentSize();
-	const auto physicsBody = PhysicsBody::createCircle(size.width / 2, PhysicsMaterial(0.1f, 0.0f, 1.0f));
+	const auto physicsBody = PhysicsBody::createCircle(size.width / 2, BEE_MATERIAL);
 	/*physicsBody->setCategoryBitmask(BEE_CATEGORY_MASK);
 	physicsBody->setCollisionBitmask(BEE_COLLISION_MASK);*/
 	physicsBody->setContactTestBitmask(BEE_BIT_MASK);

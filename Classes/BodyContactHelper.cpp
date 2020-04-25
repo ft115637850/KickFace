@@ -1,6 +1,9 @@
 #include "BodyContactHelper.h"
 
+
+#include "CoinSprite.h"
 #include "KFCommonDefinition.h"
+#include "SnailSprite.h"
 
 BeeSprite * BodyContactHelper::getBeeBetweenShapes(PhysicsShape * shapeA, PhysicsShape * shapeB)
 {
@@ -26,6 +29,34 @@ FaceSprite * BodyContactHelper::getFaceBetweenShapes(PhysicsShape * shapeA, Phys
 	else
 	{
 		sp = static_cast<FaceSprite*>(shapeB->getBody()->getNode());
+	}
+	return sp;
+}
+
+SnailSprite * BodyContactHelper::getSnailBetweenShapes(PhysicsShape * shapeA, PhysicsShape * shapeB)
+{
+	SnailSprite* sp = nullptr;
+	if (shapeA->getContactTestBitmask() == SNAIL_BIT_MASK)
+	{
+		sp = static_cast<SnailSprite*>(shapeA->getBody()->getNode());
+	}
+	else
+	{
+		sp = static_cast<SnailSprite*>(shapeB->getBody()->getNode());
+	}
+	return sp;
+}
+
+CoinSprite * BodyContactHelper::getCoinBetweenShapes(PhysicsShape * shapeA, PhysicsShape * shapeB)
+{
+	CoinSprite* sp = nullptr;
+	if (shapeA->getContactTestBitmask() == COIN_BIT_MASK)
+	{
+		sp = static_cast<CoinSprite*>(shapeA->getBody()->getNode());
+	}
+	else
+	{
+		sp = static_cast<CoinSprite*>(shapeB->getBody()->getNode());
 	}
 	return sp;
 }
