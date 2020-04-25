@@ -87,21 +87,13 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	{
 	case FACE_BIT_MASK | HAMMER_BIT_MASK:
 	{
+		kick_started_ = true;
 		_face->showHitting();
 		this->runAction(Sequence::create(DelayTime::create(0.5f),
 			CallFunc::create([this]() {
 			_face->showScared();
 		}),
 			NULL));
-		break;
-	}
-	case FACE_BIT_MASK | GROUND_BIT_MASK:
-	{
-		if (contact.getShapeB()->getBody()->getTag() == BOTTOM_GROUND_TAG ||
-			contact.getShapeA()->getBody()->getTag() == BOTTOM_GROUND_TAG)
-		{
-			kickComplete();
-		}
 		break;
 	}
 	case FACE_BIT_MASK | PROPS_BIT_MASK:
@@ -181,6 +173,25 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	default:;
 	}
 	return true;
+}
+
+void KickFaceScene::onBodyContactPostSolve(PhysicsContact & contact, const PhysicsContactPostSolve & solve)
+{
+	switch (contact.getShapeA()->getBody()->getContactTestBitmask() |
+		contact.getShapeB()->getBody()->getContactTestBitmask())
+	{
+	case FACE_BIT_MASK | GROUND_BIT_MASK:
+	case FACE_BIT_MASK | FIRE_BIT_MASK:
+	case FACE_BIT_MASK | PROPS_BIT_MASK:
+	{
+		auto vel = _face->getPhysicsBody()->getVelocity();
+		if (kick_started_ && abs(vel.x)<3 && abs(vel.y)<3)
+		{
+			kickComplete();
+		}
+		break;
+	}
+	}
 }
 
 void KickFaceScene::onBodySeparate(cocos2d::PhysicsContact & contact)
@@ -308,6 +319,7 @@ void KickFaceScene::addEventHandlers()
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(KickFaceScene::onBodyContact, this);
+	contactListener->onContactPostSolve = CC_CALLBACK_2(KickFaceScene::onBodyContactPostSolve, this);
 	contactListener->onContactSeparate = CC_CALLBACK_1(KickFaceScene::onBodySeparate, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 }

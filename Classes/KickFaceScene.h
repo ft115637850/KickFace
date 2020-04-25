@@ -11,6 +11,7 @@ USING_NS_CC;
 class KickFaceScene: public Scene
 {
 private:
+	bool kick_started_ = false;
 	unsigned level_number_ = 0;
 	unsigned current_level_score_ = 0;
 	unsigned start_score_ = 0;
@@ -29,6 +30,7 @@ private:
 	void onTouchHammerMoved(cocos2d::Touch* touch, cocos2d::Event* e);
 	void onTouchHammerEnded(cocos2d::Touch* touch, cocos2d::Event* e);
 	bool onBodyContact(cocos2d::PhysicsContact& contact);
+	void onBodyContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve);
 	void onBodySeparate(cocos2d::PhysicsContact& contact);
 	void kickComplete();
 	void createWorldAndMap();

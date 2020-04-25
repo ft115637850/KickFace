@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="140">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="141">
  <tileset firstgid="1" source="32x32.tsx"/>
  <layer id="6" name="background" width="64" height="36">
   <data encoding="base64" compression="zlib">
@@ -8,7 +8,7 @@
  </layer>
  <layer id="7" name="scene1" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztl0FPwjAYhpvN7Tb0Ii7yc4je0JNg3NkfoVy4cIQREoG/oh49C1xQo3+EEA++ZRCWOQkb2NL2e5I3XZZuX5+myb4xRhDqcWwzVkROEN+WvRo9uKJ9JATzYDHWQ/rIwPqH9+NM95A+MhB4vjtONHYdcTUJcWQ5V/StMo+OG41dV+46CEI3JugT3pB35GOHPYOsXsF0+H9HFakh17TvhCK01vT2JvT/3L+NhBo7ruMV3kNkZKi/h962gBwa0uO+JHqNCrwvkMuFf6j5PtiJb3MLvm1Xf+8l5ZTe5PxAXP07j7F7pO6JqxlHtv8jvJ+QZ0P9p/CeId+G+stGZX9nB/9VKvuf7Zn/DXqJwJqPja0WtSHNPfPnBBnnb7Nnw0Xv9gmHr5x7Ids/7zOcpf8p1lvKuWYV/G8Lq+uKv7o+8n/P5YztzVNOucf9/5qf9v74vSBj/bRnkjWy8gNW9Fl8
+   eJztl7tuwjAYha2kyRboUojgcVDZKFNL1cx9CGBhYeQipAKvUjp2LrD0IvoiVcXAMReB0hThNLUV+/+kI0dRnP8/xsgnjBFE+riwGctBeci3VXejB9e0joRkHizGhtAIGlv/8H7s6SE0gsYS93ff2YwDR15NQh4i+4rOKvPou5tx4KrtgyB04xU54Q16hz4SzAyqsoLp8O+OG6gG3dK6EymhcyTbm5D/uf8u1NPY4zFe4HsKzQz17yHbZqCsIRn3OZQ1KvB9BVW3/nuar4MdOps78Nt19fe9oxSRTcpn8urXPcYaUNOTV/MQ1f4f4XsCPRnq/wu+v6Glof5Vk6T/As6SorUeW39q6kScBL6rkv79g/hThbk03H9bA/93+L8E1npsidaabrPbAh4+Y66Fav9x53B2/gvotxiz5zT4v8/sryv+/vrc//ksZ26frlLEPe7/t+ej3n94LxCsHzUnXEOUFS7qWXI=
   </data>
  </layer>
  <layer id="5" name="scene2" width="64" height="36">
@@ -72,7 +72,7 @@
    </properties>
    <polygon points="0,0 22.75,22.375 71.875,22.5 95.25,-0.25"/>
   </object>
-  <object id="131" x="961.583" y="1009.08" width="92.5" height="15.25"/>
+  <object id="131" x="963.583" y="944.413" width="92.5" height="15.25"/>
   <object id="132" x="1857.67" y="1024.67" width="30.6667" height="64"/>
  </objectgroup>
  <objectgroup id="4" name="sprites">
@@ -91,7 +91,10 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="137" name="coin" x="592.5" y="767">
+  <object id="137" name="coin" x="1009.83" y="933.667">
+   <ellipse/>
+  </object>
+  <object id="140" name="coin" x="1424" y="1030">
    <ellipse/>
   </object>
  </objectgroup>
