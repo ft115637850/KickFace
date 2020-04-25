@@ -14,7 +14,8 @@ _hammer(nullptr),
 _face(nullptr),
 _tileMap(nullptr),
 _background(nullptr),
-_boundary(nullptr)
+_boundary(nullptr),
+_scoreText(nullptr)
 {
 }
 
@@ -143,7 +144,8 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 	case FACE_BIT_MASK | COIN_BIT_MASK:
 	{
 		CoinSprite* coin = BodyContactHelper::getCoinBetweenShapes(contact.getShapeA(), contact.getShapeB());
-		coin->getCoin();
+		current_level_score_ += coin->getCoin();
+		_scoreText->updateView(current_level_score_ + start_score_);
 		return false;
 	}
 	case BEE_BIT_MASK | FACE_BIT_MASK:
@@ -198,7 +200,7 @@ void KickFaceScene::onBodySeparate(cocos2d::PhysicsContact & contact)
 	}*/
 	case FACE_BIT_MASK | PASS_BIT_MASK:
 	{
-		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::createKickFaceScene(levelNumber + 1)));
+		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::createKickFaceScene(level_number_ + 1, start_score_ + current_level_score_)));
 		break;
 	}
 	}
@@ -215,7 +217,7 @@ void KickFaceScene::kickComplete()
 	auto item1 = MenuItemLabel::create(label1, [this](Ref* obj)
 	{
 		BeeSprite::clearBeesGroup();
-		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::createKickFaceScene(levelNumber)));
+		Director::getInstance()->replaceScene(TransitionFade::create(1, KickFaceScene::createKickFaceScene(level_number_, start_score_)));
 	});
 	item1->setPositionY(10);
 	auto label2 = Label::createWithTTF("Exit", "fonts/Marker Felt.ttf", 48);
@@ -250,7 +252,7 @@ void KickFaceScene::createWorldAndMap()
 	_boundary->setPosition(0, -500);
 	_background->addChild(_boundary);
 
-	_tileMap = KickMap::createKickMap(_background, this->levelNumber);
+	_tileMap = KickMap::createKickMap(_background, this->level_number_);
 	_background->addChild(_tileMap);
 }
 
@@ -310,13 +312,23 @@ void KickFaceScene::addEventHandlers()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 }
 
-bool KickFaceScene::initKickFaceScene(unsigned levelNumber)
+void KickFaceScene::addScoreText()
+{
+	_scoreText = ScoreText::create();
+	_scoreText->setPosition(_visibleSize.width - 20, _visibleSize.height - 33);
+	_scoreText->setScale(MAP_SCALE_FACTOR);
+	_scoreText->updateView(start_score_);
+	this->addChild(_scoreText, 1);
+}
+
+bool KickFaceScene::initKickFaceScene(unsigned levelNumber, unsigned startScore)
 {
 	if (!Scene::initWithPhysics())
 	{
 		return false;
 	}
-	this->levelNumber = levelNumber;
+	this->level_number_ = levelNumber;
+	this->start_score_ = startScore;
 	_visibleSize = Director::getInstance()->getVisibleSize();
 	//Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -324,6 +336,7 @@ bool KickFaceScene::initKickFaceScene(unsigned levelNumber)
 	addFace();
 	addKickWeapon();
 	addEventHandlers();
+	addScoreText();
 	return true;
 }
 
@@ -333,10 +346,10 @@ void KickFaceScene::onEnterTransitionDidFinish()
   	_background->runAction(Follow::create(_face, Rect(0, 0, _worldSize.width, _worldSize.height)));
 }
 
-KickFaceScene * KickFaceScene::createKickFaceScene(unsigned levelNumber)
+KickFaceScene * KickFaceScene::createKickFaceScene(unsigned levelNumber, unsigned startScore)
 {
 	KickFaceScene* p = new KickFaceScene();
-	if (p && p->initKickFaceScene(levelNumber))
+	if (p && p->initKickFaceScene(levelNumber, startScore))
 	{
 		p->autorelease();
 		return p;

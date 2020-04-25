@@ -4,7 +4,7 @@
 
 USING_NS_CC;
 
-void CoinSprite::getCoin()
+unsigned CoinSprite::getCoin()
 {
 	auto action1 = JumpBy::create(0.5, Vec2(0, 0), 80, 1);
 	auto action2 = Sequence::create(
@@ -19,6 +19,7 @@ void CoinSprite::getCoin()
 	actions.pushBack(action3);
 
 	this->runAction(Spawn::create(actions));
+	return 10;
 }
 
 bool CoinSprite::init()

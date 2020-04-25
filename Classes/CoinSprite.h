@@ -4,7 +4,7 @@
 class CoinSprite : public cocos2d::Sprite
 {
 public:
-	void getCoin();
+	unsigned getCoin();
 	bool init() override;
 	CREATE_FUNC(CoinSprite);
 	CoinSprite();

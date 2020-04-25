@@ -316,7 +316,7 @@ bool KickMap::initKickMap(Background * bg, unsigned levelNumber)
 	if (Node::init() == false)
 		return false;
 
-	_tiledMap = TMXTiledMap::create(StringUtils::format("tiled/m3.tmx", levelNumber));
+	_tiledMap = TMXTiledMap::create(StringUtils::format("tiled/m%d.tmx", levelNumber));
 	auto groups = _tiledMap->getObjectGroups();
 	for (const auto objectGroup : groups)
 	{

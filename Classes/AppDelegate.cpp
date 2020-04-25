@@ -118,7 +118,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-	auto scene = KickFaceScene::createKickFaceScene(1);
+	auto scene = KickFaceScene::createKickFaceScene();
 
     // run
     director->runWithScene(scene);
