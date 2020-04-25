@@ -100,7 +100,7 @@ void KickMap::addFireRange(TMXObjectGroup * group)
 		auto fireRangeY = fireRange["y"].asFloat();
 		auto fireRangeW = fireRange["width"].asFloat();
 		auto fireRangeH = fireRange["height"].asFloat();
-		PhysicsBody * phy = PhysicsBody::createBox(Size(fireRangeW, fireRangeH), RING_MATERIAL);
+		PhysicsBody * phy = PhysicsBody::createCircle(fireRangeW / 2, RING_MATERIAL);
 		phy->setDynamic(false);
 		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);
 		phy->setCollisionBitmask(PROPS_COLLISION_MASK);*/
@@ -316,7 +316,7 @@ bool KickMap::initKickMap(Background * bg, unsigned levelNumber)
 	if (Node::init() == false)
 		return false;
 
-	_tiledMap = TMXTiledMap::create(StringUtils::format("tiled/m%d.tmx", levelNumber));
+	_tiledMap = TMXTiledMap::create(StringUtils::format("tiled/m3.tmx", levelNumber));
 	auto groups = _tiledMap->getObjectGroups();
 	for (const auto objectGroup : groups)
 	{

@@ -6,7 +6,7 @@ USING_NS_CC;
 
 void CoinSprite::getCoin()
 {
-	auto action1 = JumpBy::create(0.5, Vec2(0, 0), 40, 1);
+	auto action1 = JumpBy::create(0.5, Vec2(0, 0), 80, 1);
 	auto action2 = Sequence::create(
 		ScaleTo::create(0.25f, 0, 1.0f),
 		ScaleTo::create(0.25f, 1.0f, 1.0f),
