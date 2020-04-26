@@ -22,7 +22,7 @@
  <objectgroup id="9" name="fireRange"/>
  <objectgroup id="8" name="fire"/>
  <objectgroup id="2" name="grounds">
-  <object id="3" x="257.136" y="510.685" width="32.2294" height="31.0133"/>
+  <object id="3" x="257.136" y="511.685" width="32.2294" height="31.0133"/>
   <object id="94" x="-0.666667" y="-34.6667" width="5" height="611.333"/>
   <object id="110" x="863.337" y="513" width="161.333" height="62.6667">
    <properties>
@@ -53,12 +53,15 @@
    <polygon points="30,-33 65.5,-33 64.5,29.5 61.5,43.5 46,59.5 -13,61 -27.5,46.5 -32.5,30"/>
   </object>
   <object id="164" x="586.667" y="320">
+   <properties>
+    <property name="isPolygon" type="bool" value="true"/>
+   </properties>
    <polygon points="-1.33333,0 11.3333,0 21,10.3333 21,234 -11.3333,234 -11,10"/>
   </object>
   <object id="165" x="959.333" y="160.667" width="31.3333" height="31.3333"/>
  </objectgroup>
  <objectgroup id="4" name="sprites">
-  <object id="1" name="face" x="273.724" y="458.446" width="16.2288" height="18.833">
+  <object id="1" name="face" x="273.724" y="464.446" width="16.2288" height="18.833">
    <ellipse/>
   </object>
   <object id="7" name="weapon" x="169.667" y="389.333" width="12" height="11.3333"/>

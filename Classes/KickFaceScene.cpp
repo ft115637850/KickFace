@@ -159,6 +159,9 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		snail->removeFromParent();
 		break;
 	}
+	case HAMMER_BIT_MASK| PROPS_BIT_MASK:
+	case HAMMER_BIT_MASK | GROUND_BIT_MASK:
+	case HAMMER_BIT_MASK | EDGE_BIT_MASK:
 	case SNAIL_BIT_MASK | PROPS_BIT_MASK:
 	case FACE_BIT_MASK | PASS_BIT_MASK:
 	case BEE_BIT_MASK | CACTUS_BIT_MASK:
@@ -299,11 +302,11 @@ void KickFaceScene::addKickWeapon()
 {
 	auto hammerPos = _tileMap->getOuterSpritesStartPosition("weapon");
 	auto weaponFixPoint = Node::create();
-	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 300));
+	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 260));
 	weaponFixPoint->addComponent(sp1PhysicsBody);
 	weaponFixPoint->setPosition(hammerPos.x, hammerPos.y + 100);
 	sp1PhysicsBody->setGravityEnable(false);
-	sp1PhysicsBody->setContactTestBitmask(PROPS_BIT_MASK);
+	sp1PhysicsBody->setContactTestBitmask(HAMMER_BIT_MASK);
 	getPhysicsWorld()->addJoint(PhysicsJointPin::construct(sp1PhysicsBody, _boundary->getPhysicsBody(), weaponFixPoint->getPosition()));
 	_background->addChild(weaponFixPoint);
 	
