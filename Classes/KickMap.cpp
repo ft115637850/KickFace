@@ -6,6 +6,28 @@
 #include "KFCommonDefinition.h"
 #include "SnailSprite.h"
 
+void KickMap::addPolygonShape(PhysicsBody * phy, ValueVector & points)
+{
+	auto size = points.size();
+	Vec2* polygonPoints = new Vec2[size];
+	int i = 0;
+	for (auto pointValue : points)
+	{
+		auto dicp = pointValue.asValueMap();
+		auto x = dicp.at("x").asFloat();
+		auto y = -dicp.at("y").asFloat();//y取负值
+		if (i>0)
+		{
+			x /= device_scale_factor_;
+			y /= device_scale_factor_;
+		}
+		polygonPoints[i] = Vec2(x, y);
+		i++;
+	}
+	phy->addShape(PhysicsShapePolygon::create(polygonPoints, size, GROUND_MATERIAL));
+	delete[] polygonPoints;
+}
+
 void KickMap::addSprites(TMXObjectGroup * group)
 {
 	ValueVector sprites = group->getObjects();
@@ -209,19 +231,7 @@ void KickMap::addGrounds(TMXObjectGroup * group)
 		if (isPolygon)
 		{
 			auto polygon = ground["points"].asValueVector();
-			auto size = polygon.size();
-			Vec2* points = new Vec2[size];
-			int i = 0;
-			for (auto pointValue : polygon)
-			{
-				auto dicp = pointValue.asValueMap();
-				auto x = dicp.at("x").asFloat();
-				auto y = -dicp.at("y").asFloat();//y取负值
-				points[i] = Vec2(x, y);
-				i++;
-			}
-			phy->addShape(PhysicsShapePolygon::create(points, size, GROUND_MATERIAL));
-			delete[] points;
+			addPolygonShape(phy, polygon);
 		}
 		else
 		{
@@ -261,19 +271,7 @@ void KickMap::addProps(TMXObjectGroup * group)
 		if (isPolygon)
 		{
 			auto polygon = prop["points"].asValueVector();
-			auto size = polygon.size();
-			Vec2* points = new Vec2[size];
-			int i = 0;
-			for (auto pointValue : polygon)
-			{
-				auto dicp = pointValue.asValueMap();
-				auto x = dicp.at("x").asFloat();
-				auto y = -dicp.at("y").asFloat();//y取负值
-				points[i] = Vec2(x, y);
-				i++;
-			}
-			phy->addShape(PhysicsShapePolygon::create(points, size));
-			delete[] points;
+			addPolygonShape(phy, polygon);
 		}
 		else
 		{
@@ -316,7 +314,7 @@ bool KickMap::initKickMap(Background * bg, unsigned levelNumber)
 {
 	if (Node::init() == false)
 		return false;
-
+	device_scale_factor_ = Director::getInstance()->getContentScaleFactor();
 	_tiledMap = TMXTiledMap::create(StringUtils::format("tiled/m%d.tmx", levelNumber));
 	auto groups = _tiledMap->getObjectGroups();
 	for (const auto objectGroup : groups)

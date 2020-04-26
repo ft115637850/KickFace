@@ -39,7 +39,7 @@ static const cocos2d::PhysicsMaterial FACE_MATERIAL = cocos2d::PhysicsMaterial(0
 static const cocos2d::PhysicsMaterial HAMMER_MATERIAL = cocos2d::PhysicsMaterial(1.0f, 1.0f, 0.0f);
 static const cocos2d::PhysicsMaterial RING_MATERIAL = cocos2d::PhysicsMaterial(0.01f, 0.01f, 0.1f);
 static const cocos2d::PhysicsMaterial GROUND_MATERIAL = cocos2d::PhysicsMaterial(1.0f, 0.1f, 1.0f);
-static const cocos2d::PhysicsMaterial PROP_MATERIAL = cocos2d::PhysicsMaterial(1.0f, 0.5f, 1.0f);
+static const cocos2d::PhysicsMaterial PROP_MATERIAL = cocos2d::PhysicsMaterial(1.0f, 0.5f, 0.5f);
 
 //#define FACE_CATEGORY_MASK		0b100000
 //#define BEE_CATEGORY_MASK		0b010000

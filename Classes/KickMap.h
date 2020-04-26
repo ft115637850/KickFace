@@ -8,7 +8,9 @@ USING_NS_CC;
 class KickMap : public Node
 {
 private:
+	float device_scale_factor_ = 1;
 	TMXTiledMap* _tiledMap;
+	void addPolygonShape(PhysicsBody * phy, ValueVector &points);
 	void addSprites(TMXObjectGroup* group);
 	void addGrounds(TMXObjectGroup* group);
 	void addProps(TMXObjectGroup* group);

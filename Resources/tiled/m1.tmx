@@ -44,7 +44,7 @@
  </objectgroup>
  <objectgroup id="3" name="props"/>
  <objectgroup id="4" name="sprites">
-  <object id="1" name="face" x="269.724" y="209.446" width="16.2288" height="18.833">
+  <object id="1" name="face" x="269.724" y="206.446" width="16.2288" height="18.833">
    <ellipse/>
   </object>
   <object id="7" name="weapon" x="165.667" y="134.333" width="12" height="11.3333"/>

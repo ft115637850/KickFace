@@ -248,7 +248,7 @@ void KickFaceScene::kickComplete()
 
 void KickFaceScene::createWorldAndMap()
 {
-	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -2000));
 	this->getPhysicsWorld()->setSpeed(0.9);
 
