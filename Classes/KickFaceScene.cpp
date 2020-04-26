@@ -248,8 +248,16 @@ void KickFaceScene::createWorldAndMap()
 	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -2000));
 	this->getPhysicsWorld()->setSpeed(0.9);
+
+	if (level_number_==1)
+	{
+		_background = Background::createBackground(WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+	}
+	else
+	{
+		_background = Background::createBackground(WORLD_WIDTH, WORLD_HEIGHT);
+	}
 	
-	_background = Background::createBackground(WORLD_WIDTH, WORLD_HEIGHT);
 	addChild(_background);
 	_worldSize = _background->getContentSize();
 
