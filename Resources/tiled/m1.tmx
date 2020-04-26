@@ -72,25 +72,25 @@
     <property name="color" type="int" value="3"/>
    </properties>
   </object>
-  <object id="142" name="bee" x="749.334" y="560.667">
+  <object id="142" name="bee" x="739.334" y="542.667">
    <properties>
     <property name="color" type="int" value="4"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="143" name="bee" x="753.333" y="594">
+  <object id="143" name="bee" x="735.333" y="606">
    <properties>
     <property name="color" type="int" value="3"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="144" name="bee" x="789.333" y="595.333">
+  <object id="144" name="bee" x="800.666" y="608">
    <properties>
     <property name="color" type="int" value="2"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="145" name="bee" x="785.334" y="559.333">
+  <object id="145" name="bee" x="800.001" y="543.333">
    <properties>
     <property name="color" type="int" value="1"/>
    </properties>
