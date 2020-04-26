@@ -13,7 +13,7 @@
  </layer>
  <layer id="5" name="scene2" width="32" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDGXQy4opNgEqNgmLHClAlpsy/SMdBLENrP2TBtj+UTDygBM/A4MzEDMDMQs/QpwNyGYHYg4g5uSH8AcaAACoxgQO
+   eJxjYBgFo2AUDGXQy4opNgEqNgmLHClAlpsy/aNgYMEktoF2wSgYacCJn4HBGYiZgZiFHyHOBmSzAzEHEHPyQ/gDDQBpvQO2
   </data>
  </layer>
  <objectgroup id="10" name="water">
@@ -23,7 +23,7 @@
  <objectgroup id="8" name="fire"/>
  <objectgroup id="2" name="grounds">
   <object id="3" x="256.136" y="255.685" width="32.2294" height="31.0133"/>
-  <object id="94" x="-0.666667" y="-34.6667" width="17" height="611.333"/>
+  <object id="94" x="-0.666667" y="-34.6667" width="4" height="611.333"/>
   <object id="110" x="863.337" y="513" width="161.333" height="62.6667">
    <properties>
     <property name="tag" type="int" value="3"/>

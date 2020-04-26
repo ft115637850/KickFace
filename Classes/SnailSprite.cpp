@@ -4,10 +4,10 @@
 
 USING_NS_CC;
 
-SnailSprite * SnailSprite::createSnail(unsigned snailColor)
+SnailSprite * SnailSprite::createSnail(unsigned snailColor, int angle)
 {
 	SnailSprite* p = new SnailSprite();
-	if (p && p->initSnail(snailColor))
+	if (p && p->initSnail(snailColor, angle))
 	{
 		p->autorelease();
 		return p;
@@ -16,7 +16,7 @@ SnailSprite * SnailSprite::createSnail(unsigned snailColor)
 	return nullptr;
 }
 
-bool SnailSprite::initSnail(unsigned snailColor)
+bool SnailSprite::initSnail(unsigned snailColor, int angle)
 {
 	_snailColor = snailColor;
 	auto texture = Director::getInstance()->getTextureCache()->getTextureForKey("tiled/32x32.png");
@@ -37,11 +37,13 @@ bool SnailSprite::initSnail(unsigned snailColor)
 	physicsBody->setGravityEnable(false);
 	physicsBody->setRotationEnable(false);
 	addComponent(physicsBody);
+	this->setRotation(angle);
 	return true;
 }
 
 void SnailSprite::hurt()
 {
+	this->setRotation(0);
 	auto texture = Director::getInstance()->getTextureCache()->getTextureForKey("tiled/32x32.png");
 	const float textureXIdx = (_snailColor - 1) * 4;
 	const float textureYIdx = 33.0f;
@@ -49,7 +51,7 @@ void SnailSprite::hurt()
 	this->setSpriteFrame(frame);
 	
 	auto action1 = JumpBy::create(1, Vec2(80, 0), 80, 1);
-	auto action2 = RotateBy::create(2, 720);
+	auto action2 = RotateBy::create(1, 360);
 	Vector<FiniteTimeAction*> actions;
 	actions.pushBack(action1);
 	actions.pushBack(action2);

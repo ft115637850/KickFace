@@ -249,7 +249,7 @@ void KickFaceScene::createWorldAndMap()
 	this->getPhysicsWorld()->setGravity(Vec2(0, -2000));
 	this->getPhysicsWorld()->setSpeed(0.9);
 
-	if (level_number_==1)
+	if (level_number_ < 3)
 	{
 		_background = Background::createBackground(WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
 	}

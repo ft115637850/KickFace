@@ -27,8 +27,9 @@ void KickMap::addSprites(TMXObjectGroup * group)
 		}
 		else if (spName == "snail")
 		{
-			auto flagColor = spProps["color"].asInt();
-			sp = SnailSprite::createSnail(flagColor);
+			auto flagColor = spProps["color"].asInt(); 
+			auto angle = spProps["angle"].asInt();
+			sp = SnailSprite::createSnail(flagColor, angle);
 		}
 		else if (spName == "coin")
 		{

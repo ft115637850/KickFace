@@ -9,8 +9,8 @@ private:
 	unsigned _snailColor = 1;
 	bool _isFalling = false;
 public:
-	static SnailSprite* createSnail(unsigned snailColor);
-	bool initSnail(unsigned snailColor);
+	static SnailSprite* createSnail(unsigned snailColor, int angle);
+	bool initSnail(unsigned snailColor, int angle);
 	void hurt();
 	void update(float delta) override;
 	SnailSprite();

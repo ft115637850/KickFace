@@ -34,7 +34,7 @@ static const unsigned int  BLUE_FLAG = 4;
 
 static const cocos2d::PhysicsMaterial WATER_MATERIAL = cocos2d::PhysicsMaterial(1.0f, 1.0f, 1.0f);
 static const cocos2d::PhysicsMaterial BEE_MATERIAL = cocos2d::PhysicsMaterial(0.1f, 0.0f, 1.0f);
-static const cocos2d::PhysicsMaterial COIN_MATERIAL = cocos2d::PhysicsMaterial(0.1f, 0.1f, 1.0f);
+static const cocos2d::PhysicsMaterial COIN_MATERIAL = cocos2d::PhysicsMaterial(0.1f, 1.0f, 1.0f);
 static const cocos2d::PhysicsMaterial FACE_MATERIAL = cocos2d::PhysicsMaterial(0.5f, 0.5f, 0.5f);
 static const cocos2d::PhysicsMaterial HAMMER_MATERIAL = cocos2d::PhysicsMaterial(1.0f, 1.0f, 0.0f);
 static const cocos2d::PhysicsMaterial RING_MATERIAL = cocos2d::PhysicsMaterial(0.01f, 0.01f, 0.1f);
