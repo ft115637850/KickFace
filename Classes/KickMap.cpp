@@ -173,19 +173,7 @@ void KickMap::addCactus(TMXObjectGroup * group)
 		auto waterH = cactus["height"].asFloat();
 		PhysicsBody * phy = PhysicsBody::create();
 		auto polygon = cactus["points"].asValueVector();
-		auto size = polygon.size();
-		Vec2* points = new Vec2[size];
-		int i = 0;
-		for (auto pointValue : polygon)
-		{
-			auto dicp = pointValue.asValueMap();
-			auto x = dicp.at("x").asFloat();
-			auto y = -dicp.at("y").asFloat();//yÈ¡¸ºÖµ
-			points[i] = Vec2(x, y);
-			i++;
-		}
-		phy->addShape(PhysicsShapePolygon::create(points, size));
-		delete [] points;
+		addPolygonShape(phy, polygon);
 
 		phy->setDynamic(false);
 		phy->setContactTestBitmask(CACTUS_BIT_MASK);

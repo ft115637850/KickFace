@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="167">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="169">
  <tileset firstgid="1" source="32x32.tsx"/>
  <layer id="6" name="background" width="32" height="18">
   <data encoding="base64" compression="zlib">
@@ -46,12 +46,6 @@
   <object id="127" x="798.997" y="543" width="63.6667" height="27.3333"/>
  </objectgroup>
  <objectgroup id="3" name="props">
-  <object id="163" x="383.5" y="482">
-   <properties>
-    <property name="isPolygon" type="bool" value="true"/>
-   </properties>
-   <polygon points="30,-33 65.5,-33 64.5,29.5 61.5,43.5 46,59.5 -13,61 -27.5,46.5 -32.5,30"/>
-  </object>
   <object id="164" x="586.667" y="320">
    <properties>
     <property name="isPolygon" type="bool" value="true"/>
@@ -59,6 +53,12 @@
    <polygon points="-1.33333,0 11.3333,0 21,10.3333 21,234 -11.3333,234 -11,10"/>
   </object>
   <object id="165" x="959.333" y="160.667" width="31.3333" height="31.3333"/>
+  <object id="168" x="351.333" y="510.667">
+   <properties>
+    <property name="isPolygon" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 62,-63.3333 96,-64 95.3333,64.6667 -0.666667,63.3333"/>
+  </object>
  </objectgroup>
  <objectgroup id="4" name="sprites">
   <object id="1" name="face" x="273.724" y="462.446" width="16.2288" height="18.833">

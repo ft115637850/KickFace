@@ -248,7 +248,7 @@ void KickFaceScene::kickComplete()
 
 void KickFaceScene::createWorldAndMap()
 {
-	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -2000));
 	this->getPhysicsWorld()->setSpeed(0.9);
 
@@ -302,7 +302,7 @@ void KickFaceScene::addKickWeapon()
 {
 	auto hammerPos = _tileMap->getOuterSpritesStartPosition("weapon");
 	auto weaponFixPoint = Node::create();
-	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 260));
+	auto sp1PhysicsBody = PhysicsBody::createBox(Size(50, 280));
 	weaponFixPoint->addComponent(sp1PhysicsBody);
 	weaponFixPoint->setPosition(hammerPos.x, hammerPos.y + 100);
 	sp1PhysicsBody->setGravityEnable(false);
