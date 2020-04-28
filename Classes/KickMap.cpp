@@ -6,7 +6,7 @@
 #include "KFCommonDefinition.h"
 #include "SnailSprite.h"
 
-void KickMap::addPolygonShape(PhysicsBody * phy, ValueVector & points)
+void KickMap::addPolygonShape(PhysicsBody * phy, ValueVector & points, const cocos2d::PhysicsMaterial & material)
 {
 	auto size = points.size();
 	Vec2* polygonPoints = new Vec2[size];
@@ -24,7 +24,7 @@ void KickMap::addPolygonShape(PhysicsBody * phy, ValueVector & points)
 		polygonPoints[i] = Vec2(x, y);
 		i++;
 	}
-	phy->addShape(PhysicsShapePolygon::create(polygonPoints, size, GROUND_MATERIAL));
+	phy->addShape(PhysicsShapePolygon::create(polygonPoints, size, material));
 	delete[] polygonPoints;
 }
 
@@ -173,8 +173,7 @@ void KickMap::addCactus(TMXObjectGroup * group)
 		auto waterH = cactus["height"].asFloat();
 		PhysicsBody * phy = PhysicsBody::create();
 		auto polygon = cactus["points"].asValueVector();
-		addPolygonShape(phy, polygon);
-
+		addPolygonShape(phy, polygon, GROUND_MATERIAL);
 		phy->setDynamic(false);
 		phy->setContactTestBitmask(CACTUS_BIT_MASK);
 		Sprite * sp = Sprite::create();
@@ -219,7 +218,7 @@ void KickMap::addGrounds(TMXObjectGroup * group)
 		if (isPolygon)
 		{
 			auto polygon = ground["points"].asValueVector();
-			addPolygonShape(phy, polygon);
+			addPolygonShape(phy, polygon, GROUND_MATERIAL);
 		}
 		else
 		{
@@ -255,19 +254,23 @@ void KickMap::addProps(TMXObjectGroup * group)
 		auto groundW = prop["width"].asFloat();
 		auto groundH = prop["height"].asFloat();
 		auto isPolygon = prop["isPolygon"].asBool();
+		auto name = prop["name"].asString();
+		PhysicsMaterial material = PROP_MATERIAL;
+		if (name == "ice")
+		{
+			material = ICE_MATERIAL;
+		}
 		PhysicsBody * phy = PhysicsBody::create();
 		if (isPolygon)
 		{
 			auto polygon = prop["points"].asValueVector();
-			addPolygonShape(phy, polygon);
+			addPolygonShape(phy, polygon, material);
 		}
 		else
 		{
-			phy->addShape(PhysicsShapeBox::create(Size(groundW, groundH), PROP_MATERIAL));
+			phy->addShape(PhysicsShapeBox::create(Size(groundW, groundH), material));
 		}
 		phy->setDynamic(false);
-		/*phy->setCategoryBitmask(PROPS_CATEGORY_MASK);
-		phy->setCollisionBitmask(PROPS_COLLISION_MASK);*/
 		phy->setContactTestBitmask(PROPS_BIT_MASK);
 		Sprite * sp = Sprite::create();
 		sp->setPosition(Vec2(groundX, groundY));

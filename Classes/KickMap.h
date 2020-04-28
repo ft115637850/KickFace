@@ -10,7 +10,7 @@ class KickMap : public Node
 private:
 	float device_scale_factor_ = 1;
 	TMXTiledMap* _tiledMap;
-	void addPolygonShape(PhysicsBody * phy, ValueVector &points);
+	void addPolygonShape(PhysicsBody * phy, ValueVector &points, const cocos2d::PhysicsMaterial &material);
 	void addSprites(TMXObjectGroup* group);
 	void addGrounds(TMXObjectGroup* group);
 	void addProps(TMXObjectGroup* group);

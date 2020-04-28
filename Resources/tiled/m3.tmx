@@ -43,19 +43,19 @@
   <object id="127" x="1792.33" y="1119" width="63.6667" height="27.3333"/>
  </objectgroup>
  <objectgroup id="3" name="props">
-  <object id="137" x="1567.67" y="1056.33">
+  <object id="137" name="ice" x="1567.67" y="1056.33">
    <properties>
     <property name="isPolygon" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 5.5,18 24,30 71,30.5 90.5,18.5 96.5,-0.5"/>
   </object>
-  <object id="140" x="574.25" y="703.75">
+  <object id="140" name="ice" x="574.25" y="703.75">
    <properties>
     <property name="isPolygon" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 35.5,0 64.75,29.75 62.75,46.25 51.75,58.5 41.25,64 -6.25,64 -18.25,58.25 -29,43.75 -30,31.25"/>
   </object>
-  <object id="141" x="1215" y="928.667">
+  <object id="141" name="ice" x="1215" y="928.667">
    <properties>
     <property name="isPolygon" type="bool" value="true"/>
    </properties>
