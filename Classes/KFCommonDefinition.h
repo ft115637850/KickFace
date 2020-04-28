@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-static const unsigned int WORLD_WIDTH = 4032;
-static const unsigned int WORLD_HEIGHT = 2268;
+static const unsigned int WORLD_WIDTH = 2016;
+static const unsigned int WORLD_HEIGHT = 1134;
 static const float MAP_SCALE_FACTOR = 1.96875f;
 
 // Physical body
