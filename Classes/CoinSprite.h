@@ -3,6 +3,8 @@
 
 class CoinSprite : public cocos2d::Sprite
 {
+private:
+	bool isGotten = false;
 public:
 	unsigned getCoin();
 	bool init() override;
