@@ -1,6 +1,7 @@
 #include "KickMap.h"
 
 #include "BeeSprite.h"
+#include "BoxSprite.h"
 #include "CoinSprite.h"
 #include "FlagSprite.h"
 #include "KFCommonDefinition.h"
@@ -56,6 +57,11 @@ void KickMap::addSprites(TMXObjectGroup * group)
 		else if (spName == "coin")
 		{
 			sp = CoinSprite::create();
+		}
+		else if (spName == "box")
+		{
+			auto boxType = spProps["type"].asInt();
+			sp = BoxSprite::createBoxSprite(boxType);
 		}
 		else
 		{

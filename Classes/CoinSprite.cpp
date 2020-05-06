@@ -40,6 +40,7 @@ bool CoinSprite::init()
 	physicsBody->setContactTestBitmask(COIN_BIT_MASK);
 	physicsBody->setGravityEnable(false);
 	physicsBody->setRotationEnable(false);
+	physicsBody->setDynamic(false);
 	addComponent(physicsBody);
 	//
 	//this->runAction(RepeatForever::create(

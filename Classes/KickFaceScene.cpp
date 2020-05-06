@@ -159,6 +159,20 @@ bool KickFaceScene::onBodyContact(PhysicsContact & contact)
 		snail->removeFromParent();
 		break;
 	}
+	case PASS_BIT_MASK | BOX_BIT_MASK:
+	case EDGE_BIT_MASK | BOX_BIT_MASK:
+	case GROUND_BIT_MASK | BOX_BIT_MASK:
+	case WATER_BIT_MASK | BOX_BIT_MASK:
+	{
+		BoxSprite* box = BodyContactHelper::getBoxBetweenShapes(contact.getShapeA(), contact.getShapeB());
+		if (box != nullptr)
+		{
+			box->removeFromParent();
+		}
+
+		return false;
+	}
+	case COIN_BIT_MASK | BOX_BIT_MASK:
 	case HAMMER_BIT_MASK| PROPS_BIT_MASK:
 	case HAMMER_BIT_MASK | GROUND_BIT_MASK:
 	case HAMMER_BIT_MASK | EDGE_BIT_MASK:
@@ -252,7 +266,7 @@ void KickFaceScene::createWorldAndMap()
 	this->getPhysicsWorld()->setGravity(Vec2(0, -2000));
 	this->getPhysicsWorld()->setSpeed(0.9);
 
-	if (level_number_ < 8)
+	if (level_number_ < 10)
 	{
 		_background = Background::createBackground(WORLD_WIDTH, WORLD_HEIGHT);
 	}

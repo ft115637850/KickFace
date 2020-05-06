@@ -153,6 +153,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Background.cpp" />
     <ClCompile Include="..\Classes\BeeSprite.cpp" />
     <ClCompile Include="..\Classes\BodyContactHelper.cpp" />
+    <ClCompile Include="..\Classes\BoxSprite.cpp" />
     <ClCompile Include="..\Classes\CoinSprite.cpp" />
     <ClCompile Include="..\Classes\FaceSprite.cpp" />
     <ClCompile Include="..\Classes\FlagSprite.cpp" />
@@ -169,6 +170,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Background.h" />
     <ClInclude Include="..\Classes\BeeSprite.h" />
     <ClInclude Include="..\Classes\BodyContactHelper.h" />
+    <ClInclude Include="..\Classes\BoxSprite.h" />
     <ClInclude Include="..\Classes\CoinSprite.h" />
     <ClInclude Include="..\Classes\FlagSprite.h" />
     <ClInclude Include="..\Classes\KFCommonDefinition.h" />
