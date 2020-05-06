@@ -1,126 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="141">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="165">
  <tileset firstgid="1" source="32x32.tsx"/>
- <layer id="6" name="background" width="64" height="36">
+ <layer id="6" name="background" width="32" height="18">
   <data encoding="base64" compression="zlib">
-   eJzt10duwlAUheFnFuAlEHpnSzHphWRLqZSQsiUwBtPZA7/FIE4URZlk4Kcz+KT7jnQGd/AG1zPGeCIiIiIiIiIiFhtiBB9jBJhgihAzzLHAEiusscHWgn7aMeYAGWSRQx4FFFFCGRVUUUMdDTSd5PcP4aGFIxzjBKc4wzkucIkrXKONG9xa0L/DPR7wiCc8o4MueujjBQO84g3v+LCgP8QIPsYIMMEUIWaYY4ElVlhjg60F/XSK/4MMssghjwKKKKGMCqqooY4Gmqnk931HRERERESSrOd++imLi26k33Rigm/vuOj2+Ev237ruXrRb391nofM1i887ngoqjw==
+   eJztzUkOAUEAheFKtXOgDY3Gleg2t+EyriCpAzmAsWfcwb+rPZIWavElb/PnKSmEMgyjEAccccIZF1wRIkKMBCky5LjhjscH+rIlRAVV2KihjgaacNBCGx246KKHvvV+P8AQHnyMMMYEU8wwxwIBllhhjc2L/V7qfmf8NKektyrgfyv1Tv7w/9s9AW3VaHE=
   </data>
  </layer>
- <layer id="7" name="scene1" width="64" height="36">
+ <layer id="7" name="scene1" width="32" height="18">
   <data encoding="base64" compression="zlib">
-   eJztl80KgkAUhQcnXUabSupxpHYt+3mBHqV1IqS+T4u2bfqhXqY7KBiVooMpdzwfHGa4I3rPMDBHIQDgx1AKMSKNSa5suxszWGIfQcMcLCFCUkSKrT+8n850SIpIcYPn27eTMbCb+yZojirnCndV9/CdZAycdvsAwDQulBOupBvpXmNmaCsrdB3137EirUkb7DswAOR/AMziWJA1Tj0h9m9ZX+V/VfvM/6rGFVlwN89/+Cpb44IH/7nAv36NC/Cfvwb/+jUucPZv1/Bfzdn/LO39QeNTcy84+9+lvU/o+1PNHjj43/az+cLN5gP3+1nFWZaXV7CmfOnW6lRVXlbpUMA=
+   eJxjYBhZQJSZgUEMiMWBWIIZIX6ViYHhGhBfB+IbTAPnPmqDUKAfw5gJqyMWDLdwolb44EpXAwUmsELoSVCa3HjT5Ka+20YB7cEENgg9iW1g3THQYBJSWmcd4HzpCrU/Cpgno1npb38r1P5ZQLtn09D+VGCZkYaEYSCNGxNfZKY+Xgo0dxkShoFl3JgYAPRuLeE=
   </data>
  </layer>
- <layer id="5" name="scene2" width="64" height="36">
+ <layer id="5" name="scene2" width="32" height="18">
   <data encoding="base64" compression="zlib">
-   eJztl8sKgkAYhYdCN5XdyZfqYpd97xNZWu57ocouVo/TCRRmqEVGYkzngw+Ov4IeV/8IQQghhJBPmBvPs2U881/cI+RfGJp5f4FKVBDiAq/wVsj+ff6P9SeEEEK+RbL/LqRd95/230d/13ju7xlq/xXyGgaa/ZMt+uzgXuoVIh/gUZqdkM8w0qx/BTueBavSrldDrsOGNGsit2Bbs52wiz492Jd6DZAdU93/R8hjONGs/xx9XLiQei2RPVPd/1fIaxho1p8QQgghhJC8cGycOWJnttgk86YtpuUOzmrQgiX4uE5DWEx3791ZVsj9G+j/6pk7GEInMQ==
+   eJxjYBgFo2AUDGXQy4opNgEqNgmLHClAlpsy/aNgYMEktoF2wSgYacCJn4HBGYiZgZiFHyHOBmSzAzEHEHPyQ/gDDQBpvQO2
   </data>
  </layer>
  <objectgroup id="10" name="water">
-  <object id="93" x="32.3333" y="1127.5" width="1633.17" height="24.3333"/>
+  <object id="157" x="0" y="555" width="673" height="19"/>
  </objectgroup>
- <objectgroup id="9" name="fireRange">
-  <object id="132" x="747.75" y="616.568" width="8" height="8">
-   <ellipse/>
-  </object>
-  <object id="133" x="747.955" y="745.114" width="8" height="8">
-   <ellipse/>
-  </object>
-  <object id="134" x="588.523" y="617.273" width="8" height="8">
-   <ellipse/>
-  </object>
-  <object id="135" x="587.909" y="744.045" width="8" height="8">
-   <ellipse/>
-  </object>
-  <object id="136" x="907.409" y="617.045" width="8" height="8">
-   <ellipse/>
-  </object>
-  <object id="137" x="907.523" y="743.977" width="8" height="8">
-   <ellipse/>
-  </object>
- </objectgroup>
- <objectgroup id="8" name="fire">
-  <object id="98" name="f6" x="931.5" y="723.424">
-   <properties>
-    <property name="isInner" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="99" name="f5" x="897.5" y="723.424">
-   <properties>
-    <property name="isInner" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="70" name="f4" x="610" y="723">
-   <properties>
-    <property name="isInner" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="79" name="f3" x="576" y="723">
-   <properties>
-    <property name="isInner" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="80" name="f2" x="772" y="724">
-   <properties>
-    <property name="isInner" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="81" name="f1" x="738" y="724">
-   <properties>
-    <property name="isInner" type="bool" value="true"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup id="9" name="fireRange"/>
+ <objectgroup id="8" name="fire"/>
  <objectgroup id="2" name="grounds">
-  <object id="3" x="352.136" y="749.352" width="32.2294" height="18.0133"/>
-  <object id="94" x="2" y="-38" width="30" height="1188"/>
-  <object id="105" x="2017" y="-37" width="29" height="1190"/>
-  <object id="106" x="4" y="-72" width="2043" height="33"/>
-  <object id="110" x="1856.67" y="1089" width="161.333" height="62.6667">
+  <object id="3" x="256.136" y="256.685" width="32.2294" height="31.0133"/>
+  <object id="94" x="-0.666667" y="-34.6667" width="4" height="611.333"/>
+  <object id="110" x="863.337" y="513" width="161.333" height="62.6667">
    <properties>
     <property name="tag" type="int" value="3"/>
    </properties>
   </object>
-  <object id="114" name="p1" x="1695.33" y="1091.33">
+  <object id="154" x="797.337" y="513.67">
    <properties>
     <property name="isPolygon" type="bool" value="true"/>
     <property name="tag" type="int" value="3"/>
    </properties>
-   <polygon points="-0.25,-2.75 -30.3333,27.4167 -30.3333,60 95.8333,60 95.4167,-2.75"/>
+   <polygon points="0,0 0,61.6667 -124.667,62 -125,30.6667 -95,-0.333333"/>
   </object>
+  <object id="155" x="1011" y="-35" width="13" height="609"/>
+  <object id="156" x="0" y="-52" width="1024" height="16"/>
  </objectgroup>
  <objectgroup id="12" name="pass">
-  <object id="127" x="1792.33" y="1119" width="63.6667" height="27.3333"/>
+  <object id="127" x="798.997" y="543" width="63.6667" height="27.3333"/>
  </objectgroup>
- <objectgroup id="3" name="props"/>
+ <objectgroup id="3" name="props">
+  <object id="162" x="769.5" y="417" width="29" height="94"/>
+  <object id="163" x="928" y="288" width="32.5" height="31.5"/>
+ </objectgroup>
  <objectgroup id="4" name="sprites">
-  <object id="1" name="face" x="365.724" y="697.113" width="16.2288" height="18.833">
+  <object id="1" name="face" x="269.724" y="206.446" width="16.2288" height="18.833">
    <ellipse/>
   </object>
-  <object id="7" name="weapon" x="261.667" y="628" width="12" height="11.3333"/>
-  <object id="111" name="flag" x="1893" y="1015">
+  <object id="7" name="weapon" x="165.667" y="134.333" width="12" height="11.3333"/>
+  <object id="111" name="flag" x="899.667" y="446">
    <properties>
     <property name="color" type="int" value="3"/>
    </properties>
   </object>
-  <object id="138" name="coin" x="660.667" y="688.667">
+  <object id="158" name="coin" x="767.5" y="271.5">
    <ellipse/>
   </object>
-  <object id="139" name="coin" x="837.333" y="692">
+  <object id="159" name="coin" x="385" y="233">
    <ellipse/>
   </object>
-  <object id="140" name="coin" x="975.333" y="696.667">
+  <object id="160" name="coin" x="519" y="246">
+   <ellipse/>
+  </object>
+  <object id="161" name="coin" x="656.5" y="257">
+   <ellipse/>
+  </object>
+  <object id="164" name="snail" x="943" y="274.5">
+   <properties>
+    <property name="color" type="int" value="2"/>
+   </properties>
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup id="11" name="cactus">
-  <object id="119" x="1949.27" y="1024.73">
+  <object id="119" x="956.937" y="448.73">
    <polygon points="0,0 5.45455,-0.181818 14.1818,8.18182 14.5455,62.5455 -9.45455,62.3636 -9.81818,7.63636"/>
   </object>
-  <object id="123" x="1929.61" y="1048.18">
+  <object id="123" x="937.277" y="472.18">
    <polygon points="0,0 -6.15115,5.09091 -5.98028,27.4545 -1.87952,30.1818 8.03067,30.9091 8.03067,4"/>
   </object>
-  <object id="126" x="1973.65" y="1031.64">
+  <object id="126" x="981.317" y="455.64">
    <polygon points="0,0 3.17467,0.181818 6.34934,5.27273 6.04699,26.7273 2.72114,32 -7.10521,32.1818 -7.10521,8.90909"/>
   </object>
  </objectgroup>

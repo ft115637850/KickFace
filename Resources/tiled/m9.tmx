@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="141">
+ <tileset firstgid="1" source="32x32.tsx"/>
+ <layer id="6" name="background" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt10duwlAUheFnFuAlEHpnSzHphWRLqZSQsiUwBtPZA7/FIE4URZlk4Kcz+KT7jnQGd/AG1zPGeCIiIiIiIiIiFhtiBB9jBJhgihAzzLHAEiusscHWgn7aMeYAGWSRQx4FFFFCGRVUUUMdDTSd5PcP4aGFIxzjBKc4wzkucIkrXKONG9xa0L/DPR7wiCc8o4MueujjBQO84g3v+LCgP8QIPsYIMMEUIWaYY4ElVlhjg60F/XSK/4MMssghjwKKKKGMCqqooY4Gmqnk931HRERERESSrOd++imLi26k33Rigm/vuOj2+Ev237ruXrRb391nofM1i887ngoqjw==
+  </data>
+ </layer>
+ <layer id="7" name="scene1" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztl80KgkAUhQcnXUabSupxpHYt+3mBHqV1IqS+T4u2bfqhXqY7KBiVooMpdzwfHGa4I3rPMDBHIQDgx1AKMSKNSa5suxszWGIfQcMcLCFCUkSKrT+8n850SIpIcYPn27eTMbCb+yZojirnCndV9/CdZAycdvsAwDQulBOupBvpXmNmaCsrdB3137EirUkb7DswAOR/AMziWJA1Tj0h9m9ZX+V/VfvM/6rGFVlwN89/+Cpb44IH/7nAv36NC/Cfvwb/+jUucPZv1/Bfzdn/LO39QeNTcy84+9+lvU/o+1PNHjj43/az+cLN5gP3+1nFWZaXV7CmfOnW6lRVXlbpUMA=
+  </data>
+ </layer>
+ <layer id="5" name="scene2" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztl8sKgkAYhYdCN5XdyZfqYpd97xNZWu57ocouVo/TCRRmqEVGYkzngw+Ov4IeV/8IQQghhJBPmBvPs2U881/cI+RfGJp5f4FKVBDiAq/wVsj+ff6P9SeEEEK+RbL/LqRd95/230d/13ju7xlq/xXyGgaa/ZMt+uzgXuoVIh/gUZqdkM8w0qx/BTueBavSrldDrsOGNGsit2Bbs52wiz492Jd6DZAdU93/R8hjONGs/xx9XLiQei2RPVPd/1fIaxho1p8QQgghhJC8cGycOWJnttgk86YtpuUOzmrQgiX4uE5DWEx3791ZVsj9G+j/6pk7GEInMQ==
+  </data>
+ </layer>
+ <objectgroup id="10" name="water">
+  <object id="93" x="32.3333" y="1127.5" width="1633.17" height="24.3333"/>
+ </objectgroup>
+ <objectgroup id="9" name="fireRange">
+  <object id="132" x="747.75" y="616.568" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="133" x="747.955" y="745.114" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="134" x="588.523" y="617.273" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="135" x="587.909" y="744.045" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="136" x="907.409" y="617.045" width="8" height="8">
+   <ellipse/>
+  </object>
+  <object id="137" x="907.523" y="743.977" width="8" height="8">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="fire">
+  <object id="98" name="f6" x="931.5" y="723.424">
+   <properties>
+    <property name="isInner" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="99" name="f5" x="897.5" y="723.424">
+   <properties>
+    <property name="isInner" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="70" name="f4" x="610" y="723">
+   <properties>
+    <property name="isInner" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="79" name="f3" x="576" y="723">
+   <properties>
+    <property name="isInner" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="80" name="f2" x="772" y="724">
+   <properties>
+    <property name="isInner" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="81" name="f1" x="738" y="724">
+   <properties>
+    <property name="isInner" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="2" name="grounds">
+  <object id="3" x="352.136" y="749.352" width="32.2294" height="18.0133"/>
+  <object id="94" x="2" y="-38" width="30" height="1188"/>
+  <object id="105" x="2017" y="-37" width="29" height="1190"/>
+  <object id="106" x="4" y="-72" width="2043" height="33"/>
+  <object id="110" x="1856.67" y="1089" width="161.333" height="62.6667">
+   <properties>
+    <property name="tag" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="114" name="p1" x="1695.33" y="1091.33">
+   <properties>
+    <property name="isPolygon" type="bool" value="true"/>
+    <property name="tag" type="int" value="3"/>
+   </properties>
+   <polygon points="-0.25,-2.75 -30.3333,27.4167 -30.3333,60 95.8333,60 95.4167,-2.75"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="12" name="pass">
+  <object id="127" x="1792.33" y="1119" width="63.6667" height="27.3333"/>
+ </objectgroup>
+ <objectgroup id="3" name="props"/>
+ <objectgroup id="4" name="sprites">
+  <object id="1" name="face" x="365.724" y="697.113" width="16.2288" height="18.833">
+   <ellipse/>
+  </object>
+  <object id="7" name="weapon" x="261.667" y="628" width="12" height="11.3333"/>
+  <object id="111" name="flag" x="1893" y="1015">
+   <properties>
+    <property name="color" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="138" name="coin" x="660.667" y="688.667">
+   <ellipse/>
+  </object>
+  <object id="139" name="coin" x="837.333" y="692">
+   <ellipse/>
+  </object>
+  <object id="140" name="coin" x="975.333" y="696.667">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="11" name="cactus">
+  <object id="119" x="1949.27" y="1024.73">
+   <polygon points="0,0 5.45455,-0.181818 14.1818,8.18182 14.5455,62.5455 -9.45455,62.3636 -9.81818,7.63636"/>
+  </object>
+  <object id="123" x="1929.61" y="1048.18">
+   <polygon points="0,0 -6.15115,5.09091 -5.98028,27.4545 -1.87952,30.1818 8.03067,30.9091 8.03067,4"/>
+  </object>
+  <object id="126" x="1973.65" y="1031.64">
+   <polygon points="0,0 3.17467,0.181818 6.34934,5.27273 6.04699,26.7273 2.72114,32 -7.10521,32.1818 -7.10521,8.90909"/>
+  </object>
+ </objectgroup>
+</map>

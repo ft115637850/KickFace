@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="165">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="162">
  <tileset firstgid="1" source="32x32.tsx"/>
  <layer id="6" name="background" width="32" height="18">
   <data encoding="base64" compression="zlib">
-   eJztzUkOAUEAheFKtXOgDY3Gleg2t+EyriCpAzmAsWfcwb+rPZIWavElb/PnKSmEMgyjEAccccIZF1wRIkKMBCky5LjhjscH+rIlRAVV2KihjgaacNBCGx246KKHvvV+P8AQHnyMMMYEU8wwxwIBllhhjc2L/V7qfmf8NKektyrgfyv1Tv7w/9s9AW3VaHE=
+   eJzty8UNAkEAAMAL9IG7tIS7VEVyZeEuPTA9QMKDfcxz4kQUxUEQ/MSaDVt27Dlw5MSZC1du3Hnw5PWFn0pGUZoMWXLkKVCkRJkKVWrUadBMfv5btOnQpUefAUNGjJkwZcacBcsv/FUQBH/rDU8gaCA=
   </data>
  </layer>
  <layer id="7" name="scene1" width="32" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBhZQJSZgUEMiMWBWIIZIX6ViYHhGhBfB+IbTAPnPmqDUKAfw5gJqyMWDLdwolb44EpXAwUmsELoSVCa3HjT5Ka+20YB7cEENgg9iW1g3THQYBJSWmcd4HzpCrU/Cpgno1npb38r1P5ZQLtn09D+VGCZkYaEYSCNGxNfZKY+Xgo0dxkShoFl3JgYAPRuLeE=
+   eJxjYBhZQJSZgUEMiMWBWIIZIX6ViYHhGhBfB+IbTAPnPmqDUKAfw5gJqyMWDLdwolb44EpXAwUmsELoSVCa3HjT5Ka+20YB7cEENgg9iW1g3TGYAOsA50tXqP1RwDwZzUp/+1uh9s8C2j2bhvanAsuMNCQMA2ncmPgiM/XxUqC5y5AwDCzjxsQAueEtTQ==
   </data>
  </layer>
  <layer id="5" name="scene2" width="32" height="18">
@@ -42,36 +42,27 @@
  <objectgroup id="12" name="pass">
   <object id="127" x="798.997" y="543" width="63.6667" height="27.3333"/>
  </objectgroup>
- <objectgroup id="3" name="props">
-  <object id="162" x="769.5" y="417" width="29" height="94"/>
-  <object id="163" x="928" y="288" width="32.5" height="31.5"/>
- </objectgroup>
+ <objectgroup id="3" name="props"/>
  <objectgroup id="4" name="sprites">
   <object id="1" name="face" x="269.724" y="206.446" width="16.2288" height="18.833">
    <ellipse/>
   </object>
   <object id="7" name="weapon" x="165.667" y="134.333" width="12" height="11.3333"/>
-  <object id="111" name="flag" x="899.667" y="446">
+  <object id="111" name="flag" x="899.667" y="439">
    <properties>
     <property name="color" type="int" value="3"/>
    </properties>
   </object>
-  <object id="158" name="coin" x="767.5" y="271.5">
+  <object id="158" name="coin" x="748" y="451">
    <ellipse/>
   </object>
-  <object id="159" name="coin" x="385" y="233">
+  <object id="159" name="coin" x="381" y="248">
    <ellipse/>
   </object>
-  <object id="160" name="coin" x="519" y="246">
+  <object id="160" name="coin" x="483" y="264">
    <ellipse/>
   </object>
-  <object id="161" name="coin" x="656.5" y="257">
-   <ellipse/>
-  </object>
-  <object id="164" name="snail" x="943" y="274.5">
-   <properties>
-    <property name="color" type="int" value="2"/>
-   </properties>
+  <object id="161" name="coin" x="583" y="323">
    <ellipse/>
   </object>
  </objectgroup>

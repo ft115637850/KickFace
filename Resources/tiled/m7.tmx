@@ -1,111 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="141">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="169">
  <tileset firstgid="1" source="32x32.tsx"/>
- <layer id="6" name="background" width="64" height="36">
+ <layer id="6" name="background" width="32" height="18">
   <data encoding="base64" compression="zlib">
-   eJzt10duwlAUheFnFuAlEHpnSzHphWRLqZSQsiUwBtPZA7/FIE4URZlk4Kcz+KT7jnQGd/AG1zPGeCIiIiIiIiIiFhtiBB9jBJhgihAzzLHAEiusscHWgn7aMeYAGWSRQx4FFFFCGRVUUUMdDTSd5PcP4aGFIxzjBKc4wzkucIkrXKONG9xa0L/DPR7wiCc8o4MueujjBQO84g3v+LCgP8QIPsYIMMEUIWaYY4ElVlhjg60F/XSK/4MMssghjwKKKKGMCqqooY4Gmqnk931HRERERESSrOd++imLi26k33Rigm/vuOj2+Ev237ruXrRb391nofM1i887ngoqjw==
+   eJzty8UNAkEAAMAL9IG7tIS7VEVyZeEuPTA9QMKDfcxz4kQUxUEQ/MSaDVt27Dlw5MSZC1du3Hnw5PWFn0pGUZoMWXLkKVCkRJkKVWrUadBMfv5btOnQpUefAUNGjJkwZcacBcsv/FUQBH/rDU8gaCA=
   </data>
  </layer>
- <layer id="7" name="scene1" width="64" height="36">
+ <layer id="7" name="scene1" width="32" height="18">
   <data encoding="base64" compression="zlib">
-   eJztl7tuwjAYha2kyRboUojgcVDZKFNL1cx9CGBhYeQipAKvUjp2LrD0IvoiVcXAMReB0hThNLUV+/+kI0dRnP8/xsgnjBFE+riwGctBeci3VXejB9e0joRkHizGhtAIGlv/8H7s6SE0gsYS93ff2YwDR15NQh4i+4rOKvPou5tx4KrtgyB04xU54Q16hz4SzAyqsoLp8O+OG6gG3dK6EymhcyTbm5D/uf8u1NPY4zFe4HsKzQz17yHbZqCsIRn3OZQ1KvB9BVW3/nuar4MdOps78Nt19fe9oxSRTcpn8urXPcYaUNOTV/MQ1f4f4XsCPRnq/wu+v6Glof5Vk6T/As6SorUeW39q6kScBL6rkv79g/hThbk03H9bA/93+L8E1npsidaabrPbAh4+Y66Fav9x53B2/gvotxiz5zT4v8/sryv+/vrc//ksZ26frlLEPe7/t+ej3n94LxCsHzUnXEOUFS7qWXI=
+   eJxjYBhZQJSZgUEMiMWBWIIZIX6ViYHhGhBfB+IbTAPnPmqDUKAfw5gJqyMWDJdwmgB1O7XCB1e6GigwgRVCT4LSwyXeBisQHeAw5UOzfwIbhJ7ENjD20xsQYz8rFfJlggADQ6IAefa7Qu2PAubJaFby7F4AxAvJtL8Vav8soN2zibRfhQ/Bvg+1+zEB+1O5GRjSkDAMpHFj4ovM1MEg+2HspUBzlyFhGFjGjYkBTxUy1Q==
   </data>
  </layer>
- <layer id="5" name="scene2" width="64" height="36">
+ <layer id="5" name="scene2" width="32" height="18">
   <data encoding="base64" compression="zlib">
-   eJzt1ksKwjAQxvGhPjY+oLow17ILdel9pLRU3Hsbt258HMcRUohYShQlhfx/8C06TZNMVyMCAAC+kQ/ea6WtVQ3vgFhkw9A3eHVJRK6am+ae/P+8qmP9AwDwK/X8Wzizbkzzb1v/rr2tHSL4J0AscjvjF86sX0Yy95/6oW8Qj1UqstZs0tA3AQAA6I6lEclsdkaOdX1uZDteiEw0U81I83z+xLnnV/Nd3/at755te7j9z7T/pjUPmUQaXw==
+   eJxjYBgFo2AUDGXQy4opNgEqNgmL3CgYOWAS20C7YHiBaFEGhhjRgbOb3kBcnHQ9TvwMDM5AzAzELPwIcTYgmx2IOYCYkx/Cpxa4yEyePgAn+QXh
   </data>
  </layer>
  <objectgroup id="10" name="water">
-  <object id="93" x="32.3333" y="1127.5" width="1633.17" height="24.3333"/>
+  <object id="157" x="0" y="555" width="673" height="19"/>
  </objectgroup>
- <objectgroup id="9" name="fireRange">
-  <object id="138" x="522.667" y="775" width="9" height="9">
-   <ellipse/>
-  </object>
-  <object id="139" x="523.333" y="649" width="9" height="9">
-   <ellipse/>
-  </object>
- </objectgroup>
- <objectgroup id="8" name="fire">
-  <object id="70" name="f4" x="546" y="757.5">
-   <properties>
-    <property name="isInner" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="79" name="f3" x="512" y="757.5">
-   <properties>
-    <property name="isInner" type="bool" value="true"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup id="9" name="fireRange"/>
+ <objectgroup id="8" name="fire"/>
  <objectgroup id="2" name="grounds">
-  <object id="3" x="352.136" y="749.352" width="32.2294" height="18.0133"/>
-  <object id="94" x="2" y="-38" width="30" height="1188"/>
-  <object id="105" x="2017" y="-37" width="29" height="1189.33"/>
-  <object id="106" x="4" y="-72" width="2043" height="33"/>
-  <object id="110" x="1857.33" y="1089" width="160.667" height="63.6667">
+  <object id="3" x="257.136" y="511.685" width="32.2294" height="31.0133"/>
+  <object id="94" x="-0.666667" y="-34.6667" width="5" height="611.333"/>
+  <object id="110" x="863.337" y="513" width="161.333" height="62.6667">
    <properties>
     <property name="tag" type="int" value="3"/>
    </properties>
   </object>
-  <object id="114" name="p1" x="1695.33" y="1091.33">
+  <object id="154" x="797.337" y="513.67">
    <properties>
     <property name="isPolygon" type="bool" value="true"/>
     <property name="tag" type="int" value="3"/>
    </properties>
-   <polygon points="-0.666667,-2 -30,28 -30.3333,60 96.3333,61.3333 95.8333,-1.66667"/>
+   <polygon points="0,0 0,61.6667 -124.667,62 -125,30.6667 -95,-0.333333"/>
   </object>
+  <object id="155" x="1011" y="-35" width="13" height="609"/>
+  <object id="156" x="0" y="-52" width="1024" height="16"/>
+ </objectgroup>
+ <objectgroup id="12" name="pass">
+  <properties>
+   <property name="isPolygon" type="bool" value="true"/>
+  </properties>
+  <object id="127" x="798.997" y="543" width="63.6667" height="27.3333"/>
  </objectgroup>
  <objectgroup id="3" name="props">
-  <object id="127" name="ice" x="1376.67" y="1041" width="92.3333" height="14"/>
-  <object id="128" name="ice" x="1375" y="832.333" width="95.6667" height="40"/>
-  <object id="129" name="ice" x="1375.17" y="831.875">
+  <object id="164" x="586.667" y="320">
    <properties>
     <property name="isPolygon" type="bool" value="true"/>
    </properties>
-   <polygon points="0,0 95.125,0.25 63.625,-31.125 31.25,-31.125"/>
+   <polygon points="-1.33333,0 11.3333,0 21,10.3333 21,234 -11.3333,234 -11,10"/>
   </object>
-  <object id="130" name="ice" x="1375.3" y="872.625">
+  <object id="165" x="959.333" y="160.667" width="31.3333" height="31.3333"/>
+  <object id="168" name="ice" x="351.333" y="510.667">
    <properties>
     <property name="isPolygon" type="bool" value="true"/>
    </properties>
-   <polygon points="0,0 22.75,22.375 71.875,22.5 95.25,-0.25"/>
+   <polygon points="0,0 62,-63.3333 96,-64 95.3333,64.6667 -0.666667,63.3333"/>
   </object>
-  <object id="131" name="ice" x="963.583" y="944.413" width="92.5" height="15.25"/>
-  <object id="132" x="1857.67" y="1024.67" width="30.6667" height="64"/>
  </objectgroup>
  <objectgroup id="4" name="sprites">
-  <object id="1" name="face" x="365.724" y="697.113" width="16.2288" height="18.833">
+  <object id="1" name="face" x="273.724" y="462.446" width="16.2288" height="18.833">
    <ellipse/>
   </object>
-  <object id="7" name="weapon" x="261.667" y="628" width="12" height="11.3333"/>
-  <object id="111" name="flag" x="1893" y="945">
+  <object id="7" name="weapon" x="169.667" y="389.333" width="12" height="11.3333"/>
+  <object id="111" name="flag" x="899.667" y="439">
    <properties>
     <property name="color" type="int" value="3"/>
    </properties>
   </object>
-  <object id="134" name="snail" x="1419.67" y="790">
+  <object id="159" name="coin" x="440" y="379">
+   <ellipse/>
+  </object>
+  <object id="160" name="coin" x="519" y="307">
+   <ellipse/>
+  </object>
+  <object id="161" name="coin" x="592" y="279">
+   <ellipse/>
+  </object>
+  <object id="166" name="snail" x="948" y="176">
    <properties>
-    <property name="color" type="int" value="1"/>
+    <property name="angle" type="int" value="-90"/>
+    <property name="color" type="int" value="2"/>
    </properties>
-   <ellipse/>
-  </object>
-  <object id="137" name="coin" x="1009.83" y="933.667">
-   <ellipse/>
-  </object>
-  <object id="140" name="coin" x="1424" y="1030">
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup id="11" name="cactus">
-  <object id="119" x="1949.27" y="1024.73">
+  <object id="119" x="956.937" y="448.73">
    <polygon points="0,0 5.45455,-0.181818 14.1818,8.18182 14.5455,62.5455 -9.45455,62.3636 -9.81818,7.63636"/>
   </object>
-  <object id="123" x="1929.61" y="1048.18">
+  <object id="123" x="937.277" y="472.18">
    <polygon points="0,0 -6.15115,5.09091 -5.98028,27.4545 -1.87952,30.1818 8.03067,30.9091 8.03067,4"/>
   </object>
-  <object id="126" x="1973.65" y="1031.64">
+  <object id="126" x="981.317" y="455.64">
    <polygon points="0,0 3.17467,0.181818 6.34934,5.27273 6.04699,26.7273 2.72114,32 -7.10521,32.1818 -7.10521,8.90909"/>
   </object>
  </objectgroup>
