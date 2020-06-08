@@ -8,64 +8,32 @@
  </layer>
  <layer id="7" name="scene1" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztl80KgkAUhQcnXUabSupxpHYt+3mBHqV1IqS+T4u2bfqhXqY7KBiVooMpdzwfHGa4I3rPMDBHIQDgx1AKMSKNSa5suxszWGIfQcMcLCFCUkSKrT+8n850SIpIcYPn27eTMbCb+yZojirnCndV9/CdZAycdvsAwDQulBOupBvpXmNmaCsrdB3137EirUkb7DswAOR/AMziWJA1Tj0h9m9ZX+V/VfvM/6rGFVlwN89/+Cpb44IH/7nAv36NC/Cfvwb/+jUucPZv1/Bfzdn/LO39QeNTcy84+9+lvU/o+1PNHjj43/az+cLN5gP3+1nFWZaXV7CmfOnW6lRVXlbpUMA=
+   eJztl7tuwjAYha2kyRboUojgcVDZKFNL1cx9CGBhYeQipAKvUjp2LrD0IvoiVcXAMReB0hThNLUV+/+kI0dRnP8/xsgnjBFE+riwGctBeci3VXejB9e0joRkHizGhtAIGlv/8H7s6SE0gsYS93ff2YwDR15NQh4i+4rOKvPou5tx4KrtgyB04xU54Q16hz4SzAyqsoLp8O+OG6gG3dK6EymhcyTbm5D/uf8u1NPY4zFe4HsKzQz17yHbZqCsIRn3OZQ1KvB9BVW3/nuar4MdOps78Nt19fe9oxSRTcpn8urXPcYaUNOTV/MQ1f4f4XsCPRnq/wu+v6Glof5Vk6T/As6SorUeW39q6kScBL6rkv79g/hThbk03H9bA/93+L8E1npsidaabrPbAh4+Y66Fav9x53B2/gvotxiz5zT4v8/sryv+/vrc//ksZ26frlLEPe7/t+ej3n94LxCsHzUnXEOUFS7qWXI=
   </data>
  </layer>
  <layer id="5" name="scene2" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztl8sKgkAYhYdCN5XdyZfqYpd97xNZWu57ocouVo/TCRRmqEVGYkzngw+Ov4IeV/8IQQghhJBPmBvPs2U881/cI+RfGJp5f4FKVBDiAq/wVsj+ff6P9SeEEEK+RbL/LqRd95/230d/13ju7xlq/xXyGgaa/ZMt+uzgXuoVIh/gUZqdkM8w0qx/BTueBavSrldDrsOGNGsit2Bbs52wiz492Jd6DZAdU93/R8hjONGs/xx9XLiQei2RPVPd/1fIaxho1p8QQgghhJC8cGycOWJnttgk86YtpuUOzmrQgiX4uE5DWEx3791ZVsj9G+j/6pk7GEInMQ==
+   eJzt1ksKwjAQxvGhPjY+oLow17ILdel9pLRU3Hsbt258HMcRUohYShQlhfx/8C06TZNMVyMCAAC+kQ/ea6WtVQ3vgFhkw9A3eHVJRK6am+ae/P+8qmP9AwDwK/X8Wzizbkzzb1v/rr2tHSL4J0AscjvjF86sX0Yy95/6oW8Qj1UqstZs0tA3AQAA6I6lEclsdkaOdX1uZDteiEw0U81I83z+xLnnV/Nd3/at755te7j9z7T/pjUPmUQaXw==
   </data>
  </layer>
  <objectgroup id="10" name="water">
   <object id="93" x="32.3333" y="1127.5" width="1633.17" height="24.3333"/>
  </objectgroup>
  <objectgroup id="9" name="fireRange">
-  <object id="132" x="747.75" y="616.568" width="8" height="8">
+  <object id="138" x="522.667" y="775" width="9" height="9">
    <ellipse/>
   </object>
-  <object id="133" x="747.955" y="745.114" width="8" height="8">
-   <ellipse/>
-  </object>
-  <object id="134" x="588.523" y="617.273" width="8" height="8">
-   <ellipse/>
-  </object>
-  <object id="135" x="587.909" y="744.045" width="8" height="8">
-   <ellipse/>
-  </object>
-  <object id="136" x="907.409" y="617.045" width="8" height="8">
-   <ellipse/>
-  </object>
-  <object id="137" x="907.523" y="743.977" width="8" height="8">
+  <object id="139" x="523.333" y="649" width="9" height="9">
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup id="8" name="fire">
-  <object id="98" name="f6" x="931.5" y="723.424">
+  <object id="70" name="f4" x="546" y="757.5">
    <properties>
     <property name="isInner" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="99" name="f5" x="897.5" y="723.424">
-   <properties>
-    <property name="isInner" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="70" name="f4" x="610" y="723">
-   <properties>
-    <property name="isInner" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="79" name="f3" x="576" y="723">
-   <properties>
-    <property name="isInner" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="80" name="f2" x="772" y="724">
-   <properties>
-    <property name="isInner" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="81" name="f1" x="738" y="724">
+  <object id="79" name="f3" x="512" y="757.5">
    <properties>
     <property name="isInner" type="bool" value="true"/>
    </properties>
@@ -74,9 +42,9 @@
  <objectgroup id="2" name="grounds">
   <object id="3" x="352.136" y="749.352" width="32.2294" height="18.0133"/>
   <object id="94" x="2" y="-38" width="30" height="1188"/>
-  <object id="105" x="2017" y="-37" width="29" height="1190"/>
+  <object id="105" x="2017" y="-37" width="29" height="1189.33"/>
   <object id="106" x="4" y="-72" width="2043" height="33"/>
-  <object id="110" x="1856.67" y="1089" width="161.333" height="62.6667">
+  <object id="110" x="1857.33" y="1089" width="160.667" height="63.6667">
    <properties>
     <property name="tag" type="int" value="3"/>
    </properties>
@@ -86,30 +54,47 @@
     <property name="isPolygon" type="bool" value="true"/>
     <property name="tag" type="int" value="3"/>
    </properties>
-   <polygon points="-0.25,-2.75 -30.3333,27.4167 -30.3333,60 95.8333,60 95.4167,-2.75"/>
+   <polygon points="-0.666667,-2 -30,28 -30.3333,60 96.3333,61.3333 95.8333,-1.66667"/>
   </object>
  </objectgroup>
- <objectgroup id="12" name="pass">
-  <object id="127" x="1792.33" y="1119" width="63.6667" height="27.3333"/>
+ <objectgroup id="3" name="props">
+  <object id="127" name="ice" x="1376.67" y="1041" width="92.3333" height="14"/>
+  <object id="128" name="ice" x="1375" y="832.333" width="95.6667" height="40"/>
+  <object id="129" name="ice" x="1375.17" y="831.875">
+   <properties>
+    <property name="isPolygon" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 95.125,0.25 63.625,-31.125 31.25,-31.125"/>
+  </object>
+  <object id="130" name="ice" x="1375.3" y="872.625">
+   <properties>
+    <property name="isPolygon" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 22.75,22.375 71.875,22.5 95.25,-0.25"/>
+  </object>
+  <object id="131" name="ice" x="963.583" y="944.413" width="92.5" height="15.25"/>
+  <object id="132" x="1857.67" y="1024.67" width="30.6667" height="64"/>
  </objectgroup>
- <objectgroup id="3" name="props"/>
  <objectgroup id="4" name="sprites">
   <object id="1" name="face" x="365.724" y="697.113" width="16.2288" height="18.833">
    <ellipse/>
   </object>
   <object id="7" name="weapon" x="261.667" y="628" width="12" height="11.3333"/>
-  <object id="111" name="flag" x="1893" y="1015">
+  <object id="111" name="flag" x="1893" y="945">
    <properties>
     <property name="color" type="int" value="3"/>
    </properties>
   </object>
-  <object id="138" name="coin" x="660.667" y="688.667">
+  <object id="134" name="snail" x="1419.67" y="790">
+   <properties>
+    <property name="color" type="int" value="1"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="139" name="coin" x="837.333" y="692">
+  <object id="137" name="coin" x="1009.83" y="933.667">
    <ellipse/>
   </object>
-  <object id="140" name="coin" x="975.333" y="696.667">
+  <object id="140" name="coin" x="1424" y="1030">
    <ellipse/>
   </object>
  </objectgroup>
